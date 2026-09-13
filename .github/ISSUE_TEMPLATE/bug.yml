@@ -1,0 +1,36 @@
+name: Bug
+description: Something in NullTrace does not do what the menu says.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste a vault, passphrase, app password, or a screenshot that shows your real name or mailbox.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      placeholder: Which numbered menu, and what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: Windows 11, or Linux distro
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.3.0, or a commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps
+      placeholder: 1. Open NullTrace.exe …
+    validations:
+      required: true

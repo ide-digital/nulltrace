@@ -1,0 +1,46 @@
+# Product binaries
+/NullTrace.exe
+/app/
+/bin/
+/dist/
+source/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Tests & coverage
+*.test
+*.out
+coverage.*
+
+# Workspace / IDE
+.idea/
+.vscode/
+.cursor/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local vaults, tokens, env — never commit
+*.db
+*.db-wal
+*.db-shm
+vault.key
+daemon.token
+passphrase
+.env
+.env.*
+*.pem
+*.p12
+
+# Logs and local previews
+*.log
+launch.log
+home-preview.html
+docs/media/preview.html
+docs/media/*.ttf
+
+# Local toolchain
+.tooling/
