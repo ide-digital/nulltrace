@@ -1,0 +1,25 @@
+Subject: Request for Erasure — GDPR Article 17 (Right to be Forgotten)
+
+To the Data Protection Officer / Privacy contact at {{.BrokerName}} ({{.BrokerDomain}}):
+
+I am a data subject exercising my right to erasure under Article 17 of Regulation (EU) 2016/679 (General Data Protection Regulation).
+
+I request that you erase all personal data concerning me without undue delay, including data stored in backup systems within a reasonable restoration cycle, and that you notify recipients of that data pursuant to Article 19.
+
+Identity for matching
+- Legal name: {{.FullName}}
+- Date of birth: {{.DateOfBirth}}
+- Email addresses: {{.Emails}}
+- Telephone numbers: {{.Phones}}
+- Addresses: {{.Addresses}}
+- Known usernames / aliases: {{.Usernames}}
+
+This request is based on Article 17(1), including that the data are no longer necessary for the purposes for which they were collected and that I withdraw any consent on which processing was based. If you refuse, identify the specific Article 17(3) exception you rely on.
+
+Please confirm in writing the erasure, or a reasoned refusal, and the supervisory authority complaint rights under Article 77.
+
+Tracking identifier (include in your reply): {{.TrackingID}}
+
+Sincerely,
+{{.FullName}}
+{{.PrimaryEmail}}

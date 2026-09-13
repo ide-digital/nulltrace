@@ -1,0 +1,273 @@
+brokers:
+  - id: spokeo
+    name: Spokeo
+    domain: spokeo.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.spokeo.com/optout
+    requires_captcha: true
+    requires_email_confirmation: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+    playbook: |
+      Open the opt-out URL. Search your listing by name and city. Submit the
+      published suppression form. Complete any challenge the site presents
+      yourself. Watch the confirmation mailbox for a verify-click email.
+
+  - id: whitepages
+    name: Whitepages
+    domain: whitepages.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.whitepages.com/suppression-requests
+    requires_captcha: true
+    requires_email_confirmation: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+    playbook: |
+      Use the suppression-request page. Identify the exact listing URL first.
+      Whitepages typically emails a confirmation link that must be opened from
+      the inbox you control.
+
+  - id: radaris
+    name: Radaris
+    domain: radaris.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://radaris.com/control/privacy
+    requires_email_confirmation: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+    playbook: |
+      Open the privacy control page, locate your record, and submit the
+      removal request. Confirm via email if prompted.
+
+  - id: fastpeoplesearch
+    name: FastPeopleSearch
+    domain: fastpeoplesearch.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.fastpeoplesearch.com/removal
+    requires_captcha: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+    playbook: |
+      Paste the exact profile URL into the removal form. Complete the site's
+      own verification steps. Recheck in 45 days; this class of site
+      re-ingests public records frequently.
+
+  - id: truepeoplesearch
+    name: TruePeopleSearch
+    domain: truepeoplesearch.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.truepeoplesearch.com/removal
+    requires_captcha: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+    playbook: Open the removal page and submit the listing URL. Expect recrawls.
+
+  - id: beenverified
+    name: BeenVerified
+    domain: beenverified.com
+    category: PEOPLE_SEARCH
+    mechanism: HYBRID
+    opt_out_url: https://www.beenverified.com/app/optout/search
+    requires_email_confirmation: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+    playbook: Search the opt-out tool for your name, then confirm by email.
+
+  - id: peoplefinders
+    name: PeopleFinders
+    domain: peoplefinders.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.peoplefinders.com/opt-out
+    requires_email_confirmation: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+
+  - id: intelius
+    name: Intelius
+    domain: intelius.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.intelius.com/opt-out
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+
+  - id: instantcheckmate
+    name: Instant Checkmate
+    domain: instantcheckmate.com
+    category: BACKGROUND
+    mechanism: WEB_FORM
+    opt_out_url: https://www.instantcheckmate.com/opt-out/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+
+  - id: truthfinder
+    name: TruthFinder
+    domain: truthfinder.com
+    category: BACKGROUND
+    mechanism: WEB_FORM
+    opt_out_url: https://www.truthfinder.com/opt-out/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 60
+
+  - id: mylife
+    name: MyLife
+    domain: mylife.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.mylife.com/ccpa/index.pubview
+    jurisdiction_coverage: CCPA_ONLY
+    repopulation_period_days: 90
+    playbook: MyLife's public CCPA flow is the documented removal path.
+
+  - id: ussearch
+    name: US Search
+    domain: ussearch.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.ussearch.com/opt-out/
+    jurisdiction_coverage: ALL
+
+  - id: addresses
+    name: Addresses.com
+    domain: addresses.com
+    category: PEOPLE_LOCATOR
+    mechanism: WEB_FORM
+    opt_out_url: https://www.addresses.com/optout.php
+    jurisdiction_coverage: ALL
+
+  - id: peoplelookup
+    name: PeopleLookup
+    domain: peoplelookup.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.peoplelookup.com/optout
+    jurisdiction_coverage: ALL
+
+  - id: spyfly
+    name: SpyFly
+    domain: spyfly.com
+    category: BACKGROUND
+    mechanism: WEB_FORM
+    opt_out_url: https://www.spyfly.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: socialcatfish
+    name: Social Catfish
+    domain: socialcatfish.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://socialcatfish.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: nuwber
+    name: Nuwber
+    domain: nuwber.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://nuwber.com/removal
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+
+  - id: clustrmaps
+    name: ClustrMaps
+    domain: clustrmaps.com
+    category: PEOPLE_LOCATOR
+    mechanism: WEB_FORM
+    opt_out_url: https://clustrmaps.com/bl/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: familytreenow
+    name: FamilyTreeNow
+    domain: familytreenow.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.familytreenow.com/optout
+    jurisdiction_coverage: ALL
+
+  - id: thatsthem
+    name: ThatsThem
+    domain: thatsthem.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://thatsthem.com/optout
+    jurisdiction_coverage: ALL
+
+  - id: cyberbackgroundchecks
+    name: CyberBackgroundChecks
+    domain: cyberbackgroundchecks.com
+    category: BACKGROUND
+    mechanism: WEB_FORM
+    opt_out_url: https://www.cyberbackgroundchecks.com/removal
+    requires_captcha: true
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+
+  - id: fastbackgroundcheck
+    name: FastBackgroundCheck
+    domain: fastbackgroundcheck.com
+    category: BACKGROUND
+    mechanism: WEB_FORM
+    opt_out_url: https://www.fastbackgroundcheck.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: searchpeoplefree
+    name: SearchPeopleFree
+    domain: searchpeoplefree.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.searchpeoplefree.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: usphonebook
+    name: USPhoneBook
+    domain: usphonebook.com
+    category: PEOPLE_LOCATOR
+    mechanism: WEB_FORM
+    opt_out_url: https://www.usphonebook.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: peoplewhiz
+    name: PeopleWhiz
+    domain: peoplewhiz.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.peoplewhiz.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: advancedbackgroundchecks
+    name: AdvancedBackgroundChecks
+    domain: advancedbackgroundchecks.com
+    category: BACKGROUND
+    mechanism: WEB_FORM
+    opt_out_url: https://www.advancedbackgroundchecks.com/removal
+    jurisdiction_coverage: ALL
+
+  - id: beenverified-peoplelooker
+    name: PeopleLooker
+    domain: peoplelooker.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.peoplelooker.com/opt-out
+    jurisdiction_coverage: ALL
+
+  - id: publicrecordsnow
+    name: PublicRecordsNow
+    domain: publicrecordsnow.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.publicrecordsnow.com/optout
+    jurisdiction_coverage: ALL
+
+  - id: beenverified-ownerly
+    name: Ownerly
+    domain: ownerly.com
+    category: PEOPLE_SEARCH
+    mechanism: WEB_FORM
+    opt_out_url: https://www.ownerly.com/opt-out
+    jurisdiction_coverage: ALL

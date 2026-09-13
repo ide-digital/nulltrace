@@ -1,0 +1,23 @@
+Subject: Consumer Request to Delete Personal Data — {{.StatuteName}}
+
+To the Privacy Officer at {{.BrokerName}} ({{.BrokerDomain}}):
+
+I am a consumer submitting a request to delete personal data under {{.StatuteName}}.
+
+Please delete personal data you maintain about me and instruct processors and affiliates that received the data to delete it, except where a statutory exemption applies. If you rely on an exemption, identify it.
+
+Identity for matching
+- Legal name: {{.FullName}}
+- Date of birth: {{.DateOfBirth}}
+- Email addresses: {{.Emails}}
+- Telephone numbers: {{.Phones}}
+- Addresses: {{.Addresses}}
+- Known usernames / aliases: {{.Usernames}}
+
+Please confirm in writing within the statutory response period whether you located matching records and what you deleted.
+
+Tracking identifier (include in your reply): {{.TrackingID}}
+
+Sincerely,
+{{.FullName}}
+{{.PrimaryEmail}}

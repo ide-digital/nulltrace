@@ -1,0 +1,30 @@
+Subject: Request to Delete Personal Information — California Consumer Privacy Act (Cal. Civ. Code § 1798.105)
+
+To the Privacy Officer / Data Protection contact at {{.BrokerName}} ({{.BrokerDomain}}):
+
+I am a consumer submitting a verifiable request to delete personal information under the California Consumer Privacy Act, as amended by the CPRA, Cal. Civ. Code § 1798.105.
+
+Please delete all personal information you maintain about me, including records sourced from public records, data brokers, affiliates, and service providers, and direct those service providers and contractors to do the same.
+
+Identity for matching
+- Legal name: {{.FullName}}
+- Date of birth: {{.DateOfBirth}}
+- Email addresses: {{.Emails}}
+- Telephone numbers: {{.Phones}}
+- Addresses: {{.Addresses}}
+- Known usernames / aliases: {{.Usernames}}
+
+This request covers sale, sharing, and retention of my personal information except where a statutory exception in § 1798.105(d) applies. If you claim an exception, identify the specific subsection and the information you will retain.
+
+Please confirm in writing:
+1. That you have located and deleted matching records, or that you found none;
+2. The categories of personal information deleted;
+3. The service providers or contractors you instructed to delete matching data.
+
+Tracking identifier (include in your reply): {{.TrackingID}}
+
+I expect a response within the time required by Cal. Civ. Code § 1798.130 (generally 45 days from receipt).
+
+Sincerely,
+{{.FullName}}
+{{.PrimaryEmail}}

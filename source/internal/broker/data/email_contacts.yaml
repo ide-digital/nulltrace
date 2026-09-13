@@ -1,0 +1,265 @@
+brokers:
+  - id: acxiom
+    contact_email: consumeradvo@acxiom.com
+  - id: lexisnexis-risk
+    contact_email: privacy@lexisnexisrisk.com
+  - id: lexisnexis-accuity
+    contact_email: privacy@lexisnexis.com
+  - id: thomsonreuters
+    contact_email: privacy.informationrights@thomsonreuters.com
+  - id: corelogic
+    contact_email: privacy@corelogic.com
+  - id: epsilon
+    contact_email: privacy@epsilon.com
+  - id: oracle-advertising
+    contact_email: privacy_ww@oracle.com
+  - id: experian
+    contact_email: privacyrequests@experian.com
+  - id: equifax
+    contact_email: privacy@equifax.com
+  - id: transunion
+    contact_email: privacy@transunion.com
+  - id: innovis
+    contact_email: dnc@innovis.com
+  - id: melissa
+    contact_email: privacy@melissa.com
+  - id: liveintent
+    contact_email: privacy@liveintent.com
+  - id: lotame
+    contact_email: privacy@lotame.com
+  - id: liveramp
+    contact_email: privacy@liveramp.com
+  - id: towerdata
+    contact_email: privacy@towerdata.com
+  - id: fullcontact
+    contact_email: privacy@fullcontact.com
+  - id: pipl
+    contact_email: privacy@pipl.com
+  - id: zoominfo
+    contact_email: dpo@zoominfo.com
+  - id: apollo
+    contact_email: privacy@apollo.io
+  - id: rocketreach
+    contact_email: privacy@rocketreach.co
+  - id: lusha
+    contact_email: privacy@lusha.com
+  - id: hunter
+    contact_email: privacy@hunter.io
+  - id: people-data-labs
+    contact_email: privacy@peopledatalabs.com
+  - id: merkle
+    contact_email: privacy@merkle.com
+  - id: databroker-infogroup
+    contact_email: privacy@data-axle.com
+  - id: nielsen
+    contact_email: privacy.department@nielsen.com
+  - id: comscore
+    contact_email: privacy@comscore.com
+  - id: beenverified
+    contact_email: privacy@beenverified.com
+  - id: spokeo
+    contact_email: privacy@spokeo.com
+  - id: whitepages
+    contact_email: privacy@whitepages.com
+  - id: mylife
+    contact_email: privacy@mylife.com
+  - id: intelius
+    contact_email: privacy@intelius.com
+  - id: peoplefinders
+    contact_email: privacy@peoplefinders.com
+  - id: truthfinder
+    contact_email: privacy@truthfinder.com
+  - id: instantcheckmate
+    contact_email: privacy@instantcheckmate.com
+  - id: radaris
+    contact_email: support@radaris.com
+  - id: ididata
+    contact_email: privacy@ididata.com
+  - id: tlo
+    contact_email: privacy@tlo.com
+  - id: tapad
+    contact_email: privacy@tapad.com
+  - id: neustar
+    contact_email: privacy@home.neustar
+  - id: clearbit
+    contact_email: privacy@clearbit.com
+  - id: epsilon-conversant
+    contact_email: privacy@conversantmedia.com
+
+  - id: infotracer
+    name: InfoTracer
+    domain: infotracer.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@infotracer.com
+    opt_out_url: https://infotracer.com/optout/
+    jurisdiction_coverage: ALL
+
+  - id: beenverified-numberguru
+    name: NumberGuru
+    domain: numberguru.com
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@beenverified.com
+    jurisdiction_coverage: ALL
+
+  - id: anywho
+    name: AnyWho
+    domain: anywho.com
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@anywho.com
+    jurisdiction_coverage: ALL
+
+  - id: 411
+    name: "411.com"
+    domain: 411.com
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@411.com
+    jurisdiction_coverage: ALL
+
+  - id: dexknows
+    name: DexKnows
+    domain: dexknows.com
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@thryv.com
+    jurisdiction_coverage: ALL
+
+  - id: yellowbook
+    name: Yellowbook
+    domain: yellowbook.com
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@thryv.com
+    jurisdiction_coverage: ALL
+
+  - id: superpages
+    name: Superpages
+    domain: superpages.com
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@thryv.com
+    jurisdiction_coverage: ALL
+
+  - id: white-pages-canada
+    name: Canada411
+    domain: canada411.ca
+    category: PEOPLE_LOCATOR
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@yp.ca
+    jurisdiction_coverage: GDPR_ONLY
+
+  - id: peekyou
+    name: PeekYou
+    domain: peekyou.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@peekyou.com
+    opt_out_url: https://www.peekyou.com/about/contact/optout/
+    jurisdiction_coverage: ALL
+
+  - id: zabasearch
+    name: ZabaSearch
+    domain: zabasearch.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@zabasearch.com
+    jurisdiction_coverage: ALL
+
+  - id: archives
+    name: Archives.com
+    domain: archives.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@archives.com
+    jurisdiction_coverage: ALL
+
+  - id: beenverified-publicrecords
+    name: PublicRecords360
+    domain: publicrecords360.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@beenverified.com
+    jurisdiction_coverage: ALL
+
+  - id: cubib
+    name: Cubib
+    domain: cubib.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: support@cubib.com
+    jurisdiction_coverage: ALL
+
+  - id: checkpeople
+    name: CheckPeople
+    domain: checkpeople.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@checkpeople.com
+    jurisdiction_coverage: ALL
+
+  - id: privateeye
+    name: PrivateEye
+    domain: privateeye.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@privateeye.com
+    jurisdiction_coverage: ALL
+
+  - id: valpak
+    name: Valpak
+    domain: valpak.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@valpak.com
+    jurisdiction_coverage: ALL
+
+  - id: ancestry
+    name: Ancestry
+    domain: ancestry.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@ancestry.com
+    opt_out_url: https://www.ancestry.com/cs/legal/privacystatement
+    jurisdiction_coverage: ALL
+
+  - id: myheritage
+    name: MyHeritage
+    domain: myheritage.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@myheritage.com
+    jurisdiction_coverage: GDPR_ONLY
+
+  - id: familysearch
+    name: FamilySearch
+    domain: familysearch.org
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: data-privacy@familysearch.org
+    jurisdiction_coverage: ALL
+
+  - id: truepeoplesearch
+    contact_email: contact@truepeoplesearch.com
+  - id: fastpeoplesearch
+    contact_email: privacy@fastpeoplesearch.com
+  - id: usphonebook
+    contact_email: info@usphonebook.com
+  - id: thatsthem
+    contact_email: support@thatsthem.com
+  - id: publicrecordsnow
+    contact_email: privacy@publicrecordsnow.com
+  - id: familytreenow
+    contact_email: privacy@familytreenow.com
+  - id: addresses
+    contact_email: privacy@addresses.com
+  - id: advancedbackgroundchecks
+    contact_email: privacy@advancedbackgroundchecks.com
+  - id: searchpeoplefree
+    contact_email: privacy@searchpeoplefree.com
+  - id: nuwber
+    contact_email: support@nuwber.com
+  - id: ussearch
+    contact_email: privacy@ussearch.com

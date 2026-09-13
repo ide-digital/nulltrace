@@ -1,0 +1,22 @@
+# syntax=docker/dockerfile:1
+FROM golang:1.23-alpine AS build
+WORKDIR /src
+ENV CGO_ENABLED=0
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN go build -trimpath -ldflags="-s -w" -o /out/nulltraced ./cmd/nulltraced \
+ && go build -trimpath -ldflags="-s -w" -o /out/nulltrace ./cmd/nulltrace
+
+FROM alpine:3.20
+RUN adduser -D -H -u 10001 nulltrace \
+ && mkdir -p /home/nulltrace/.local/share/nulltrace /home/nulltrace/.config/nulltrace \
+ && chown -R nulltrace:nulltrace /home/nulltrace
+USER nulltrace
+WORKDIR /home/nulltrace
+COPY --from=build /out/nulltraced /usr/local/bin/nulltraced
+COPY --from=build /out/nulltrace /usr/local/bin/nulltrace
+ENV HOME=/home/nulltrace
+EXPOSE 7738
+# Bind IPC to the container loopback mapping via compose.
+ENTRYPOINT ["/usr/local/bin/nulltraced"]

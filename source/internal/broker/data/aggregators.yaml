@@ -1,0 +1,313 @@
+brokers:
+  - id: acxiom
+    name: Acxiom
+    domain: acxiom.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.acxiom.com/about-us/privacy/us-do-not-sell-or-share/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+    notes: Major wholesale marketing-data aggregator.
+
+  - id: lexisnexis-risk
+    name: LexisNexis Risk Solutions
+    domain: risk.lexisnexis.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: HYBRID
+    opt_out_url: https://optout.lexisnexis.com/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+    playbook: Use the LexisNexis opt-out portal. Follow with a written demand if the portal rejects the request.
+
+  - id: thomsonreuters
+    name: Thomson Reuters CLEAR
+    domain: thomsonreuters.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.thomsonreuters.com/en/privacy-statement.html
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: corelogic
+    name: CoreLogic
+    domain: corelogic.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.corelogic.com/privacy/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: epsilon
+    name: Epsilon
+    domain: epsilon.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://legal.epsilon.com/us/privacy-policy
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: oracle-advertising
+    name: Oracle Advertising (BlueKai / Datalogix)
+    domain: oracle.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.oracle.com/legal/privacy/marketing-cloud-data-cloud-privacy-policy.html
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: experian
+    name: Experian
+    domain: experian.com
+    category: FINANCIAL
+    mechanism: HYBRID
+    opt_out_url: https://www.experian.com/privacy/opting-out-of-direct-marketing
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+    notes: Credit-file freezes are a separate process from marketing opt-out.
+
+  - id: equifax
+    name: Equifax
+    domain: equifax.com
+    category: FINANCIAL
+    mechanism: HYBRID
+    opt_out_url: https://www.equifax.com/personal/privacy/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: transunion
+    name: TransUnion
+    domain: transunion.com
+    category: FINANCIAL
+    mechanism: HYBRID
+    opt_out_url: https://www.transunion.com/privacy
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: innovis
+    name: Innovis
+    domain: innovis.com
+    category: FINANCIAL
+    mechanism: HYBRID
+    opt_out_url: https://www.innovis.com/personal/privacyPolicy
+    jurisdiction_coverage: ALL
+
+  - id: lexisnexis-accuity
+    name: LexisNexis Accurint
+    domain: lexisnexis.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: HYBRID
+    opt_out_url: https://optout.lexisnexis.com/
+    jurisdiction_coverage: ALL
+
+  - id: ididata
+    name: Interactive Data / IDI
+    domain: ididata.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: tlo
+    name: TransUnion TLO
+    domain: tlo.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: melissa
+    name: Melissa Data
+    domain: melissa.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.melissa.com/privacy
+    jurisdiction_coverage: ALL
+
+  - id: neustar
+    name: TransUnion / Neustar
+    domain: home.neustar
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: liveintent
+    name: LiveIntent
+    domain: liveintent.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://liveintent.com/privacy/
+    jurisdiction_coverage: ALL
+
+  - id: lotame
+    name: Lotame
+    domain: lotame.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.lotame.com/privacy/
+    jurisdiction_coverage: ALL
+
+  - id: liveramp
+    name: LiveRamp
+    domain: liveramp.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://liveramp.com/privacy/opt-out/
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+
+  - id: tapad
+    name: Tapad (Experian)
+    domain: tapad.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: towerdata
+    name: TowerData
+    domain: towerdata.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: fullcontact
+    name: FullContact
+    domain: fullcontact.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.fullcontact.com/privacy/
+    jurisdiction_coverage: ALL
+
+  - id: pipl
+    name: Pipl
+    domain: pipl.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://pipl.com/privacy
+    jurisdiction_coverage: ALL
+
+  - id: zoominfo
+    name: ZoomInfo
+    domain: zoominfo.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.zoominfo.com/do-not-sell-my-information
+    jurisdiction_coverage: ALL
+
+  - id: apollo
+    name: Apollo.io
+    domain: apollo.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.apollo.io/privacy-center
+    jurisdiction_coverage: ALL
+
+  - id: rocketreach
+    name: RocketReach
+    domain: rocketreach.co
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://rocketreach.co/privacy
+    jurisdiction_coverage: ALL
+
+  - id: lusha
+    name: Lusha
+    domain: lusha.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.lusha.com/privacy-center/
+    jurisdiction_coverage: ALL
+
+  - id: hunter
+    name: Hunter.io
+    domain: hunter.io
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://hunter.io/privacy-policy
+    jurisdiction_coverage: GDPR_ONLY
+
+  - id: clearbit
+    name: Clearbit (HubSpot)
+    domain: clearbit.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: people-data-labs
+    name: People Data Labs
+    domain: peopledatalabs.com
+    category: WHOLESALE_AGGREGATOR
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.peopledatalabs.com/privacy-center
+    jurisdiction_coverage: ALL
+
+  - id: epsilon-conversant
+    name: Conversant
+    domain: conversantmedia.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: oracle-addthis
+    name: AddThis / Oracle
+    domain: addthis.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: nielsen
+    name: Nielsen
+    domain: nielsen.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.nielsen.com/legal/privacy-principles/
+    jurisdiction_coverage: ALL
+
+  - id: comscore
+    name: Comscore
+    domain: comscore.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: merkle
+    name: Merkle
+    domain: merkle.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: epsilon-cj
+    name: CJ Affiliate
+    domain: cj.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    jurisdiction_coverage: ALL
+
+  - id: databroker-infogroup
+    name: Data Axle (InfoGroup)
+    domain: data-axle.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    opt_out_url: https://www.data-axle.com/privacy-policy/
+    jurisdiction_coverage: ALL
+
+  - id: haveibeenpwned
+    name: Have I Been Pwned
+    domain: haveibeenpwned.com
+    category: BACKGROUND
+    mechanism: API
+    opt_out_url: https://haveibeenpwned.com
+    jurisdiction_coverage: ALL
+    notes: Breach index, not a data broker. Findings are informational; do not send a deletion demand to HIBP itself.
+
+  - id: ca-delete-act
+    name: California CPPA Data Broker Registry
+    domain: cppa.ca.gov
+    category: WHOLESALE_AGGREGATOR
+    mechanism: WEB_FORM
+    opt_out_url: https://cppa.ca.gov/data_broker_registry/
+    jurisdiction_coverage: CCPA_ONLY
+    playbook: |
+      Open the CPPA data-broker registry. The statewide DELETE Act portal
+      (DROP) is the documented one-to-many path once it is live. Until then,
+      use this page to identify registered brokers and follow each broker's
+      own published privacy request process. NullTrace does not automate the
+      portal.

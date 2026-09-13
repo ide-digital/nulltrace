@@ -1,0 +1,3034 @@
+# Additional broker contacts and opt-out URLs. Role mailboxes only.
+brokers:
+  - id: checkr
+    name: Checkr
+    domain: checkr.com
+    category: BACKGROUND
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@checkr.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: goodhire
+    name: GoodHire
+    domain: goodhire.com
+    category: BACKGROUND
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@goodhire.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sterling
+    name: Sterling
+    domain: sterlingcheck.com
+    category: BACKGROUND
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@sterlingcheck.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: hireright
+    name: HireRight
+    domain: hireright.com
+    category: BACKGROUND
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@hireright.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: peoplesmart
+    name: PeopleSmart
+    domain: peoplesmart.com
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@peoplesmart.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+  - id: neighborwho
+    name: NeighborWho
+    domain: neighborwho.com
+    category: PEOPLE_SEARCH
+    mechanism: HYBRID
+    opt_out_url: https://neighborwho.com/remove
+    contact_email: privacy@neighborwho.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+  - id: centeda
+    name: Centeda
+    domain: centeda.com
+    category: PEOPLE_SEARCH
+    mechanism: HYBRID
+    opt_out_url: https://centeda.com/ng/control/privacy
+    contact_email: support@centeda.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+  - id: idtrue
+    name: IDTrue
+    domain: idtrue.com
+    category: PEOPLE_SEARCH
+    mechanism: HYBRID
+    opt_out_url: https://www.idtrue.com/optout
+    contact_email: privacy@idtrue.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+  - id: veromi
+    name: Veromi
+    domain: veromi.net
+    category: PEOPLE_SEARCH
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@veromi.net
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 45
+  - id: 01advertising
+    name: 01Advertising Inc.
+    domain: 01advertising.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://app.termly.io/notify/d1321341-0e82-4d8c-afaf-c4940d46c171
+    contact_email: privacy@01advertising.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: 33across
+    name: 33ACROSS Inc
+    domain: 33across.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.33across.com/wp-content/uploads/2020/04/33Across-CCPA-Notice-Collection-Policy_US.pdf
+    contact_email: privacy@33across.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: 4c-insights
+    name: 4C Insights Inc.
+    domain: mediaocean.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.mediaocean.com/your-privacy-rights
+    contact_email: ccpa@mediaocean.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: 4eyesai
+    name: 4Eyes.Ai, Inc.
+    domain: 4-eyes.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.4-eyes.ai/privacy-policy?cord_section=privacy_options_dns
+    contact_email: privacy@4-eyes.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: acronymix
+    name: ACRONYMIX LLC
+    domain: acronymix.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@acronymix.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: activimpact
+    name: Activimpact, LLC
+    domain: activimpact.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.activimpact.ai/dsar?hsLang=en
+    contact_email: privacy@activimpact.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: acuant
+    name: Acuant, Inc.
+    domain: idology.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@gbgplc.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: adept-id
+    name: Adept Id, Inc.
+    domain: adept-id.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.adept-id.com/opt-out-preferences/
+    contact_email: privacy@adept-id.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: adsquare-gmbh
+    name: Adsquare GmbH
+    domain: adsquare.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://adsquare.com/privacy/us_privacy_supplement/#goto-contact-us
+    contact_email: legal@adsquare.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: advisortarget
+    name: Advisortarget, LLC
+    domain: finsum.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.finsum.com/index.php/what-we-do/your-privacy-choices
+    contact_email: privacy@broadridge.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: affinity-solutions
+    name: Affinity Solutions Inc.
+    domain: affinity.solutions
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://affinitysolutions-privacy.my.onetrust.com/webform/a564cfa1-53bf-4c10-bf95-cd907432d7e8/7e4e6bf3-6562-454e-8c73-6a7bd1f4b336
+    contact_email: privacy@affinitysolutions.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: aidentified
+    name: Aidentified, Inc.
+    domain: aidentified.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.aidentified.com/delete-my-data
+    contact_email: privacy@aidentified.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: alc
+    name: ALC LLC
+    domain: belardiwong.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/3d2d5e0c-bd98-46b8-906c-ede68a6f6a80/400f54ed-fcbb-4749-ab5b-32f491c72390
+    contact_email: privacy.officer@belardiwong.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: alikeaudience
+    name: Alikeaudience, Inc.
+    domain: alikeaudience.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacy-optout.alikeaudience.com/
+    contact_email: legal@alikeaudience.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: alliant-cooperative-data-solutions
+    name: Alliant Cooperative Data Solutions LLC
+    domain: alliantinsight.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://alliantinsight.com/data-services-and-website-privacy-policy/
+    contact_email: compliance@alliantdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: alphonso
+    name: Alphonso Inc.
+    domain: lgads.tv
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://alphonso.tv/privacy/ccpa/
+    contact_email: compliance@lgads.tv
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: altair-data-resources
+    name: Altair Data Resources, Inc.
+    domain: altairdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.altairdata.com/altair-consumer-info/
+    contact_email: privacy@altairci.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: altisource-holdings
+    name: Altisource Holdings, LLC
+    domain: altisource.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.altisource.com/us-consumer-privacy-notice
+    contact_email: privacy@altisource.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: american-city-business-journals
+    name: American City Business Journals, Inc.
+    domain: acbj.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@bizjournals.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: andrews-wharton
+    name: Andrews Wharton, Inc.
+    domain: andrewswharton.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.andrewswharton.com/your-privacy-choices
+    contact_email: privacy@andrewswharton.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: anexinet
+    name: Anexinet Corp.
+    domain: anexinet.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@anexinet.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: appscience
+    name: Appscience
+    domain: appsci.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://appsci.io/do-not-sell-my-info
+    contact_email: privacy@appsci.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: arity-875
+    name: Arity 875, LLC
+    domain: arity.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://arity.com/yourprivacychoices/
+    contact_email: privacy@arity.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: arrakis-technologies
+    name: Arrakis Technologies Corp.
+    domain: arrakis.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.arrakis.ai/optout
+    contact_email: privacy@arrakis.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: american-spirit-data-solutions
+    name: AMERICAN SPIRIT DATA SOLUTIONS LLC
+    domain: aspire-north.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.aspire-north.com/do-not-sell-my-personal-information--out-out-request-form.html
+    contact_email: privacy@aspire-north.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: asset-international
+    name: Asset International, Inc.
+    domain: issgovernance.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.issgovernance.com/privacy-legal/ccpa/
+    contact_email: dataprotectionofficer@iss-stoxx.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: atdata
+    name: ATDATA LLC
+    domain: atdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://instantdata.atdata.com/optout
+    contact_email: privacysupport@atdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: atlantic-fox-technologies
+    name: Atlantic Fox Technologies, Inc.
+    domain: atlanticfox.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@atlanticfox.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: audience-acuity
+    name: Audience Acuity LLC
+    domain: audienceacuity.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.audienceacuity.com/opt-out-of-database
+    contact_email: privacy@audienceacuity.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: 33-mile-radius
+    name: 33 MILE RADIUS LLC
+    domain: remodeling.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://remodeling.com/do-not-sell/
+    contact_email: legal@evercommerce.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: azerion-us
+    name: Azerion US Inc.
+    domain: azerion.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.hybridtheory.com/do-not-sell/
+    contact_email: dpo_hybridtheory@azerion.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: background-information-services
+    name: Background Information Services, Inc.
+    domain: bisi.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@bisi.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: bdex
+    name: Bdex, LLC
+    domain: bdex.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.bdex.com/privacy-policy/data-sharing-opt-out/
+    contact_email: privacy@bdex.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: bdo-usa-llp
+    name: BDO USA, LLP
+    domain: bdo.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.bdo.com/do-not-sell-my-personal-information
+    contact_email: privacy@bdo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: beeswax
+    name: Beeswax
+    domain: beeswax.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.prod.bidr.io/optout
+    contact_email: privacy@beeswax.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: publicnsa
+    name: PUBLICNSA LLC
+    domain: bigdbm.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.bigdbm.com/
+    contact_email: privacy@bigdbm.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: biointelli
+    name: Biointelli Corporation
+    domain: biointelli.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@biointelli.net
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: black-pearl-group-limited
+    name: Black Pearl Group Limited
+    domain: blackpearl.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.blackpearl.com/privacy-opt-out
+    contact_email: privacy@blackpearl.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: bliss-point-media
+    name: Bliss Point Media, Inc.
+    domain: blisspointmedia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.blisspointmedia.com/privacy
+    contact_email: privacy@blisspointmedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: blis-usa
+    name: Blis USA, Inc.
+    domain: blis.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://blis.com/ccpa-opt-out/
+    contact_email: privacy@blis.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: bombora
+    name: Bombora, Inc
+    domain: bombora.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://bombora.com/opt-out/
+    contact_email: legal@bombora.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: brooks-integrated-marketing
+    name: Brooks Integrated Marketing, LLC
+    domain: brooksim.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.brooksim.com/privacy-form
+    contact_email: privacy@brooksim.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: btrs-holdings
+    name: BTRS Holdings Inc
+    domain: billtrust.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/82a6a736-b3a7-4e87-a2fd-04a39b7d2b19/2f5dc7b8-7698-4623-82d2-b2b969ef901e
+    contact_email: privacy@billtrust.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: buildertrend-solutions
+    name: Buildertrend Solutions, Inc.
+    domain: buildertrend.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@buildertrend.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: buyerlink
+    name: Buyerlink Inc.
+    domain: buyerlink.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.buyerlink.com/do-not-sell-or-share-my-personal-information
+    contact_email: legal@buyerlink.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: bv-insights
+    name: BV Insights LLC
+    domain: big-village.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://big-village.com/do-not-sell-or-share-my-personal-information/
+    contact_email: legal@big-village.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: carco-group
+    name: CARCO Group, Inc.
+    domain: cisive.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@cisive.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cardlytics
+    name: CARDLYTICS Inc
+    domain: bridg.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://datagrail.cardlytics.com/
+    contact_email: legalnotices@cardlytics.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: careerbuilder
+    name: Careerbuilder, LLC
+    domain: careerbuilder.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@careerbuilder.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: carry-technologies
+    name: Carry Technologies, Inc
+    domain: hightouch.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.hightouch.com/privacy-choices
+    contact_email: legal@hightouch.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: catalina-marketing
+    name: Catalina Marketing Corporation
+    domain: catalina.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.catalina.com/#privacy
+    contact_email: privacyteam@catalina.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: catalyze-ai
+    name: Catalyze Ai, Inc
+    domain: catalyzeai.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.catalyzeai.com/opt-out
+    contact_email: privacy@catalyzeai.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cic-mortgage-credit
+    name: CIC Mortgage Credit, Inc
+    domain: ciccredit.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.optoutprescreen.com/
+    contact_email: compliance@ciccredit.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: runtime-collective
+    name: Runtime Collective LLC
+    domain: cision.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.cision.com/contact-us/opt-out/
+    contact_email: legaldept@cision.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: civil-data-research
+    name: Civil Data Research, LLC
+    domain: searchpublicrecords.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.searchpublicrecords.com/help-center/privacy-requests
+    contact_email: privacyinfo@searchpublicrecords.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: civis-analytics
+    name: Civis Analytics, Inc
+    domain: civisanalytics.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.civisanalytics.com/privacy-policy/#ccpa
+    contact_email: dataprotection@civisanalytics.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: clay-labs
+    name: Clay Labs LLC
+    domain: clay.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://docs.google.com/forms/d/e/1FAIpQLSeAsU1U-AJfhqzDx6-6eVcyQ_kBD1J9cw1y0huQiS-HCkRf0Q/viewform?usp=send_form
+    contact_email: privacy@clay.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: clearcompany
+    name: Clearcompany, LLC
+    domain: clearcompany.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.networkadvertising.org/
+    contact_email: privacy@clearcompany.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: clearview-ai
+    name: Clearview Ai, Inc.
+    domain: clearview.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.clearview.ai/privacy-and-requests
+    contact_email: legal@clearview.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: datanyze
+    name: DATANYZE LLC
+    domain: datanyze.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.datanyze.com/privacy-center
+    contact_email: ccpa@clickagy.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cognism
+    name: Cognism Inc.
+    domain: cognism.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://cognism.privacy.saymine.io/cognism
+    contact_email: legal@cognism.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: collateral-analytics
+    name: Collateral Analytics, LLC
+    domain: mortgagetech.ice.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliancemortgagetech@ice.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: collective-data-solutions
+    name: Collective Data Solutions, LLC
+    domain: collectivedata.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.collectivedata.io/opt-out-do-not-sell-request-process/
+    contact_email: privacy@collectivedata.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: commercial-real-estate-exchange
+    name: COMMERCIAL REAL ESTATE EXCHANGE Inc
+    domain: crexi.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://crexi.bigidprivacy.cloud/consumer/#/o2TCsG9LJ7
+    contact_email: privacy@crexi.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: contemporary-information
+    name: CONTEMPORARY INFORMATION CORP.
+    domain: cicreports.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@cicreports.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: crisil-irevna-us
+    name: CRISIL Irevna US LLC
+    domain: greenwich.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.crisil.com/content/crisilcom/en/home/crisil-privacy-notice/do-not-sell-my-personal-information.html
+    contact_email: privacy1@crisil.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: crosswalk-technologies
+    name: Crosswalk Technologies Inc
+    domain: crosswalknyc.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.crosswalknyc.com/optout
+    contact_email: privacy@crosswalknyc.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: crunchbase
+    name: Crunchbase Inc
+    domain: crunchbase.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@crunchbase.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cuebiq-group
+    name: Cuebiq Group, LLC
+    domain: cuebiq.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.cuebiq.com/privacypolicy/
+    contact_email: privacy@cuebiq.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cybba
+    name: Cybba Inc.
+    domain: cybba.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://cybba-requests.my.onetrust.com/webform/a4a1351e-d293-4305-bde4-b9cf8f5c0989/f89c576a-b5c6-498e-bad5-698f084ffd30
+    contact_email: privacy@cybba.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cyndx-networks
+    name: Cyndx Networks LLC
+    domain: cyndx.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.cyndx.com/california-do-not-track/
+    contact_email: privacy@cyndx.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: data-decisions-group
+    name: Data Decisions Group, LLC
+    domain: datadecisionsgroup.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@datadecisionsgroup.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: data-facts
+    name: Data Facts, Inc.
+    domain: datafacts.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@datafacts.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: datamentors
+    name: DATAMENTORS LLC
+    domain: porchgroupmedia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.porchgroupmedia.com/inbound/do-not-sell-my-personal-information/
+    contact_email: privacy@porchgroupmedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: deluxe
+    name: Deluxe Corporation
+    domain: deluxe.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.deluxe.com/policy/donotsell/
+    contact_email: privacyprogramoffice@deluxe.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: datasys-group
+    name: DATASYS GROUP Inc
+    domain: datasys.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@datasys.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: datonics
+    name: Datonics, LLC
+    domain: datonics.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.datonics.com/do-not-sell-my-info#page
+    contact_email: privacy@datonics.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dealersocket
+    name: Dealersocket, LLC
+    domain: dealersocket.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://globaldsar.solera.com/webform/20bbc57b-6134-4535-8062-a1745b771851/1eafe8e0-f69b-4d39-af7c-6dbf764046fa
+    contact_email: privacy@solera.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: decide-technologies
+    name: Decide Technologies Inc.
+    domain: decide.co
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@decide.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: deeptrace
+    name: Deeptrace Inc.
+    domain: coresignal.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@coresignal.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: demandbase
+    name: Demandbase
+    domain: demandbase.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@demandbase.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: demyst-data
+    name: Demyst Data, Ltd
+    domain: demyst.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.demystdata.com/data-subject-action-request
+    contact_email: privacy@demystdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: digicenter
+    name: Digicenter, LLC.
+    domain: digicenter.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.collectivedata.io/opt-out-do-not-sell-request-process/
+    contact_email: privacy@digicenter.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: digital-viking-media
+    name: DIGITAL VIKING MEDIA Inc
+    domain: digitalvikingmedia.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: optout@digitalvikingmedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: diligent
+    name: Diligent Corporation
+    domain: diligent.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://diligentlegal.results.highbond.com/survey_responses/9Wrc_yiuertX-uLJ4bJA/edit
+    contact_email: privacy@diligent.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: disco-technology
+    name: Disco Technology Inc.
+    domain: disconetwork.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://support.disconetwork.com/hc/en-us/articles/4418121857819-CCPA-on-Disco#h_01GZPTPA4SPX26NA7E7HP5KHYS
+    contact_email: privacy@disconetwork.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dstillery
+    name: Dstillery, Inc
+    domain: dstillery.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.dstillery.com/
+    contact_email: privacy@dstillery.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dt-client-services
+    name: DT Client Services, LLC
+    domain: thedatatrust.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://thedatatrust.com/do-not-sell-my-personal-information/
+    contact_email: legal@thedatatrust.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dtn
+    name: DTN LLC
+    domain: dtn.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.dtn.com/do-not-sell-my-information-form/
+    contact_email: privacy@dtn.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dynata
+    name: Dynata, LLC
+    domain: dynata.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@dynata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: economic-modeling
+    name: ECONOMIC MODELING LLC
+    domain: lightcast.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.networkadvertising.org/
+    contact_email: legal@lightcast.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ekata
+    name: Ekata, Inc.
+    domain: ekata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.mastercard.us/public/my-data/dgr-public/personal-data-request.html?locale=en-us&region=NAM#/ekata/request/personalinfo
+    contact_email: privacysupport@ekata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: el-torocom
+    name: EL Toro.Com, LLC
+    domain: eltoro.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.eltoro.com/do-not-sell-my-personal-information/
+    contact_email: privacy@eltoro.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: emailmovers
+    name: Emailmovers Ltd
+    domain: emailmovers.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@emailmovers.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: endgame-labs
+    name: Endgame Labs, Inc
+    domain: endgame.io
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@endgame.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: enigma-technologies
+    name: ENIGMA TECHNOLOGIES Inc
+    domain: enigma.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.enigma.com/company/do-not-share-or-sell-my-personal-information
+    contact_email: privacy@enigma.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: eprodirect
+    name: Eprodirect
+    domain: eprodirect.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.eprodirect.com/do-not-sell-my-personal-information/
+    contact_email: optout@eprodirect.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: equimine
+    name: Equimine
+    domain: propstream.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.propstream.com/privacy-request
+    contact_email: privacyinquiry@propstream.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: erepublic
+    name: Erepublic LLC
+    domain: erepublic.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://erepublic.secure.force.com/PrivacyRequest/
+    contact_email: privacy@erepublic.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: evorra
+    name: Evorra Ltd
+    domain: evorra.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@evorra.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: experian-data
+    name: Experian Data Corp
+    domain: experianverify.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.clarityservices.com/support/opt-out-2/
+    contact_email: optout@experian.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: exponential-interactive
+    name: Exponential Interactive, Inc.
+    domain: vdx.tv
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.vdx.tv/policies/privacy#opting-out
+    contact_email: privacy@vdx.tv
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: eyeota-pte
+    name: Eyeota Pte Ltd
+    domain: eyeota.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.eyeota.com/how-to-opt-out
+    contact_email: privacy@eyeota.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: factori-technologies
+    name: Factori Technologies LLC
+    domain: factori.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.factori.ai/do-not-sell-my-information/
+    contact_email: privacy@factori.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: fair-screen
+    name: Fair Screen, Inc.
+    domain: fairscreen.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@fairscreen.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: faraday
+    name: Faraday, Inc.
+    domain: faraday.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.faraday.io/privacy-options
+    contact_email: privacy@faraday.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: fideo-intelligence
+    name: Fideo Intelligence, Inc.
+    domain: fideo.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://app.fideo.ai/your-privacy-choices/
+    contact_email: legal@fideo.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: fifty-technology
+    name: Fifty Technology Ltd
+    domain: fifty.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.fifty.io/opt-out
+    contact_email: privacy@fifty.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: first-direct
+    name: First Direct, Inc
+    domain: firstdirectmarketing.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://compliance.firstdirectmarketing.com/
+    contact_email: privacy@firstdirectmarketing.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: first-movers-advantage
+    name: First Movers Advantage, LLC
+    domain: fmadata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.fmadata.com/opt-out-requests/new
+    contact_email: privacy@fmadata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: first-orion
+    name: First Orion, Inc.
+    domain: firstorion.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacy.firstorion.com/
+    contact_email: ccparequests@firstorion.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: stefan-certic
+    name: Stefan Certic
+    domain: myflashcloud.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.flashintel.ai/dont-sell-my-information
+    contact_email: legal@myflashcloud.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: focus-usa
+    name: Focus USA, Inc.
+    domain: focus-usa.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.focus-usa.com/optout-form/
+    contact_email: privacy@focus-usa.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: foo-monk
+    name: FOO MONK LLC
+    domain: instantly.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://help.instantly.ai/en/collections/9392788-instantly-privacy-center
+    contact_email: privacy@instantly.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: foragerai
+    name: Forager.Ai, LLC
+    domain: forager.ai
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@forager.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: forewarn
+    name: FOREWARN LLC
+    domain: forewarn.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.forewarn.com/opt-out-policy/
+    contact_email: legal.compliance@forewarn.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: fourleaf
+    name: Fourleaf LLC
+    domain: fourleafdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.fourleafdata.com/privacy-policy
+    contact_email: privacy@thefourleaf.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: foursquare-labs
+    name: Foursquare Labs, Inc.
+    domain: location.foursquare.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.aboutads.info/?c=2&lang=EN
+    contact_email: legal@foursquare.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: fraiser
+    name: Fraiser, LLC
+    domain: fraiser.org
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.fraiser.org/data-request-form
+    contact_email: privacy@fraiser.org
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: freemium-data-services
+    name: Freemium Data Services, LLC
+    domain: reachdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.reachdata.com/privacy
+    contact_email: compliance@reachdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: freewheel-media
+    name: Freewheel Media Inc
+    domain: freewheel.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.freewheel.com/do-not-sell-my-information
+    contact_email: legalnotices@freewheel.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: freshaddress
+    name: Freshaddress, LLC
+    domain: freshaddress.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://instantdata.atdata.com/optout
+    contact_email: privacy@freshaddress.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: fyllo
+    name: Fyllo
+    domain: hellofyllo.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.semasio.com/legal/privacy-choices
+    contact_email: legal@hellofyllo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: cengage-learning
+    name: CENGAGE LEARNING Inc
+    domain: cengage.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://info.cengage.com/LP=5633
+    contact_email: privacy@cengage.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: gravy-analytics
+    name: Gravy Analytics, Inc.
+    domain: gravyanalytics.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.unacast.com/opt-out
+    contact_email: legal@gravyanalytics.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: great-lakes-list
+    name: GREAT LAKES LIST Inc
+    domain: greatlakeslists.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.greatlakeslists.com/opt_out_request.php
+    contact_email: ccpa@greatlakeslists.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: greenhouse-software
+    name: Greenhouse Software, Inc.
+    domain: greenhouse.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@greenhouse.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: grin-technologies
+    name: Grin Technologies Inc.
+    domain: grin.co
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.grin.co/data-privacy-form/
+    contact_email: legal@grin.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: growbots
+    name: Growbots Inc
+    domain: growbots.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.growbots.com/do-not-sell-my-info/
+    contact_email: privacy@growbots.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: here-north-america
+    name: HERE North America LLC
+    domain: here.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://legal.here.com/en-gb/privacy/do-not-sell
+    contact_email: privacy@here.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: hireteammate
+    name: HIRETEAMMATE Inc
+    domain: hireez.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://app.hireez.com/ownyourdata
+    contact_email: privacy@hireez.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: hivestack
+    name: Hivestack, Inc.
+    domain: hivestack.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.hivestack.com/opt-out-california-residents/
+    contact_email: privacy@hivestack.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: accudata-integrated-marketing
+    name: ACCUDATA INTEGRATED Marketing, Inc.
+    domain: aslmarketing.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.accudata.com
+    contact_email: privacy.compliance@accudata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: hubspot
+    name: Hubspot, Inc.
+    domain: hubspot.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@hubspot.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: hybrid-theory
+    name: Hybrid Theory
+    domain: hybridtheory.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@hybridtheory.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: i360
+    name: I360, LLC
+    domain: i-360.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/77dff651-9f08-40cd-99fe-a7c487b2504d/fd25e566-5931-4987-ae94-13ffd3306913
+    contact_email: privacy@i-360.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: id5-technology
+    name: ID5 Technology
+    domain: id5.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.id5.io/platform-privacy-policy/#what-are-your-choices
+    contact_email: privacy@id5.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: idm
+    name: Idm, Inc.
+    domain: idm.us.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: ccpa@idm.us.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: imprint-analytics
+    name: Imprint Analytics LLC
+    domain: imprintanalytics.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://imprintanalytics.io/limit-the-use-of-my-sensitive-personal-information/
+    contact_email: privacy@imprintanalytics.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: indiemark
+    name: Indiemark LLC
+    domain: emailindustries.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.emailindustries.com/legal/#ccpa
+    contact_email: privacy@emailindustries.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: inflection-risk-solutions
+    name: Inflection Risk Solutions, LLC
+    domain: inflection.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@inflection.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: infogroup
+    name: Infogroup Inc.
+    domain: infogroup.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.data-axle.com/do-not-sell-my-data/
+    contact_email: privacyteam@infogroup.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: infopay
+    name: INFOPAY Inc
+    domain: infopay.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@infopay.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: information-data-resources
+    name: Information Data Resources, LLC
+    domain: publicinfoservices.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.publicinfoservices.com/help-center/privacy-requests
+    contact_email: privacyinfo@publicinfoservices.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: inmarket-media
+    name: Inmarket Media LLC
+    domain: inmarket.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.inmarket.com/opt-out/
+    contact_email: privacy@inmarket.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: inmobi
+    name: Inmobi
+    domain: trufactor.io
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@inmobi.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: innovative-database-solutions
+    name: Innovative Database Solutions, Inc.
+    domain: idatabasesolutions.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://idatabasesolutions.com/do-not-sell-my-personal-info/
+    contact_email: compliance@idatabasesolutions.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: insideview
+    name: InsideView, Inc.
+    domain: insideview.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@insideview.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: intalytics
+    name: Intalytics, Inc.
+    domain: esiteanalytics.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@kalibrate.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: intellicorp-records
+    name: Intellicorp Records, Inc.
+    domain: intellicorp.net
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.intellicorp.net/marketing/Your-California-Privacy-Rights
+    contact_email: compliance@intellicorp.net
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: intent-iq
+    name: Intent IQ LLC
+    domain: intentiq.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.intentiq.com/opt-out/
+    contact_email: privacy@intentiq.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: intentsify
+    name: INTENTSIFY LLC
+    domain: intentsify.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://app.intentsify.io/opt-out
+    contact_email: privacy@intentsify.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ipsos
+    name: Ipsos
+    domain: ipsos.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: dpo.usa@ipsos.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: iqvia-digital
+    name: IQVIA Digital Inc.
+    domain: iqvia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.iqvia.com/about-us/privacy/ccpa/do-not-sell
+    contact_email: privacyofficer@iqvia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ispottv
+    name: Ispot.Tv
+    domain: ispot.tv
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.ispot.tv/privacy/opt-out
+    contact_email: privacy@ispot.tv
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: iwave-information-systems
+    name: Iwave Information Systems
+    domain: kindsight.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://go.kindsight.io/privacy-opt-out
+    contact_email: privacy+california@iwave.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: j2-martech
+    name: J2 MARTECH CORP
+    domain: ziffdavis.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://platform.fullcontact.com/your-privacy-choices
+    contact_email: privacy@ziffdavis.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: jmr-media-consulting
+    name: JMR Media Consulting, Inc.
+    domain: jmr-media.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.jmr-media.com/do-not-sell-my-personal
+    contact_email: privacy@jmr-media.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: jun-group-productions
+    name: Jun Group Productions, LLC
+    domain: jungroup.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://jungroup.com/ccpa/
+    contact_email: ccpa@jungroup.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: kargo-global
+    name: Kargo Global LLC
+    domain: kargo.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.kargo.com/privacy#opt-out
+    contact_email: privacyinfo@kargo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: key-marketing-advantage
+    name: Key Marketing Advantage, LLC
+    domain: keymarketingadvantage.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.keymarketingadvantage.com/do_not_use_my_personal_information
+    contact_email: privacy@keymarketingadvantage.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: killi
+    name: Killi Ltd.
+    domain: killi.io
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@killi.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: kloudend
+    name: KLOUDEND Inc
+    domain: kloudend.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://ipapi.co/donotsell/
+    contact_email: legal@kloudend.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: kochava
+    name: KOCHAVA Inc.
+    domain: kochava.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.kochava.com/opt-out-do-not-sell-request-process/
+    contact_email: legal@kochava.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: labels-lists
+    name: "LABELS & LISTS Inc"
+    domain: l2-data.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://l2political.com/california-privacy-rights-for-california-residents-only/
+    contact_email: privacy@l2political.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: leadcrunch
+    name: Leadcrunch
+    domain: getrev.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://getrev.ai/do-not-sell-or-share-my-personal-information/
+    contact_email: privacy@getrev.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: leadership-connect
+    name: Leadership Connect
+    domain: leadershipconnect.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.leadershipconnect.io/opt-out
+    contact_email: privacy@leadershipconnect.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: leadloft
+    name: Leadloft Inc.
+    domain: leadloft.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@leadloft.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: leadsmarketcom
+    name: Leadsmarket.Com LLC
+    domain: leadsmarket.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.leadsmarket.com/privacy-policy.
+    contact_email: legal@leadsmarket.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: leadspace
+    name: Leadspace, Inc.
+    domain: leadspace.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.leadspace.com/do-not-sell-form/
+    contact_email: privacy_registration@leadspace.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: lifesight
+    name: Lifesight LLC
+    domain: lifesight.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://lifesight.io/opt-out/
+    contact_email: privacy@lifesight.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: limeleads
+    name: Limeleads
+    domain: limeleads.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.limeleads.com/do-not-sell-my-data-request/
+    contact_email: privacy@limeleads.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: listsonline
+    name: Listsonline
+    domain: listsonline.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacyofficer@listsonline.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: lizdev
+    name: Lizdev, Inc
+    domain: lizdev.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacyanddatacompliancereview@lizdev.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: logiq
+    name: Logiq, Inc
+    domain: logiq.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@logiq.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: loopme
+    name: LOOPME LTD
+    domain: loopme.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@loopme.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ls-mobile-apps-holdings
+    name: L.S Mobile Apps Holdings Ltd
+    domain: lsmapps.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.lsmapps.com/onetrust-opt-out
+    contact_email: privacy@lsmapps.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: lucid-holdings
+    name: Lucid Holdings, LLC
+    domain: luc.id
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@luc.id
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: madhive
+    name: Madhive, Inc.
+    domain: madhive.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.madhive.com/legal/us-state-privacy-notice#optOut
+    contact_email: privacy@madhive.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: madison-logic
+    name: Madison Logic, Inc.
+    domain: madisonlogic.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@madisonlogic.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: magnite
+    name: MAGNITE Inc
+    domain: magnite.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.magnite.com/legal/user-choice-portal/#optout
+    contact_email: privacy@magnite.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: marinus-analytics
+    name: Marinus Analytics
+    domain: marinusanalytics.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.marinusanalytics.com/do-not-sell-my-personal-information
+    contact_email: privacy@marinusanalytics.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: market-force
+    name: Market Force Corporation
+    domain: marketforcecorp.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.marketforcecorp.com/opt-out/
+    contact_email: privacy@marketforcecorp.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: marriott-international
+    name: Marriott International, Inc.
+    domain: marriott.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/0894cd2c-85ba-4d0b-8ec1-e18f3735e0e0/b03c7f1f-4aca-4502-b5eb-d8d883be4c8c
+    contact_email: privacy@marriott.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: matchbook-data
+    name: MATCHBOOK DATA LLC
+    domain: matchbookdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.matchbookdata.com/opt-out-form/
+    contact_email: privacy@matchbookdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: maxmind
+    name: MAXMIND Inc
+    domain: maxmind.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.maxmind.com/en/opt-out
+    contact_email: legal@maxmind.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mch
+    name: MCH Inc
+    domain: mchdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.mchdata.com/about/ccpaemail
+    contact_email: privacy@mchdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mediamath
+    name: Mediamath, Inc.
+    domain: mediamath.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.mediamath.com/privacy-policy/ccpa-optout/
+    contact_email: privacy@mediamath.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: medianet-advertising-fz
+    name: Media.Net Advertising Fz, LLC
+    domain: media.net
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.media.net/optout/
+    contact_email: privacy@media.net
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mediawallah
+    name: MEDIAWALLAH Inc
+    domain: mediawallah.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://mediawallah.com/donotsell/
+    contact_email: privacy@mediawallah.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mediazod
+    name: Mediazod LLC
+    domain: leadzod.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@leadzod.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: medpro-systems
+    name: Medpro Systems
+    domain: medprosystems.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@medprosystems.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: meltwater-news-us
+    name: Meltwater News US Inc
+    domain: meltwater.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.meltwater.com/en/legal
+    contact_email: legal@meltwater.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: message-digital
+    name: MESSAGE DIGITAL LLC
+    domain: messagedigital.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.messagedigital.com/my-data
+    contact_email: privacy@messagedigital.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mh-sub-i
+    name: MH Sub I, LLC
+    domain: internetbrands.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.internetbrands.com/privacy/privacy-contact-form.php
+    contact_email: privacy@internetbrands.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mightyrep
+    name: Mightyrep
+    domain: mightyrep.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@mightyrep.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: minerva-bi
+    name: MINERVA BI Inc
+    domain: realtors.minervadata.xyz
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://realtors.minervadata.xyz/opt-out
+    contact_email: privacy@minervadata.xyz
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: mobile-technology
+    name: Mobile Technology Corporation
+    domain: onspotdata.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: optout@onspotdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: modigie
+    name: Modigie Inc.
+    domain: modigie.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/4a8e10dc-2293-42ea-ad06-886bc22167a6/20341940-11c2-4c43-9b64-194e952203fd
+    contact_email: privacy@modigie.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: monocl
+    name: Monocl
+    domain: monocl.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://preferences.definitivehc.com/privacy
+    contact_email: privacy@definitivehc.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: m-r-strategic-services
+    name: "M&R Strategic Services"
+    domain: mrss.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://docs.google.com/forms/d/e/1FAIpQLSefr7ccty1bMZza8chUgLe0eWktBpQ_wGhzFpzeUupGlna3CA/viewform?usp=sf_link
+    contact_email: privacy@mrss.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: narvar
+    name: Narvar, Inc.
+    domain: corp.narvar.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://narvar.my.onetrust.com/webform/04b3731f-2a9a-42ce-bd6b-106d4b4ec3bf/a7c944bf-3cec-4f00-9dc5-dea5bf2b6f4f
+    contact_email: legal@narvar.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: national-data-analytics
+    name: National Data Analytics, LLC
+    domain: publicdatacheck.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.publicdatacheck.com/help-center/privacy-requests
+    contact_email: privacyinfo@publicdatacheck.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: national-opinion-institute
+    name: National Opinion Institute, LLC
+    domain: nationalopinioninstitute.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/77dff651-9f08-40cd-99fe-a7c487b2504d/afcce4ab-fd72-4990-a972-58e24d9110a7
+    contact_email: privacy@nationalopinioninstitute.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: national-student-clearinghouse
+    name: NATIONAL STUDENT CLEARINGHOUSE
+    domain: studentclearinghouse.org
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@studentclearinghouse.org
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: nativo
+    name: Nativo, Inc.
+    domain: nativo.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.nativo.com/interest-based-ads#your-rights
+    contact_email: legal@nativo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: near-north-america
+    name: Near North America
+    domain: near.co
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@near.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dun-bradstreet
+    name: "DUN & BRADSTREET Inc"
+    domain: dnb.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.netwisedata.com/consumer-privacy
+    contact_email: privacy@netwisedata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: nexsales-solutions
+    name: Nexsales Solutions Inc.
+    domain: nexsales.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@nexsales.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: nextroll
+    name: Nextroll, Inc.
+    domain: nextroll.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://app.adroll.com/optout
+    contact_email: legal@nextroll.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: nexxa-group
+    name: Nexxa Group, Inc.
+    domain: nexxagroup.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.nexxagroup.com/corporate-overview/consumer-opt-out/
+    contact_email: consumerchoice@nexxagroup.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: nexxen
+    name: Nexxen Inc.
+    domain: nexxen.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://yourdata.nexxen.com/
+    contact_email: privacyrights@nexxen.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: nfocus-consulting
+    name: Nfocus Consulting Inc
+    domain: n-focus.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.n-focus.com/do-not-sell-or-share-my-personal-information/
+    contact_email: consumer@n-focus.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: onaudience
+    name: Onaudience Ltd
+    domain: onaudience.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.onaudience.com/opt-out
+    contact_email: privacy@onaudience.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: onemata
+    name: Onemata Corporation
+    domain: onemata.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@onemata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: one-model
+    name: One Model, Inc.
+    domain: onemodel.co
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@onemodel.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: on-hold-america
+    name: On Hold-America, Inc.
+    domain: kycdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.kycdata.com/consumer-privacy/
+    contact_email: consumers@kycdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: online-advertising-network-sp-z-oo
+    name: Online Advertising Network Sp. z o.o.
+    domain: oan.pl
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://oan.pl/opt-out/
+    contact_email: privacy@oan.pl
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: online-media-group
+    name: ONLINE MEDIA GROUP Inc.
+    domain: omginc.xyz
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.omginc.xyz/privacy#ccpa
+    contact_email: privacy@omginc.xyz
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: opensend
+    name: Opensend Inc
+    domain: opensend.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@opensend.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: openx-technologies
+    name: Openx Technologies, Inc.
+    domain: openx.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.openx.com/privacy-center/browser-opt-out-portal/
+    contact_email: privacy@openx.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: optimal-fusion
+    name: Optimal Fusion
+    domain: optimalfusion.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.optimalfusion.com/adpreferences/
+    contact_email: dataprotectionofficer@optimalfusion.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: orgio
+    name: Orgio, Inc.
+    domain: theorg.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.theorg.com/do-not-sell
+    contact_email: privacy@theorg.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: origin8
+    name: ORIGIN8 Inc
+    domain: pushint.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://pushint.com/manage-my-data
+    contact_email: compliance@pushint.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: outbrain
+    name: Outbrain Inc.
+    domain: outbrain.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://my.outbrain.com/recommendations-settings/home
+    contact_email: legal@outbrain.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: outlogic
+    name: OUTLOGIC LLC
+    domain: outlogic.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://outlogic.io/opt-out-form/
+    contact_email: privacy@outlogic.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: lender-feed
+    name: Lender Feed LLC
+    domain: monitorbase.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://my.monitorbase.com/privacypolicy
+    contact_email: privacy@monitorbase.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: pacific-east-research
+    name: Pacific East Research Inc
+    domain: pacificeast.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.pacificeast.com/contact-us-privacy/
+    contact_email: privacy@pacificeast.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: paedae
+    name: Paedae, Inc.
+    domain: infillion.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/f7e3f6db-ed65-4759-a3f5-3b5c8b7e9bff/draft/9949a1a8-aa69-4848-a93f-d093d877a981
+    contact_email: privacy@infillion.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: paramount-lists
+    name: PARAMOUNT LISTS Inc
+    domain: paramountdirectmarketing.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.paramountdirectmarketing.com/opt_out_request.php
+    contact_email: ccpa@paramountdirectmarketing.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: path2response
+    name: Path2Response LLC
+    domain: path2response.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal-cdn.onetrust.com/dsarwebform/2de26f06-de6f-45a7-8e1d-7d1148a3f301/draft/7a5dc7d1-cc7e-43a8-9f24-702807deb65b.html
+    contact_email: legal@path2response.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: pathway-ventures
+    name: PATHWAY VENTURES LLC
+    domain: indivizio.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.protectdataprivacy.com/
+    contact_email: privacyofficer@indivizio.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: pension-benefit-information
+    name: Pension Benefit Information, LLC
+    domain: pbinfo.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: ccparequests@pbinfo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: peoplefindersdaas
+    name: Peoplefindersdaas
+    domain: peoplefindersdaas.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.peoplefindersdaas.com/personal-information
+    contact_email: privacy@peoplefindersdaas.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: perf-labs
+    name: Perf Labs, Inc.
+    domain: interseller.io
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@interseller.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: permutive
+    name: Permutive, Inc
+    domain: permutive.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://permutive.com/privacy/
+    contact_email: privacy@permutive.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: pitchbook-data
+    name: Pitchbook Data, Inc.
+    domain: pitchbook.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@pitchbook.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: place-exchange
+    name: Place Exchange, Inc.
+    domain: placeexchange.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.placeexchange.com/do-not-sell-my-information
+    contact_email: privacy@placeexchange.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: placeiq
+    name: PLACEIQ Inc
+    domain: precisely.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.precisely.com/your-privacy-choices
+    contact_email: privacy@placeiq.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: plexuss
+    name: Plexuss, Inc.
+    domain: plexuss.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.plexuss.com/ccpa-opt-out
+    contact_email: compliance@plexuss.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: plunge
+    name: Plunge, LLC
+    domain: plungedigital.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://share.hsforms.com/1erM4FtHJQY2p2JaWuo4YbQ2dsq6
+    contact_email: privacy@plungedigital.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: pop-acta-media
+    name: Pop Acta Media, LLC
+    domain: popacta.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.popacta.com/
+    contact_email: legal@popacta.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: predactiv
+    name: Predactiv
+    domain: predactiv.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@predactiv.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: preferred-communications
+    name: Preferred Communications
+    domain: preferredcommunications.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://preferredcommunications.com/consumer-opt-out/
+    contact_email: opt-out-ccpa@preferredcommunications.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: privco-media
+    name: Privco Media LLC
+    domain: privco.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.privco.com/privacy-policy#opt-out
+    contact_email: legal@privco.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: propertyradar
+    name: Propertyradar Inc
+    domain: propertyradar.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.onetrust.com/webform/c3eb779a-028a-4045-aefc-ac78be730689/6f6c2bef-b565-4753-adc6-95585d7a9486
+    contact_email: privacy@propertyradar.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: property-reach-lp
+    name: Property Reach LP
+    domain: propertyreach.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@propertyreach.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: prospector-database
+    name: Prospector Database, LLC
+    domain: prospectordatabase.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.prospectordatabase.com/privacy-center
+    contact_email: privacy@prospectordatabase.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: pulsepoint
+    name: Pulsepoint, Inc.
+    domain: pulsepoint.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.pulsepoint.com/legal/platform-privacy-policy#opt-out
+    contact_email: privacy@pulsepoint.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: purecars-technologies
+    name: Purecars Technologies, LLC
+    domain: purecars.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@purecars.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: quadrant-global-pte
+    name: Quadrant Global Pte. Ltd.
+    domain: quadrant.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.quadrant.io/opt-out
+    contact_email: privacy@quadrant.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: qualfon
+    name: Qualfon
+    domain: qualfon.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.qualfon.com/privacy-policy/consumer-privacy-choices/
+    contact_email: consumerprivacy@qualfon.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: rampedup
+    name: Rampedup, LLC.
+    domain: rampedup.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://basic.rampedup.io/app/donotsell
+    contact_email: privacy@rampedup.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: rategain-adara
+    name: Rategain Adara, Inc.
+    domain: adara.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://adara.com/opt-out/
+    contact_email: dpo@adara.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ray-cdp
+    name: Ray Cdp, Inc.
+    domain: rayinsights.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.rayinsights.com/ray-cdp-opt-out-and-delete-request/
+    contact_email: privacy@raycdp.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: realeflow
+    name: Realeflow LLC
+    domain: realeflow.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://forms.gle/cgg2e2jLT7CL7efM7
+    contact_email: privacy@realeflow.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: reallygreatrate
+    name: Reallygreatrate, Inc.
+    domain: rgrmarketing.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal-eu-cdn.onetrust.com/dsarwebform/942fbf02-bbfe-4a5d-808d-080b06c5651c/3fdf8f1d-7ab3-4a99-bb4e-24965500290d.html
+    contact_email: ccpa@rgrmarketing.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: recsolu
+    name: Recsolu Inc.
+    domain: yello.co
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://yello.co/do-not-sell-my-personal-information/
+    contact_email: privacy@yello.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: redmob-limited-liability
+    name: Redmob Limited Liability Company
+    domain: redmob.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.redmob.io/privacy-policy
+    contact_email: privacy@redmob.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: regulatory-datacorp
+    name: Regulatory Datacorp, Inc.
+    domain: bvdinfo.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://survey.alchemer.com/s3/8249180/Do-Not-Sell-Request
+    contact_email: privacy@bvdinfo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: researchusa
+    name: Researchusa LLC
+    domain: researchusallc.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacycompliance.biz/researchusallc-ccpa/
+    contact_email: privacy@researchusallc.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: resonate-networks
+    name: RESONATE Networks, Inc.
+    domain: resonate.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://ds.reson8.com/opt-out.gif?lp=https://www.resonate.com/ccpa-do-not-sell/
+    contact_email: privacy@resonate.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: revcontent
+    name: Revcontent
+    domain: revcontent.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@revcontent.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: revenuebase
+    name: Revenuebase Inc
+    domain: revenuebase.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://revenuebase.ai/do-not-sell-my-info/
+    contact_email: privacy@revenuebase.ai
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: revoptimal
+    name: Revoptimal, LLC
+    domain: revoptimal.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@revoptimal.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: rhetorik-limited
+    name: Rhetorik Limited
+    domain: rhetorik.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://rhetorik.com/do-not-sell-my-info/
+    contact_email: privacy@rhetorik.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: dealerx-partners
+    name: Dealerx Partners LLC
+    domain: data.exchange
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.dealerx.com/privacy-options/
+    contact_email: compliance@dealerx.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: rooftop-digital
+    name: ROOFTOP DIGITAL LLC
+    domain: rooftopdigital.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.consumerdataprotect.com/?ref=rooftopdigital.com
+    contact_email: privacyofficer@therooftop.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: roqad
+    name: Roq.Ad Inc.
+    domain: roq.ad
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.roq.ad/white-papers/#optout
+    contact_email: privacy@roq.ad
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: round-sky
+    name: Round Sky, Inc.
+    domain: roundsky.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@roundsky.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: rpm-data-solutions
+    name: RPM Data Solutions LLC
+    domain: exlservice.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@exlservice.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sabio
+    name: Sabio, Inc.
+    domain: sabio.inc
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.sabio.inc/do-not-sell-my-info
+    contact_email: privacy@sabio.inc
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: safegraph
+    name: Safegraph Inc.
+    domain: safegraph.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@safegraph.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: salesintel-research
+    name: Salesintel Research Inc.
+    domain: salesintel.io
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://salesintel.io/opt-out/
+    contact_email: privacy@salesintel.io
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: salutary-data
+    name: SALUTARY DATA LLC
+    domain: salutarydata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.salutarydata.com/privacy-opt-out-and-disclosure-form/
+    contact_email: privacy@salutarydata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: free-stream-media
+    name: Free Stream Media Corp.
+    domain: samba.tv
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.samba.tv/users/notice-of-right-to-opt-out
+    contact_email: privacy@samba.tv
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sbfe
+    name: Sbfe, LLC
+    domain: sbfe.org
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: ccpa@sbfe.org
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: scalable-commerce
+    name: Scalable Commerce, LLC
+    domain: kidslivesafe.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.kidslivesafe.com/help-center/privacy-requests
+    contact_email: privacyinfo@kidslivesafe.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: date-detective
+    name: Date Detective Inc
+    domain: date-detective.app
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://mobile.date-detective.app/investigate-opt-out?origin=website
+    contact_email: privacy@date-detective.app
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: scileads
+    name: Scileads Ltd
+    domain: scileads.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://scileads.com/opt-out/
+    contact_email: privacy@scileads.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: seamless-contacts
+    name: Seamless Contacts, Inc.
+    domain: seamless.ai
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://login.seamless.ai/personalDataRequest
+    contact_email: privacy@seamlessleads.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: semcastingcom
+    name: Semcasting.com
+    domain: semcasting.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.semcasting.com/privacy-choice?hsLang=en
+    contact_email: privacychoice@semcasting.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sentilink
+    name: Sentilink Corp
+    domain: sentilink.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@sentilink.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: share-local-media
+    name: Share Local Media, Inc
+    domain: sharelocalmedia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://opt-out.sharelocalmedia.com/
+    contact_email: legal@sharelocalmedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sharethrough
+    name: Sharethrough Inc.
+    domain: sharethrough.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacy-center.sharethrough.com/en/do-not-sell-my-personal-information/
+    contact_email: dataprotection@sharethrough.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sheerid
+    name: SHEERID Inc
+    domain: sheerid.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.sheerid.com/privacy-notice-for-audience-development-products-services/?_cord_id=6ddcc513-32c1-4799-832f-5c1d99acad88
+    contact_email: privacy@sheerid.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: similarweb
+    name: Similarweb Ltd.
+    domain: similarweb.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: legal@similarweb.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: simio-cloud
+    name: SIMIO CLOUD LLC
+    domain: simiocloud.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://simiocloud.com/optout
+    contact_email: privacy@simiocloud.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: skyhook-holding
+    name: Skyhook Holding, Inc.
+    domain: skyhook.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.skyhook.com/opt-out-of-skyhook-products.
+    contact_email: privacy@skyhook.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: slashdot-media
+    name: Slashdot Media, LLC
+    domain: slashdotmedia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.slashdotmedia.com/opt-out-choices/
+    contact_email: privacy@slashdotmedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: exact-opco
+    name: EXACT OPCO LLC
+    domain: solarpower-experts.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.exactcustomer.com/DoNotSell.aspx
+    contact_email: privacy@exactcustomer.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: sovrn
+    name: Sovrn, Inc.
+    domain: sovrn.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacy.sovrn.com/opt-out
+    contact_email: privacy@sovrn.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: spectrum-mailing-lists
+    name: Spectrum Mailing Lists
+    domain: spectrumlists.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://spectrummailinglists.com/privacy-statement/
+    contact_email: privacy@spectrumlists.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: s-p-global
+    name: "S&P Global Inc."
+    domain: spglobal.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.spglobal.com/en/privacy/california-consumer-privacy-act
+    contact_email: privacy@spglobal.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: spycloud
+    name: Spycloud, Inc.
+    domain: spycloud.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.spycloud.com/contact-us/
+    contact_email: privacy@spycloud.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: stackadapt
+    name: STACKADAPT Inc
+    domain: stackadapt.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.stackadapt.com/legal-document-centre/opt-out-of-sale-targeted-advertising
+    contact_email: legal@stackadapt.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: staircase
+    name: Staircase, Inc.
+    domain: staircase.co
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: optout@staircase.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: statara-solutions
+    name: Statara Solutions LLC
+    domain: statara.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://statara.com/opt-out
+    contact_email: privacy@statara.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: statsocial
+    name: Statsocial, Inc.
+    domain: statsocial.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.statsocial.com/optout
+    contact_email: privacy@statsocial.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: steppingblocks
+    name: STEPPINGBLOCKS Inc
+    domain: steppingblocks.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.steppingblocks.com/personal-information-inquiry
+    contact_email: privacy@steppingblocks.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: 360-media-direct
+    name: 360 Media Direct
+    domain: 360mediadirect.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://360-media-direct.privacy.saymine.io/360_Media_Direct
+    contact_email: privacy@360mediadirect.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: summit-resources
+    name: Summit Resources, LLC
+    domain: clientcommand.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal-cdn.onetrust.com/dsarwebform/555c3377-7eb2-4e7a-bf30-c408de4ab483/70df6685-8289-4d72-a9d7-9a736b3b837f.html
+    contact_email: legal@clientcommand.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: swoopcom
+    name: Swoop.Com, Inc.
+    domain: swoop.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://optout.swoop.com/
+    contact_email: privacyrights@swoop.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: taboola
+    name: TABOOLA Inc
+    domain: taboola.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@taboola.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: amplemarket
+    name: Amplemarket
+    domain: amplemarket.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.amplemarket.com/legal/do-not-sell-my-info
+    contact_email: privacy@amplemarket.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: targetsmart-communications
+    name: TARGETSMART COMMUNICATIONS LLC
+    domain: targetsmart.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacy.targetsmart.com/general/opt_out
+    contact_email: privacy@targetsmart.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: techtarget
+    name: TECHTARGET Inc
+    domain: techtarget.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://techtarget.zendesk.com/hc/en-us/requests/new?ticket_form_id=360004852434
+    contact_email: privacy@techtarget.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: telefi
+    name: Telefi LLC
+    domain: telefi.app
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: ccpa@telefi.app
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: terminus-software
+    name: Terminus Software, Inc.
+    domain: terminus.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://home.terminusplatform.com/data-deletion-request
+    contact_email: privacy@terminus.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: the-data-group
+    name: The Data Group
+    domain: thedatagroup.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@thedatagroup.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: tracers-information-specialists
+    name: Tracers Information Specialists, Inc.
+    domain: tracersinfo.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: compliance@tracersinfo.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: triplelift
+    name: Triplelift, Inc.
+    domain: triplelift.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@triplelift.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: truedata-solutions
+    name: Truedata Solutions, Inc.
+    domain: truedata.co
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://info-prod.truedata.co/opt-out-request
+    contact_email: legal@truedata.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: tymax-media
+    name: Tymax Media
+    domain: tymaxmedia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.tymaxmedia.com/ccpa.php
+    contact_email: privacyofficer@datacomplianceportal.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ubermedia
+    name: Ubermedia
+    domain: ubermedia.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@ubermedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ga-uc-holdings
+    name: GA-UC HOLDINGS Inc
+    domain: unacast.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.unacast.com/opt-out
+    contact_email: privacy@unacast.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: unearth-campaigns
+    name: Unearth Campaigns LLC
+    domain: unearthcampaigns.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.unearthcampaigns.com/opt-out/
+    contact_email: privacy@unearthcampaigns.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: unity-technologies-sf
+    name: Unity Technologies SF
+    domain: unity.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.unity.com/legal/do-not-sell-my-personal-information
+    contact_email: dpo@unity3d.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: us-marketing-group
+    name: US Marketing Group
+    domain: usmarketinggrp.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.usmarketinggrp.com/privacy-policy/#CCPA
+    contact_email: privacy@usmarketinggrp.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: veeva-systems
+    name: Veeva Systems Inc.
+    domain: veeva.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.veeva.com/privacy/do-not-sell-share/
+    contact_email: privacy@veeva.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: vendelux
+    name: Vendelux
+    domain: vendelux.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@vendelux.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: venntel
+    name: Venntel, Inc.
+    domain: venntel.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.venntel.com/opt-out
+    contact_email: legal@venntel.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: ventiveiq
+    name: Ventiveiq LLC
+    domain: ventiveiq.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal.privacypillar.com/dsar/form?orgid=0c31c814-ea86-461f-8ccb-294f05bc74c3&propid=cc95835d-7719-4336-b0c4-18146e5d000a&formid=4348f332-6917-4566-8c56-6fc9eb57097f&status=publish
+    contact_email: privacy@ventiveiq.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: veraset
+    name: Veraset LLC
+    domain: veraset.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.veraset.com/do-not-sell-my-personal-information
+    contact_email: privacy@veraset.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: versium-analytics
+    name: Versium Analytics, Inc
+    domain: versium.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://versium.com/ccpa-opt-out
+    contact_email: optout@versium.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: videoamp
+    name: Videoamp, Inc.
+    domain: videoamp.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.videoamp.com/consumer-rights-under-ccpa
+    contact_email: legal@videoamp.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: vistar-media
+    name: Vistar Media, Inc.
+    domain: vistarmedia.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.vistarmedia.com/privacy-choices
+    contact_email: privacy@vistarmedia.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: visual-visitor
+    name: VISUAL VISITOR LLC
+    domain: visualvisitor.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.visualvisitor.com/opt-out/
+    contact_email: privacy@visualvisitor.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: vrtcal-markets
+    name: VRTCAL Markets Inc
+    domain: vrtcal.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.vrtcal.com/opt-out/
+    contact_email: privacy@vrtcal.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: wiland
+    name: Wiland Inc
+    domain: wiland.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.wiland.com/privacy-choices#how-to-submit-privacy-choices
+    contact_email: privacy@wiland.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: windfall-data
+    name: Windfall Data, Inc.
+    domain: windfalldata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.windfall.com/do-not-sell-my-info
+    contact_email: privacy@windfalldata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: winr-data-bv
+    name: WINR Data B.V.
+    domain: winrdata.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://privacyportal-au.onetrust.com/webform/ad3cafad-4bf2-4d22-951f-57cc1fd05690/5fa8f2da-0508-42a6-bbc7-9b031898d10c
+    contact_email: privacy@winrdata.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: wunderkind
+    name: Wunderkind Corporation
+    domain: wunderkind.co
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.wunderkind.co/privacy/opt-out-of-data-processing/
+    contact_email: privacy@wunderkind.co
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: xad
+    name: Xad, Inc.
+    domain: groundtruth.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.groundtruth.com/privacy-rights/
+    contact_email: legal@groundtruth.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: xcelerated-data
+    name: Xcelerated Data LLC
+    domain: xcelerated.com
+    category: MARKETING
+    mechanism: EMAIL_LEGAL
+    contact_email: privacy@xcelerated.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: eab-global
+    name: EAB Global, Inc.
+    domain: appily.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://cappex.formstack.com/forms/do_not_sell
+    contact_email: privacy@eab.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+  - id: zipstorm
+    name: Zipstorm LLC
+    domain: seekout.com
+    category: MARKETING
+    mechanism: HYBRID
+    opt_out_url: https://www.seekout.com/privacy/choices
+    contact_email: privacy@seekout.com
+    jurisdiction_coverage: ALL
+    repopulation_period_days: 90
+

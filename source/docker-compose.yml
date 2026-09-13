@@ -1,0 +1,19 @@
+services:
+  nulltraced:
+    build:
+      context: .
+      dockerfile: Dockerfile.daemon
+    image: 4x3/nulltraced:local
+    restart: unless-stopped
+    environment:
+      NULLTRACE_PASSPHRASE_FILE: /home/nulltrace/.config/nulltrace/passphrase
+      NULLTRACE_LISTEN: 0.0.0.0:7738
+    volumes:
+      - nulltrace-data:/home/nulltrace/.local/share/nulltrace
+      - nulltrace-config:/home/nulltrace/.config/nulltrace
+    ports:
+      - "127.0.0.1:7738:7738"
+
+volumes:
+  nulltrace-data:
+  nulltrace-config:
