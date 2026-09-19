@@ -46,21 +46,16 @@ func runSetupThenMenu(ctx context.Context, pw []byte) error {
 	fmt.Println()
 	fmt.Println("  " + tui.Title("Who are we scrubbing?"))
 	fmt.Println("  " + tui.Muted("Use the name and contact info the people-search sites would have."))
+	fmt.Println("  " + tui.Muted("Blank skips a field. Anything you type gets a format check."))
 	fmt.Println()
 
-	var first, last string
-	for first == "" || last == "" {
-		first = promptLine(in, "  First name")
-		last = promptLine(in, "  Last name")
-		if first == "" || last == "" {
-			fmt.Println("  " + tui.Warn("first and last name are required"))
-		}
-	}
-	middle := promptLine(in, "  Middle name (optional)")
-	dob := promptLine(in, "  Date of birth (optional)")
-	email := promptLine(in, "  Email (optional)")
-	phone := promptLine(in, "  Phone (optional)")
-	city := promptLine(in, "  City (optional)")
+	first := promptChecked(in, "  First name", true, func(s string) error { return checkPersonName(s, false) })
+	last := promptChecked(in, "  Last name", true, func(s string) error { return checkPersonName(s, false) })
+	middle := promptChecked(in, "  Middle name (optional)", false, func(s string) error { return checkPersonName(s, true) })
+	dob := promptChecked(in, "  Date of birth (optional)", false, checkDOB)
+	email := promptChecked(in, "  Email (optional)", false, checkEmail)
+	phone := promptChecked(in, "  Phone (optional)", false, checkPhone)
+	city := promptCity(in, "  City (optional)")
 	s := &session{ctx: ctx, rt: rt, in: in}
 	if err := s.putIdentityFromWizard(first, last, middle, dob, email, phone, city); err != nil {
 		return err

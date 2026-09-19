@@ -195,19 +195,76 @@ func cmdIdentity() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if first == "" || last == "" {
 				if err := huh.NewForm(huh.NewGroup(
-					huh.NewInput().Title("First name").Value(&first),
-					huh.NewInput().Title("Last name").Value(&last),
-					huh.NewInput().Title("Middle name").Value(&middle),
-					huh.NewInput().Title("Date of birth (optional)").Value(&dob),
-					huh.NewInput().Title("Email").Value(&email),
-					huh.NewInput().Title("Phone").Value(&phone),
-					huh.NewInput().Title("City").Value(&city),
+					huh.NewInput().Title("First name").Value(&first).Validate(func(s string) error {
+						return checkPersonName(s, false)
+					}),
+					huh.NewInput().Title("Last name").Value(&last).Validate(func(s string) error {
+						return checkPersonName(s, false)
+					}),
+					huh.NewInput().Title("Middle name").Value(&middle).Validate(func(s string) error {
+						if strings.TrimSpace(s) == "" {
+							return nil
+						}
+						return checkPersonName(s, true)
+					}),
+					huh.NewInput().Title("Date of birth (optional)").Value(&dob).Validate(func(s string) error {
+						if strings.TrimSpace(s) == "" {
+							return nil
+						}
+						return checkDOB(s)
+					}),
+					huh.NewInput().Title("Email").Value(&email).Validate(func(s string) error {
+						if strings.TrimSpace(s) == "" {
+							return nil
+						}
+						return checkEmail(s)
+					}),
+					huh.NewInput().Title("Phone").Value(&phone).Validate(func(s string) error {
+						if strings.TrimSpace(s) == "" {
+							return nil
+						}
+						return checkPhone(s)
+					}),
+					huh.NewInput().Title("City").Value(&city).Validate(func(s string) error {
+						if strings.TrimSpace(s) == "" {
+							return nil
+						}
+						return checkCityShape(s)
+					}),
 				)).Run(); err != nil {
 					return err
 				}
 			}
-			if first == "" || last == "" {
-				return fmt.Errorf("first and last name are required")
+			if err := checkPersonName(first, false); err != nil {
+				return fmt.Errorf("first name: %w", err)
+			}
+			if err := checkPersonName(last, false); err != nil {
+				return fmt.Errorf("last name: %w", err)
+			}
+			if middle != "" {
+				if err := checkPersonName(middle, true); err != nil {
+					return fmt.Errorf("middle name: %w", err)
+				}
+			}
+			if dob != "" {
+				if err := checkDOB(dob); err != nil {
+					return fmt.Errorf("date of birth: %w", err)
+				}
+			}
+			if email != "" {
+				if err := checkEmail(email); err != nil {
+					return fmt.Errorf("email: %w", err)
+				}
+			}
+			if phone != "" {
+				if err := checkPhone(phone); err != nil {
+					return fmt.Errorf("phone: %w", err)
+				}
+			}
+			if city != "" {
+				if err := checkCityShape(city); err != nil {
+					return fmt.Errorf("city: %w", err)
+				}
 			}
 			req := ipc.IdentityAddRequest{First: first, Last: last, Middle: middle, DOB: dob}
 			if email != "" {
@@ -247,6 +304,9 @@ func cmdIdentity() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if typ == "" || value == "" {
 				return fmt.Errorf("--type and --value are required")
+			}
+			if err := checkAttrValue(typ, value); err != nil {
+				return err
 			}
 			req := ipc.AttrAddRequest{IdentityID: ident, Type: typ, Value: value, Primary: primary}
 			return doOrLocal(cmd.Context(), ipc.CmdAttrAdd, req, func(rt *Runtime) error {

@@ -460,18 +460,13 @@ func (s *session) doIdentity() {
 }
 
 func (s *session) addIdentity() {
-	first := promptLine(s.in, "  First name")
-	last := promptLine(s.in, "  Last name")
-	if first == "" || last == "" {
-		fmt.Println("  " + tui.Bad("first and last name are required"))
-		s.pause()
-		return
-	}
-	middle := promptLine(s.in, "  Middle name (optional)")
-	dob := promptLine(s.in, "  Date of birth (optional)")
-	email := promptLine(s.in, "  Email (optional)")
-	phone := promptLine(s.in, "  Phone (optional)")
-	city := promptLine(s.in, "  City (optional)")
+	first := promptChecked(s.in, "  First name", true, func(v string) error { return checkPersonName(v, false) })
+	last := promptChecked(s.in, "  Last name", true, func(v string) error { return checkPersonName(v, false) })
+	middle := promptChecked(s.in, "  Middle name (optional)", false, func(v string) error { return checkPersonName(v, true) })
+	dob := promptChecked(s.in, "  Date of birth (optional)", false, checkDOB)
+	email := promptChecked(s.in, "  Email (optional)", false, checkEmail)
+	phone := promptChecked(s.in, "  Phone (optional)", false, checkPhone)
+	city := promptCity(s.in, "  City (optional)")
 	req := ipc.IdentityAddRequest{First: first, Last: last, Middle: middle, DOB: dob}
 	if email != "" {
 		req.Emails = []string{email}
@@ -502,7 +497,14 @@ func (s *session) addIdentity() {
 }
 
 func (s *session) addAttr(typ, label string) {
-	val := promptLine(s.in, "  "+label)
+	var val string
+	if strings.EqualFold(typ, string(broker.AttrCity)) {
+		val = promptCity(s.in, "  "+label)
+	} else {
+		val = promptChecked(s.in, "  "+label, false, func(v string) error {
+			return checkAttrValue(typ, v)
+		})
+	}
 	if val == "" {
 		return
 	}
