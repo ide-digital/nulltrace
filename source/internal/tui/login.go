@@ -106,7 +106,11 @@ func (m loginModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.quit = true
 			return m, tea.Quit
 		case tea.KeyEnter:
-			return m.submit()
+			next, cmd := m.submit()
+			if cmd != nil {
+				return next, cmd
+			}
+			return next, tea.ClearScreen
 		case tea.KeyTab, tea.KeyShiftTab, tea.KeyDown, tea.KeyUp:
 			if m.first {
 				if m.focus == 0 {
@@ -211,17 +215,16 @@ func (m loginModel) View() string {
 		Muted("locked"))
 
 	field := func(label string, buf secretBuf, focused bool) string {
-		// One line, fixed width. Empty field is a cursor only — placeholder
-		// bullets made the caret look like it started at the end of a password.
+		const slot = 22
 		n := len(buf)
-		if n > 48 {
-			n = 48
+		if n > slot-1 {
+			n = slot - 1
 		}
 		body := strings.Repeat("•", n)
-		if focused {
+		if focused && n < slot {
 			body += "█"
 		}
-		line := lab(label) + "  " + body
+		line := lab(label) + "  " + PadRight(body, slot)
 		for lipgloss.Width(line) < lipgloss.Width(userLine) {
 			line += " "
 		}
@@ -254,9 +257,5 @@ func (m loginModel) View() string {
 		center(errLine, w),
 		center(Muted(hint), w),
 	}, "\n")
-	pad := (h-lipgloss.Height(body)-2)/2 + 1
-	if pad < 1 {
-		pad = 1
-	}
-	return strings.Repeat("\n", pad) + body
+	return drop(body, h)
 }

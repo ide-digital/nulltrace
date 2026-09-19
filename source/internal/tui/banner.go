@@ -15,7 +15,7 @@ const logo = `
  ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝`
 
 func Banner() string {
-	return styleBanner.Render(logo)
+	return styleBanner.Render(strings.Trim(logo, "\n"))
 }
 
 func rule(width int) string {
@@ -33,11 +33,11 @@ func rule(width int) string {
 // (often thousands of rows) as a resize event; using that height pads
 // the view with blank lines and each keystroke leaves a leftover row.
 func fitTerm(w, h int) (int, int) {
-	if w < 1 {
+	if w < 80 {
 		w = 80
 	}
-	if h < 1 {
-		h = 32
+	if h < 24 {
+		h = 24
 	}
 	if w > 160 {
 		w = 120
@@ -46,6 +46,21 @@ func fitTerm(w, h int) (int, int) {
 		h = 40
 	}
 	return w, h
+}
+
+// drop pushes body down a few rows so the banner is not clipped by the
+// window chrome, without painting a full-height frame (that scrolls the
+// ASCII off the top of a Windows console).
+func drop(body string, h int) string {
+	bh := lipgloss.Height(body)
+	pad := (h - bh) / 2
+	if pad < 2 {
+		pad = 2
+	}
+	if pad > 5 {
+		pad = 5
+	}
+	return strings.Repeat("\n", pad) + body
 }
 
 func center(s string, width int) string {

@@ -70,20 +70,23 @@ func prepareConsole() {
 	}
 }
 
-// sizeConsole uses a 120-column window like the original layout, but the
-// buffer height matches the window (not thousands of scrollback rows).
-// A tall buffer is reported as the terminal height on Windows and made
-// the login password field stack a new row on every key.
+// sizeConsole shrinks the screen buffer to the visible window. It does not
+// move or resize the window — collapsing it to 1×1 was blinking the boot
+// ASCII off and making Bubble Tea lay out against a 2-row terminal.
 func sizeConsole(out windows.Handle, k32 *windows.LazyDLL) {
-	const cols, rows = 120, 43
+	var info windows.ConsoleScreenBufferInfo
+	if windows.GetConsoleScreenBufferInfo(out, &info) != nil {
+		return
+	}
+	cols := info.Window.Right - info.Window.Left + 1
+	rows := info.Window.Bottom - info.Window.Top + 1
+	if cols < 1 || rows < 1 {
+		return
+	}
+	if info.Size.X == cols && info.Size.Y == rows {
+		return
+	}
 	packed := uintptr(uint32(uint16(cols)) | uint32(uint16(rows))<<16)
-	if p := k32.NewProc("SetConsoleScreenBufferSize"); p.Find() == nil {
-		_, _, _ = p.Call(uintptr(out), packed)
-	}
-	rect := windows.SmallRect{Left: 0, Top: 0, Right: cols - 1, Bottom: rows - 1}
-	if p := k32.NewProc("SetConsoleWindowInfo"); p.Find() == nil {
-		_, _, _ = p.Call(uintptr(out), 1, uintptr(unsafe.Pointer(&rect)))
-	}
 	if p := k32.NewProc("SetConsoleScreenBufferSize"); p.Find() == nil {
 		_, _, _ = p.Call(uintptr(out), packed)
 	}

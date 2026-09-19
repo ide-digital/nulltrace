@@ -73,6 +73,22 @@ func TestLoginTypingStaysOneField(t *testing.T) {
 	}
 }
 
+func TestLoginViewDoesNotGrowWhenTyping(t *testing.T) {
+	m := newLoginModel(true)
+	m.width, m.height = 100, 36
+	before := strings.Count(m.View(), "\n")
+	for _, r := range "supersecret" {
+		m = m.edit([]rune{r}, false)
+	}
+	after := m.View()
+	if strings.Count(after, "\n") != before {
+		t.Fatalf("view grew from %d to %d lines", before, strings.Count(after, "\n"))
+	}
+	if n := strings.Count(strings.ToLower(after), "set a password"); n != 1 {
+		t.Fatalf("set a password count %d:\n%s", n, after)
+	}
+}
+
 func TestLoginIgnoresWindowsBufferHeight(t *testing.T) {
 	var model tea.Model = newLoginModel(false)
 	model, _ = model.Update(tea.WindowSizeMsg{Width: 120, Height: 3000})

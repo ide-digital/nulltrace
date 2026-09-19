@@ -7,7 +7,6 @@ import (
 	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/charmbracelet/lipgloss"
 )
 
 type bootResultMsg struct {
@@ -110,9 +109,5 @@ func (m bootModel) View() string {
 		center(styleItem.Render(bar), w),
 		center(Muted(fmt.Sprintf("loading  %d%%", m.pct)), w),
 	}, "\n")
-	pad := (h-lipgloss.Height(body)-2)/2 + 1
-	if pad < 1 {
-		pad = 1
-	}
-	return strings.Repeat("\n", pad) + body
+	return drop(body, h)
 }
