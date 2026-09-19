@@ -1,6 +1,6 @@
 # NullTrace
 
-A local-first privacy toolkit. It maps the name, email, and phone you type against a catalog of 400+ people-search and marketing brokers, queues CCPA/GDPR deletion mail, and checks whether a password already sits in public dumps. The vault is a file on your PC. There is no NullTrace account.
+A local-first privacy toolkit. It maps the name, email, and phone you type against a catalog of 400+ people-search and marketing brokers, queues CCPA/GDPR deletion mail, and checks whether a password already sits in public dumps. The vault is a file on your machine. There is no NullTrace account.
 
 <p align="center">
   <img src="docs/media/home.png" alt="NullTrace home menu" width="920">
@@ -25,11 +25,20 @@ Browser automation and CapSolver exist in the tree and stay **off** unless you t
 
 The username is the computer name and it is locked on purpose. The password is the vault key.
 
-## Windows
+## Run it
 
-A Windows zip is on the [Releases](https://github.com/4x3/nulltrace/releases) page if you would rather not build from source.
+A Windows zip is on the [Releases](https://github.com/4x3/nulltrace/releases) page if you would rather not build. Unzip, keep `NullTrace.exe` next to the `app` folder, double-click.
 
-Double-click `NullTrace.exe` after you build. Keep it next to the `app` folder.
+Otherwise Go 1.23+ with CGO off. Same binary on Linux, macOS, and Windows:
+
+```sh
+git clone https://github.com/4x3/nulltrace.git
+cd nulltrace/source
+go build -trimpath -ldflags="-s -w" -o nulltrace ./cmd/nulltrace
+./nulltrace
+```
+
+Windows from source, if you want the launcher:
 
 ```powershell
 git clone https://github.com/4x3/nulltrace.git
@@ -38,7 +47,7 @@ powershell -File source\build.ps1
 .\NullTrace.exe
 ```
 
-First open: loading bar, then create a login. Later opens ask for that same password. Wrong password stays on the login screen.
+Run the binary in a terminal. First open: loading bar, then create a login. Later opens ask for that same password. Wrong password stays on the login screen.
 
 The first-run identity form (and **[5] Identity** later) checks names, email, phone, date of birth, and city. Leave a field blank to skip it.
 
@@ -54,28 +63,14 @@ From the home menu:
 
 Nested screens use `[0] back` and `[m] main menu`.
 
-## Other platforms
-
-Go 1.23+, CGO off.
-
-```sh
-cd source
-go test ./...
-go build -trimpath -ldflags="-s -w" -o nulltrace ./cmd/nulltrace
-```
-
-There is a daemon (`nulltraced`) and a Compose file if you want the vault unlocked on a box and the CLI talking to `127.0.0.1:7738`. See `source/docker-compose.yml` and `source/scripts/systemd/nulltraced.service`.
-
-```sh
-nulltrace --version
-```
+There is a daemon (`nulltraced`) and a Compose file if you want the vault unlocked on a box and the CLI talking to `127.0.0.1:7738`. See `source/docker-compose.yml` and `source/scripts/systemd/nulltraced.service`. `source/scripts/install.sh` drops `nulltrace` / `nulltraced` into `/usr/local/bin`.
 
 ## Where files live
 
-| | Windows | Unix |
+| | Windows | Linux / macOS |
 |---|---|---|
-| Vault | `%LocalAppData%\nulltrace` | `$XDG_DATA_HOME/nulltrace` |
-| Config | `%AppData%\nulltrace` | `$XDG_CONFIG_HOME/nulltrace` |
+| Vault | `%LocalAppData%\nulltrace` | `$XDG_DATA_HOME/nulltrace` (usually `~/.local/share/nulltrace`) |
+| Config | `%AppData%\nulltrace` | `$XDG_CONFIG_HOME/nulltrace` (usually `~/.config/nulltrace`) |
 
 Config is YAML (`source/config.example.yaml` is the default shape). Mailbox passwords, HIBP keys, and CapSolver keys go in the encrypted vault, not the YAML.
 

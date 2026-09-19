@@ -4,8 +4,8 @@
 
 NullTrace keeps the vault on the machine that runs it:
 
-- Windows: `%LocalAppData%\nulltrace`
-- Config: `%AppData%\nulltrace` (or `$HOME/.config/nulltrace` on Unix)
+- Windows: `%LocalAppData%\nulltrace` (vault), `%AppData%\nulltrace` (config)
+- Linux / macOS: `$HOME/.local/share/nulltrace` (vault), `$HOME/.config/nulltrace` (config)
 
 The vault is encrypted. Do not attach `vault.db`, `config.yaml`, `daemon.token`,
 or a passphrase file to an issue or a pull request.

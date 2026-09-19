@@ -5,9 +5,10 @@ Build from `source/`. Go 1.23+ is enough; CGO is off.
 ```
 cd source
 go test ./...
+go build -o nulltrace ./cmd/nulltrace
 ```
 
-On Windows:
+On Windows the launcher is:
 
 ```
 powershell -File source/build.ps1
