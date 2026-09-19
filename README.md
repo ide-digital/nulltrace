@@ -40,6 +40,8 @@ powershell -File source\build.ps1
 
 First open: loading bar, then create a login. Later opens ask for that same password. Wrong password stays on the login screen.
 
+The first-run identity form (and **[5] Identity** later) checks names, email, phone, date of birth, and city. Leave a field blank to skip it.
+
 From the home menu:
 
 1. **[5] Identity** — the name / email / phone the people-search sites actually have on you

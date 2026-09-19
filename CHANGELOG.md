@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Setup and Identity prompts check names, email, phone, date of birth, and city before saving. Blank still skips optional fields.
+- Windows console buffer is kept the same size as the window so the boot/login screens don't clip or smear.
+
 ## 0.3.0
 
 First public cut.

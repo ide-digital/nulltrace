@@ -26,6 +26,6 @@ Browser automation and CapSolver are off until you enable them.
 ## Reporting a vulnerability
 
 Please use GitHub's private vulnerability reporting on this repository
-(Security tab → Report a vulnerability). Include the version (`v0.3.0`
+(Security tab → Report a vulnerability). Include the version (`v0.3.1`
 or `git rev-parse --short HEAD`) and enough to reproduce. Do not open a
 public issue for a vault-bypass or crypto bug.
