@@ -13,7 +13,6 @@ var schemaFS embed.FS
 
 const currentSchemaVersion = 1
 
-// Migrate applies embedded DDL if the vault is at a lower schema version.
 func Migrate(ctx context.Context, db *sql.DB) error {
 	if err := ctx.Err(); err != nil {
 		return err
@@ -34,7 +33,7 @@ func Migrate(ctx context.Context, db *sql.DB) error {
 			version INTEGER PRIMARY KEY,
 			applied_at TEXT NOT NULL
 		);`); err != nil {
-		return fmt.Errorf("ensure schema_migrations: %w", err)
+		return fmt.Errorf("create schema_migrations: %w", err)
 	}
 
 	var version int

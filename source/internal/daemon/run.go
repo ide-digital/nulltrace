@@ -2,18 +2,22 @@ package daemon
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log/slog"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/app"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	imapx "github.com/4x3/nulltrace/internal/engine/imap"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/app"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	imapx "github.com/ide-digital/nulltrace/internal/engine/imap"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func Run(ctx context.Context, passphrase []byte) error {
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
 	rt, err := app.Open(ctx, passphrase, true)
 	if err != nil {
 		return err
@@ -37,14 +41,21 @@ func Run(ctx context.Context, passphrase []byte) error {
 		"vault", rt.Dirs.VaultDB,
 		"brokers", rt.Reg.Len(),
 	)
+	if !rt.MailLinked(ctx) {
+		rt.Log.Info("no mailbox linked yet, queued requests will wait")
+	}
 
-	srv := NewServer(rt, token)
+	srv := NewServer(rt, token, cancel)
 	if err := srv.Listen(); err != nil {
 		return err
 	}
 
 	pool := NewPool(2, func(ctx context.Context, job Job) error {
-		return rt.DispatchSMTP(ctx, job.ActionID)
+		err := rt.DispatchSMTP(ctx, job.ActionID)
+		if errors.Is(err, nterr.ErrAlreadyClaimed) {
+			return nil
+		}
+		return err
 	}, func(msg string, args ...any) {
 		rt.Log.Warn(msg, args...)
 	})
@@ -55,14 +66,15 @@ func Run(ctx context.Context, passphrase []byte) error {
 	errCh := make(chan error, 1)
 	go func() { errCh <- srv.Serve(ctx) }()
 
+	var serveErr error
 	select {
 	case <-ctx.Done():
 		rt.Log.Info("nulltraced shutting down")
-		pool.Wait()
-		return nil
-	case err := <-errCh:
-		return err
+	case serveErr = <-errCh:
+		cancel()
 	}
+	pool.Wait()
+	return serveErr
 }
 
 func runIMAP(ctx context.Context, rt *app.Runtime) {

@@ -6,7 +6,7 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func renderDashboard(s ipc.Snapshot, width int) string {
@@ -45,7 +45,7 @@ func renderDashboard(s ipc.Snapshot, width int) string {
 		row("overdue", fmt.Sprintf("%d", st.Overdue), overStyle),
 		row("ipc", st.ListenAddr, styleMuted),
 		"",
-		styleMuted.Render("  scan → broker map    scrub → queue mail    r refresh"),
+		styleMuted.Render("  scan: broker map    scrub: queue mail    r refresh"),
 	}
 	_ = width
 	return strings.Join(lines, "\n")

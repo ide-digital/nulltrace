@@ -3,14 +3,15 @@ package app
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/url"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	imapx "github.com/4x3/nulltrace/internal/engine/imap"
-	"github.com/4x3/nulltrace/internal/engine/mailer"
-	"github.com/4x3/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	imapx "github.com/ide-digital/nulltrace/internal/engine/imap"
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
+	"github.com/ide-digital/nulltrace/internal/nterr"
 )
 
 func (rt *Runtime) DispatchSMTP(ctx context.Context, actionID string) error {
@@ -50,7 +51,11 @@ func (rt *Runtime) SendQueuedSMTP(ctx context.Context, report func(sent, fail in
 		if row, e := rt.Store.GetBroker(ctx, a.BrokerID); e == nil {
 			name = row.Name
 		}
-		if e := rt.dispatchSMTP(ctx, d, a.ID); e != nil {
+		e := rt.dispatchSMTP(ctx, d, a.ID)
+		if errors.Is(e, nterr.ErrAlreadyClaimed) {
+			continue
+		}
+		if e != nil {
 			fail++
 			if report != nil {
 				report(sent, fail, name+": "+e.Error())
@@ -73,8 +78,10 @@ func (rt *Runtime) dispatchSMTP(ctx context.Context, d *mailer.Dispatcher, actio
 	if a.Strategy != string(broker.StrategySMTP) {
 		return fmt.Errorf("action %s is not SMTP_DEMAND", actionID)
 	}
+	if a.CurrentState != string(broker.StateQueued) {
+		return nterr.ErrAlreadyClaimed
+	}
 	if !d.Configured() {
-		_ = rt.Store.UpdateActionState(ctx, a.ID, string(broker.StateFailed), 1, nterr.ErrMissingSMTP.Error(), nil)
 		return nterr.ErrMissingSMTP
 	}
 	row, err := rt.Store.GetBroker(ctx, a.BrokerID)
@@ -88,6 +95,13 @@ func (rt *Runtime) dispatchSMTP(ctx context.Context, d *mailer.Dispatcher, actio
 	view, _, err := LoadIdentityView(ctx, rt.Store, "")
 	if err != nil {
 		return err
+	}
+	claimed, err := rt.Store.ClaimAction(ctx, a.ID, string(broker.StateQueued), string(broker.StateSending))
+	if err != nil {
+		return err
+	}
+	if !claimed {
+		return nterr.ErrAlreadyClaimed
 	}
 	res, err := d.Send(ctx, mailer.Demand{
 		BrokerName:   b.Name,
@@ -103,7 +117,11 @@ func (rt *Runtime) dispatchSMTP(ctx context.Context, d *mailer.Dispatcher, actio
 		return err
 	}
 	payload, _ := json.Marshal(map[string]any{"to": res.To, "subject": res.Subject, "sent_at": res.SentAt})
-	enc, _ := rt.Store.EncryptActionResponse(a.ID, payload)
+	// The mail already went out. Losing the receipt beats re-sending it.
+	enc, err := rt.Store.EncryptActionResponse(a.ID, payload)
+	if err != nil {
+		rt.Log.Warn("could not store send receipt", "action", a.ID, "err", err)
+	}
 	next := string(broker.StateSubmitted)
 	if b.RequiresEmailConfirmation {
 		next = string(broker.StateAwaitingConfirmation)
@@ -135,22 +153,29 @@ func (rt *Runtime) HandleIMAP(ctx context.Context, f imapx.Finding) error {
 	}
 	if actionID != "" {
 		payload, _ := json.Marshal(f)
-		enc, _ := rt.Store.EncryptActionResponse(actionID, payload)
+		enc, err := rt.Store.EncryptActionResponse(actionID, payload)
+		if err != nil {
+			rt.Log.Warn("could not store imap mail", "action", actionID, "err", err)
+		}
 		state := string(broker.StateAwaitingConfirmation)
 		if len(f.URLs) == 0 {
 			state = string(broker.StateSubmitted)
 		}
-		_ = rt.Store.UpdateActionState(ctx, actionID, state, 0, "", enc)
+		rt.setState(ctx, actionID, state, "", enc)
 	}
 
 	if !rt.Cfg.IMAP.AutoFetch {
 		return nil
 	}
+	sameBroker := func(host string) bool {
+		b, ok := rt.Reg.MatchHost(host)
+		return ok && (f.BrokerID == "" || b.ID == f.BrokerID)
+	}
 	for _, u := range f.URLs {
 		if !imapx.LooksLikeConfirmation(u) {
 			continue
 		}
-		res, err := imapx.FetchConfirmation(ctx, rt.HTTP, u)
+		res, err := imapx.FetchConfirmation(ctx, rt.HTTP, u, sameBroker)
 		if err != nil {
 			rt.Log.Warn("confirmation fetch failed", "url_host", hostOf(u), "err", err)
 			continue
@@ -163,15 +188,22 @@ func (rt *Runtime) HandleIMAP(ctx context.Context, f imapx.Finding) error {
 		})
 		if res.NeedsHuman {
 			if actionID != "" {
-				_ = rt.Store.UpdateActionState(ctx, actionID, string(broker.StateAwaitingManual), 0, "challenge page; finish in a browser", nil)
+				rt.setState(ctx, actionID, string(broker.StateAwaitingManual), "challenge page; finish in a browser", nil)
 			}
 			continue
 		}
 		if res.Success && actionID != "" {
-			_ = rt.Store.UpdateActionState(ctx, actionID, string(broker.StateCompleted), 0, "", nil)
+			rt.setState(ctx, actionID, string(broker.StateCompleted), "", nil)
 		}
 	}
 	return nil
+}
+
+// setState is for the IMAP side, where there is nobody to hand an error back to.
+func (rt *Runtime) setState(ctx context.Context, actionID, state, note string, resp []byte) {
+	if err := rt.Store.UpdateActionState(ctx, actionID, state, 0, note, resp); err != nil {
+		rt.Log.Warn("update action", "action", actionID, "state", state, "err", err)
+	}
 }
 
 func hostOf(raw string) string {

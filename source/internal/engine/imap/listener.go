@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
-	"net/url"
-	"regexp"
+	"net"
 	"strings"
 	"time"
 
@@ -15,12 +14,10 @@ import (
 	"github.com/emersion/go-imap/client"
 	"github.com/emersion/go-message/mail"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/config"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/config"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
 )
-
-var urlRe = regexp.MustCompile(`https?://[^\s<>"']+`)
 
 type Finding struct {
 	From       string
@@ -68,11 +65,12 @@ func (l *Listener) Run(ctx context.Context) error {
 	var (
 		c   *client.Client
 		err error
+		dl  = &net.Dialer{Timeout: 30 * time.Second}
 	)
 	if l.cfg.TLS {
-		c, err = client.DialTLS(addr, nil)
+		c, err = client.DialWithDialerTLS(dl, addr, nil)
 	} else {
-		c, err = client.Dial(addr)
+		c, err = client.DialWithDialer(dl, addr)
 	}
 	if err != nil {
 		return fmt.Errorf("imap dial %s: %w", addr, err)
@@ -102,6 +100,9 @@ func (l *Listener) Run(ctx context.Context) error {
 			return err
 		}
 		if err := l.drainUnseen(ctx, c); err != nil {
+			if ctx.Err() != nil {
+				return ctx.Err()
+			}
 			l.log.Warn("imap drain", "err", err)
 		}
 
@@ -145,9 +146,10 @@ func (l *Listener) drainUnseen(ctx context.Context, c *client.Client) error {
 	ch := make(chan *imap.Message, 8)
 	done := make(chan error, 1)
 	go func() { done <- c.Fetch(seq, items, ch) }()
+	// Keep reading ch even after a cancel, or Fetch blocks on a full channel.
 	for msg := range ch {
-		if err := ctx.Err(); err != nil {
-			return err
+		if ctx.Err() != nil {
+			continue
 		}
 		finding, err := l.parseMessage(msg, section)
 		if err != nil {
@@ -163,7 +165,10 @@ func (l *Listener) drainUnseen(ctx context.Context, c *client.Client) error {
 			}
 		}
 	}
-	return <-done
+	if err := <-done; err != nil {
+		return err
+	}
+	return ctx.Err()
 }
 
 func (l *Listener) parseMessage(msg *imap.Message, section *imap.BodySectionName) (*Finding, error) {
@@ -187,9 +192,9 @@ func (l *Listener) parseMessage(msg *imap.Message, section *imap.BodySectionName
 		from = addrs[0].Address
 	}
 	date, _ := header.Date()
-	tracking := header.Get("X-NullTrace-Tracking-ID")
+	tracking := strings.TrimSpace(header.Get("X-NullTrace-Tracking-ID"))
 	if tracking == "" {
-		tracking = header.Get("In-Reply-To")
+		tracking = trackingFromReply(header.Get("In-Reply-To"))
 	}
 
 	var bodies []string
@@ -213,20 +218,27 @@ func (l *Listener) parseMessage(msg *imap.Message, section *imap.BodySectionName
 		}
 	}
 	joined := strings.Join(bodies, "\n")
-	urls := unique(extractURLs(joined))
+	urls := extractURLs(joined)
 	if len(urls) == 0 && tracking == "" {
 		return nil, nil
 	}
 
 	brokerID := ""
 	if l.reg != nil {
-		if b, ok := l.reg.MatchURL(joined + " " + from + " " + strings.Join(urls, " ")); ok {
-			brokerID = b.ID
+		hosts := []string{addrHost(from)}
+		for _, u := range urls {
+			hosts = append(hosts, urlHost(u))
+		}
+		for _, h := range hosts {
+			if b, ok := l.reg.MatchHost(h); ok {
+				brokerID = b.ID
+				break
+			}
 		}
 	}
 	preview := joined
 	if len(preview) > 400 {
-		preview = preview[:400]
+		preview = strings.ToValidUTF8(preview[:400], "")
 	}
 	return &Finding{
 		From:       from,
@@ -237,31 +249,4 @@ func (l *Listener) parseMessage(msg *imap.Message, section *imap.BodySectionName
 		TrackingID: tracking,
 		Preview:    preview,
 	}, nil
-}
-
-func extractURLs(s string) []string {
-	found := urlRe.FindAllString(s, -1)
-	var out []string
-	for _, u := range found {
-		u = strings.TrimRight(u, ".,);[]")
-		parsed, err := url.Parse(u)
-		if err != nil || parsed.Scheme == "" || parsed.Host == "" {
-			continue
-		}
-		out = append(out, u)
-	}
-	return out
-}
-
-func unique(in []string) []string {
-	seen := map[string]struct{}{}
-	var out []string
-	for _, s := range in {
-		if _, ok := seen[s]; ok {
-			continue
-		}
-		seen[s] = struct{}{}
-		out = append(out, s)
-	}
-	return out
 }

@@ -38,6 +38,21 @@ func TestAnalyzeStrongUnique(t *testing.T) {
 	}
 }
 
+func TestFailedLookupIsNotClean(t *testing.T) {
+	r := Analyze("wX9!mQ2pL7#vN4sD0aR", nil)
+	r.PwnedErr = "dial tcp: no route to host"
+	r = FinishRisk(r)
+	if r.Risk == "ok" {
+		t.Fatal("a failed lookup cannot be ok")
+	}
+	if strings.Contains(r.Summary, "Not found") || strings.Contains(r.Summary, "Not a famous") {
+		t.Fatalf("summary claims a clean lookup: %q", r.Summary)
+	}
+	if len(r.Advice) == 0 || !strings.Contains(r.Advice[0], "no route to host") {
+		t.Fatalf("lookup error dropped: %v", r.Advice)
+	}
+}
+
 func TestAnalyzeIdentityHint(t *testing.T) {
 	r := Analyze("jordan-house-2020", []string{"Jordan"})
 	found := false

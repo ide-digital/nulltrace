@@ -1,4 +1,4 @@
-module github.com/4x3/nulltrace
+module github.com/ide-digital/nulltrace
 
 go 1.23.0
 

@@ -1,6 +1,9 @@
 package app
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestCheckEmail(t *testing.T) {
 	if err := checkEmail("fe"); err == nil {
@@ -27,8 +30,9 @@ func TestCheckDOB(t *testing.T) {
 	if err := checkDOB("2099-01-01"); err == nil {
 		t.Fatal("future dates should fail")
 	}
-	if err := checkDOB("2024-01-01"); err == nil {
-		t.Fatal("recent dates should fail")
+	kid := time.Now().AddDate(-5, 0, 0).Format("2006-01-02")
+	if err := checkDOB(kid); err == nil {
+		t.Fatal("a five year old should fail")
 	}
 }
 

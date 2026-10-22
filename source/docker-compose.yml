@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.daemon
-    image: 4x3/nulltraced:local
+    image: nulltraced:local
     restart: unless-stopped
     environment:
       NULLTRACE_PASSPHRASE_FILE: /home/nulltrace/.config/nulltrace/passphrase

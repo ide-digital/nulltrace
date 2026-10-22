@@ -8,7 +8,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 type MenuHooks struct {
@@ -145,7 +145,7 @@ func (m menuModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 			m.busy = true
 			m.err = nil
-			m.flash = "working…"
+			m.flash = "working..."
 			return m, m.dispatch(choice)
 		}
 		s := msg.String()

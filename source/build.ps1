@@ -10,11 +10,15 @@ if (Test-Path "C:\Program Files\Go\bin") {
     $env:PATH = "C:\Program Files\Go\bin;" + $env:PATH
 }
 
+function Build($ldflags, $out, $pkg) {
+    go build -trimpath -ldflags $ldflags -o $out $pkg
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
+
 Set-Location $Source
-go mod tidy
-go build -trimpath -ldflags "-H windowsgui -s -w" -o (Join-Path $Root "NullTrace.exe") ./cmd/launch
-go build -trimpath -ldflags "-s -w" -o (Join-Path $App "nulltrace.exe") ./cmd/nulltrace
-go build -trimpath -ldflags "-s -w" -o (Join-Path $App "nulltraced.exe") ./cmd/nulltraced
+Build "-H windowsgui -s -w" (Join-Path $Root "NullTrace.exe") ./cmd/launch
+Build "-s -w" (Join-Path $App "nulltrace.exe") ./cmd/nulltrace
+Build "-s -w" (Join-Path $App "nulltraced.exe") ./cmd/nulltraced
 
 Write-Host "Built:"
 Write-Host "  $(Join-Path $Root 'NullTrace.exe')"

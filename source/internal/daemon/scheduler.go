@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/app"
-	"github.com/4x3/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/app"
+	"github.com/ide-digital/nulltrace/internal/broker"
 )
 
 func RunScheduler(ctx context.Context, rt *app.Runtime, pool *Pool) {
@@ -41,7 +41,8 @@ func RunScheduler(ctx context.Context, rt *app.Runtime, pool *Pool) {
 }
 
 func drainQueued(ctx context.Context, rt *app.Runtime, pool *Pool) {
-	if rt.Store.Locked() {
+	// Nothing can go out until a mailbox is linked; leave the queue alone.
+	if rt.Store.Locked() || !rt.MailLinked(ctx) {
 		return
 	}
 	acts, err := rt.Store.ActionsByState(ctx, string(broker.StateQueued))

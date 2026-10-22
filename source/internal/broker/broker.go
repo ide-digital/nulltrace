@@ -45,6 +45,7 @@ type ActionState string
 
 const (
 	StateQueued               ActionState = "QUEUED"
+	StateSending              ActionState = "SENDING"
 	StateSubmitted            ActionState = "SUBMITTED"
 	StateAwaitingConfirmation ActionState = "AWAITING_CONFIRMATION"
 	StateAwaitingManual       ActionState = "AWAITING_MANUAL"
@@ -96,21 +97,6 @@ type Broker struct {
 	RepopulationPeriodDays    int          `yaml:"repopulation_period_days"`
 	Notes                     string       `yaml:"notes"`
 	Playbook                  string       `yaml:"playbook"`
-}
-
-func (b Broker) Slug() string {
-	if b.ID != "" {
-		return strings.ToLower(b.ID)
-	}
-	return strings.ToLower(strings.ReplaceAll(b.Domain, ".", "-"))
-}
-
-func (b Broker) DeadlineDays() int {
-	return 30
-}
-
-func (b Broker) CanAutoEmail() bool {
-	return b.ContactEmail != "" && (b.Mechanism == MechanismEmailLegal || b.Mechanism == MechanismHybrid)
 }
 
 func (b Broker) RequiresHuman() bool {

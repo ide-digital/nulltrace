@@ -11,8 +11,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/tui"
 )
 
 func promptChecked(in *bufio.Reader, label string, required bool, check func(string) error) string {
@@ -218,7 +218,7 @@ func checkUsername(s string) error {
 		if unicode.IsLetter(r) || unicode.IsDigit(r) || r == '_' || r == '.' || r == '-' {
 			continue
 		}
-		return fmt.Errorf("username can only use letters, numbers, dots, and underscores")
+		return fmt.Errorf("username can only use letters, numbers, dots, dashes, and underscores")
 	}
 	return nil
 }

@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/engine/playbook"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/engine/playbook"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func (rt *Runtime) Snapshot(ctx context.Context) (ipc.Snapshot, error) {
@@ -30,6 +30,7 @@ func (rt *Runtime) Snapshot(ctx context.Context) (ipc.Snapshot, error) {
 	if rt.Store.Locked() {
 		return snap, nil
 	}
+	snap.Status.MailLinked = rt.MailLinked(ctx)
 	view, id, err := LoadIdentityView(ctx, rt.Store, "")
 	if err == nil {
 		snap.Identity = ipc.IdentityView{
@@ -118,14 +119,11 @@ func (rt *Runtime) Snapshot(ctx context.Context) (ipc.Snapshot, error) {
 	}
 	for _, r := range audit {
 		details, _ := rt.Store.DecryptAudit(r)
-		if len(details) > 240 {
-			details = details[:240]
-		}
 		snap.Audit = append(snap.Audit, ipc.AuditView{
 			Timestamp: r.Timestamp.UTC().Format(time.RFC3339),
 			EventType: r.EventType,
 			BrokerID:  r.BrokerID,
-			Details:   string(details),
+			Details:   cut(string(details), 240),
 		})
 	}
 	for _, b := range rt.Reg.All() {

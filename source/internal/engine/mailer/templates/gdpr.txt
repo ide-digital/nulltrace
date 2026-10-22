@@ -1,4 +1,4 @@
-Subject: Request for Erasure — GDPR Article 17 (Right to be Forgotten)
+Subject: Request for Erasure - GDPR Article 17 (Right to be Forgotten)
 
 To the Data Protection Officer / Privacy contact at {{.BrokerName}} ({{.BrokerDomain}}):
 

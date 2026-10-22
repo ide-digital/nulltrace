@@ -8,10 +8,36 @@ import (
 	"strconv"
 	"strings"
 
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/tui"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/tui"
 	"golang.org/x/term"
 )
+
+// stdinGone is panicked by readLine once stdin is closed. Without it every
+// prompt loop spins on "" and promptYes happily returns its default.
+type stdinGone struct{}
+
+func readLine(in *bufio.Reader) string {
+	s, err := in.ReadString('\n')
+	if err != nil && s == "" {
+		panic(stdinGone{})
+	}
+	return strings.TrimSpace(s)
+}
+
+func (s *session) readChoice() string { return readLine(s.in) }
+
+func quitOnEOF(err *error) {
+	r := recover()
+	if r == nil {
+		return
+	}
+	if _, ok := r.(stdinGone); !ok {
+		panic(r)
+	}
+	fmt.Println()
+	*err = nil
+}
 
 func isHomeChoice(s string) bool {
 	switch strings.ToLower(strings.TrimSpace(s)) {
@@ -44,8 +70,7 @@ func printNav() {
 
 func (s *session) pause() {
 	fmt.Print("\n  " + tui.Muted("Enter") + " back      " + tui.Key("m") + "  main menu\n  " + tui.Prompt() + " ")
-	line, _ := s.in.ReadString('\n')
-	if isHomeChoice(line) {
+	if isHomeChoice(readLine(s.in)) {
 		s.goHome = true
 	}
 }
@@ -54,8 +79,7 @@ func (s *session) gone() bool { return s.goHome }
 
 func promptLine(in *bufio.Reader, label string) string {
 	fmt.Print(label + ": ")
-	s, _ := in.ReadString('\n')
-	return strings.TrimSpace(s)
+	return readLine(in)
 }
 
 func promptDefault(in *bufio.Reader, label, def string) string {
@@ -64,12 +88,10 @@ func promptDefault(in *bufio.Reader, label, def string) string {
 	} else {
 		fmt.Print(label + ": ")
 	}
-	s, _ := in.ReadString('\n')
-	s = strings.TrimSpace(s)
-	if s == "" {
-		return def
+	if s := readLine(in); s != "" {
+		return s
 	}
-	return s
+	return def
 }
 
 func promptYes(in *bufio.Reader, label string, defYes bool) bool {
@@ -78,8 +100,7 @@ func promptYes(in *bufio.Reader, label string, defYes bool) bool {
 		hint = "y/N"
 	}
 	fmt.Printf("%s [%s]: ", label, hint)
-	s, _ := in.ReadString('\n')
-	s = strings.TrimSpace(strings.ToLower(s))
+	s := strings.ToLower(readLine(in))
 	if s == "" {
 		return defYes
 	}
@@ -87,8 +108,8 @@ func promptYes(in *bufio.Reader, label string, defYes bool) bool {
 }
 
 func waitEnter(in *bufio.Reader) {
-	fmt.Print("\n  Press Enter to return to the menu…")
-	_, _ = in.ReadString('\n')
+	fmt.Print("\n  Press Enter to return to the menu...")
+	readLine(in)
 }
 
 func clearScreen() {
@@ -104,7 +125,6 @@ func promptInt(in *bufio.Reader, label string, def int) int {
 	return n
 }
 
-// ReadSecret prompts without echoing. Never logs the value.
 func ReadSecret(prompt string) ([]byte, error) {
 	fd := int(os.Stdin.Fd())
 	fmt.Fprint(os.Stderr, prompt)
@@ -134,4 +154,8 @@ func (rt *Runtime) hasSecret(ctx context.Context, key string) bool {
 	}
 	ncrypto.Zeroize(v)
 	return true
+}
+
+func (rt *Runtime) MailLinked(ctx context.Context) bool {
+	return rt.Cfg.SMTP.Host != "" && rt.hasSecret(ctx, SecretSMTPPassword)
 }

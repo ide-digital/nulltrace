@@ -133,8 +133,9 @@ func (e *Engine) Click(selector string) error {
 }
 
 func (e *Engine) Has(selector string) bool {
-	_, err := e.Page.Element(selector)
-	return err == nil
+	// Page.Element waits for the full page timeout on a miss; Has doesn't.
+	ok, _, err := e.Page.Has(selector)
+	return ok && err == nil
 }
 
 func (e *Engine) HTML() (string, error) {

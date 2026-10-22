@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/engine/mailer"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
 )
 
 const hibpUA = "NullTrace/1.0"
@@ -207,11 +207,9 @@ func clip(s string, n int) string {
 	return s[:n]
 }
 
-// PwnedPasswordPrefix queries the k-anonymity Pwned Passwords range API.
-// Only the first 5 hex chars of SHA-1(password) leave the machine.
 func PwnedPasswordPrefix(ctx context.Context, httpc *http.Client, password []byte) (count int, err error) {
 	if httpc == nil {
-		httpc = http.DefaultClient
+		httpc = &http.Client{Timeout: 20 * time.Second}
 	}
 	sum := sha1.Sum(password)
 	hexed := strings.ToUpper(hex.EncodeToString(sum[:]))
@@ -227,6 +225,10 @@ func PwnedPasswordPrefix(ctx context.Context, httpc *http.Client, password []byt
 		return 0, err
 	}
 	defer resp.Body.Close()
+	// A 429/503 has no hash lines, which would otherwise read as "not found".
+	if resp.StatusCode != http.StatusOK {
+		return 0, fmt.Errorf("pwned passwords: %s", resp.Status)
+	}
 	body, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
 		return 0, err

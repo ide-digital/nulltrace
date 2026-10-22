@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/engine/mailer"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
 )
 
 func Score(id mailer.IdentityView, b broker.Broker) Finding {

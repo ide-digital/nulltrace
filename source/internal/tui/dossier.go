@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func renderDossier(s ipc.Snapshot) string {
@@ -14,7 +14,7 @@ func renderDossier(s ipc.Snapshot) string {
 	}
 	line := func(k, v string) string {
 		if v == "" {
-			v = "—"
+			v = "-"
 		}
 		return fmt.Sprintf("  %-14s %s", k, v)
 	}

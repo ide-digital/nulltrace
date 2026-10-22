@@ -86,12 +86,15 @@ func (c *Client) solve(ctx context.Context, typ, websiteURL, siteKey string) (st
 		return "", fmt.Errorf("capsolver: empty task id")
 	}
 
+	// Solves normally land in 10-60s. Past a few minutes the task is dead.
+	ctx, cancel := context.WithTimeout(ctx, 3*time.Minute)
+	defer cancel()
 	tick := time.NewTicker(3 * time.Second)
 	defer tick.Stop()
 	for {
 		select {
 		case <-ctx.Done():
-			return "", ctx.Err()
+			return "", fmt.Errorf("capsolver task %s: %w", cr.TaskID, ctx.Err())
 		case <-tick.C:
 			var gr getTaskResp
 			if err := c.post(ctx, "/getTaskResult", getTaskReq{ClientKey: c.key, TaskID: cr.TaskID}, &gr); err != nil {

@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"time"
 
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/engine/automate"
-	"github.com/4x3/nulltrace/internal/engine/browser"
-	"github.com/4x3/nulltrace/internal/engine/captcha"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/engine/automate"
+	"github.com/ide-digital/nulltrace/internal/engine/browser"
+	"github.com/ide-digital/nulltrace/internal/engine/captcha"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func (rt *Runtime) Automate(ctx context.Context, brokerID string, headful bool) (ipc.AutomateResult, error) {

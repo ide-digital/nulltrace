@@ -71,7 +71,7 @@ func prepareConsole() {
 }
 
 // sizeConsole shrinks the screen buffer to the visible window. It does not
-// move or resize the window — collapsing it to 1×1 was blinking the boot
+// move or resize the window - collapsing it to 1x1 was blinking the boot
 // ASCII off and making Bubble Tea lay out against a 2-row terminal.
 func sizeConsole(out windows.Handle, k32 *windows.LazyDLL) {
 	var info windows.ConsoleScreenBufferInfo
@@ -155,8 +155,6 @@ func isStdinTerminal() bool {
 	var mode uint32
 	return windows.GetConsoleMode(h, &mode) == nil
 }
-
-func ownConsole() bool { return true }
 
 func bootLog(msg string, args ...any) {
 	dir := os.Getenv("LocalAppData")

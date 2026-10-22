@@ -11,8 +11,6 @@ import (
 
 func prepareConsole() {}
 
-func ownConsole() bool { return false }
-
 func showEngineError(msg string) { fmt.Fprintln(os.Stderr, msg) }
 
 func bootLog(string, ...any) {}

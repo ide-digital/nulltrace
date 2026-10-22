@@ -2,7 +2,7 @@ package tui
 
 import "github.com/charmbracelet/lipgloss"
 
-const Version = "0.3.1"
+const Version = "0.4.0"
 
 func Key(k string) string   { return styleNum.Render("[" + k + "]") }
 func Item(s string) string  { return styleItem.Render(s) }
@@ -14,9 +14,6 @@ func Bad(s string) string   { return styleBad.Render(s) }
 func Warn(s string) string  { return styleWarn.Render(s) }
 func Title(s string) string { return styleTitle.Render(s) }
 func Prompt() string        { return stylePrompt.Render(">") }
-func RuleLine(w int) string { return rule(w) }
-
-// NavLine is the standard nested-screen footer: one step back, or jump home.
 func NavLine() string {
 	return Key("0") + "  back      " + Key("m") + "  main menu"
 }

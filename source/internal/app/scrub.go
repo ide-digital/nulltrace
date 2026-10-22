@@ -7,9 +7,9 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/storage"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/storage"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func (rt *Runtime) Scrub(ctx context.Context) (ipc.ScrubResult, error) {
@@ -76,6 +76,12 @@ func (rt *Runtime) Scrub(ctx context.Context) (ipc.ScrubResult, error) {
 }
 
 func (rt *Runtime) queueAction(ctx context.Context, rec storage.ExposedRecordRow, b broker.Broker, strategy broker.Strategy, state string, deadline *time.Time) (bool, error) {
+	if strategy == broker.StrategySMTP {
+		retried, err := rt.Store.RequeueFailed(ctx, rec.ID, string(strategy))
+		if err != nil || retried {
+			return retried, err
+		}
+	}
 	open, err := rt.Store.HasOpenAction(ctx, rec.ID, string(strategy))
 	if err != nil {
 		return false, err
@@ -148,7 +154,6 @@ func (rt *Runtime) Watchdog(ctx context.Context) (int, error) {
 		})
 		n++
 	}
-	// Also honour per-broker repopulation on completed actions.
 	past, err := rt.Store.CompletedPastRepopulation(ctx, time.Now().UTC())
 	if err != nil {
 		return n, err

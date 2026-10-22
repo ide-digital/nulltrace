@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func (rt *Runtime) Export(ctx context.Context, format string) (ipc.ExportResult, error) {
@@ -77,7 +77,7 @@ func (rt *Runtime) Export(ctx context.Context, format string) (ipc.ExportResult,
 		for _, l := range out {
 			b.WriteString("## ")
 			b.WriteString(l.Timestamp)
-			b.WriteString(" — ")
+			b.WriteString(" - ")
 			b.WriteString(l.Event)
 			b.WriteByte('\n')
 			if l.BrokerID != "" {

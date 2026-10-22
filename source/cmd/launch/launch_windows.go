@@ -11,7 +11,7 @@ import (
 func engineName() string { return "nulltrace.exe" }
 
 func launchEngine(root, engine string, extra []string) error {
-	// ShellExecute is what Explorer uses for a console .exe — a real window
+	// ShellExecute is what Explorer uses for a console .exe - a real window
 	// with a keyboard. CreateProcess from a GUI parent wires stdin to NUL.
 	verb, err := windows.UTF16PtrFromString("open")
 	if err != nil {
@@ -21,7 +21,11 @@ func launchEngine(root, engine string, extra []string) error {
 	if err != nil {
 		return err
 	}
-	params, err := windows.UTF16PtrFromString(strings.TrimSpace("--app " + strings.Join(extra, " ")))
+	args := []string{"--app"}
+	for _, a := range extra {
+		args = append(args, windows.EscapeArg(a))
+	}
+	params, err := windows.UTF16PtrFromString(strings.Join(args, " "))
 	if err != nil {
 		return err
 	}

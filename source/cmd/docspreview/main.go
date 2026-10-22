@@ -13,7 +13,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/muesli/termenv"
 
-	"github.com/4x3/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/internal/tui"
 )
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
 		Queued:    8,
 		Verified:  3,
 		Manual:    5,
-		Hint:      "First time?  [5] Identity  →  [1] Scan  →  [14] Leaks  →  [4] Listings",
+		Hint:      "First time?  [5] Identity  >  [1] Scan  >  [14] Leaks  >  [4] Listings",
 	})
 	login := tui.RenderLoginDemo("WORKSTATION", 8)
 
@@ -248,7 +248,7 @@ func ansiHTML(s string) string {
 					case n == 49:
 						bg = ""
 					case n == 1, n == 22:
-						// Ignore bold — a heavier glyph width shreds the FIGlet banner.
+						// Ignore bold - a heavier glyph width shreds the FIGlet banner.
 					}
 				}
 				// Re-parse for 38/48;5;n

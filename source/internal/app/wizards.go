@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/paths"
-	"github.com/4x3/nulltrace/internal/tui"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/paths"
+	"github.com/ide-digital/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func (s *session) doSMTP() {
@@ -35,7 +35,7 @@ func (s *session) doSMTP() {
 			fmt.Println("  " + tui.Warn("server saved, but no app password yet"))
 			fmt.Println("  " + tui.Muted(fmt.Sprintf("%s  %s:%d", nz(cfg.SMTP.From, cfg.SMTP.Username), cfg.SMTP.Host, cfg.SMTP.Port)))
 		} else {
-			fmt.Println("  " + tui.Muted("Nothing linked. Pick a provider — it opens in your browser."))
+			fmt.Println("  " + tui.Muted("Nothing linked. Pick a provider - it opens in your browser."))
 		}
 		fmt.Println()
 		fmt.Println("  " + tui.Key("1") + "  Link Gmail")
@@ -79,7 +79,7 @@ func (s *session) doIMAP() {
 			return
 		}
 		clearScreen()
-		printHead("Inbox", "Optional. Watch for “click to confirm” mail from brokers.")
+		printHead("Inbox", "Optional. Watch for 'click to confirm' mail from brokers.")
 		cfg := s.cfg()
 		if cfg.IMAP.Host != "" {
 			watch := tui.Muted("no password")
@@ -87,12 +87,12 @@ func (s *session) doIMAP() {
 				watch = tui.OK("watching")
 			}
 			fmt.Println("  " + tui.Label("status") + "    " + watch)
-			fmt.Println("  " + tui.Label("mailbox") + "   " + tui.Name(nz(cfg.IMAP.Username, "—")))
+			fmt.Println("  " + tui.Label("mailbox") + "   " + tui.Name(nz(cfg.IMAP.Username, "-")))
 			fmt.Println("  " + tui.Label("server") + "    " + tui.Muted(fmt.Sprintf("%s:%d  %s", cfg.IMAP.Host, cfg.IMAP.Port, cfg.IMAP.Mailbox)))
 		} else {
 			fmt.Println("  " + tui.Muted("Inbox watching is off."))
 			if _, addr, ok := s.linkedMail(); ok {
-				fmt.Println("  " + tui.Muted("Linked mail: "+addr+" — [1] reuses that app password."))
+				fmt.Println("  " + tui.Muted("Linked mail: "+addr+" - [1] reuses that app password."))
 			}
 		}
 		fmt.Println()
@@ -281,8 +281,8 @@ func (s *session) setProxy() {
 }
 
 func (s *session) setLaw() {
-	fmt.Println("  " + tui.Key("1") + "  CCPA  — California (default)")
-	fmt.Println("  " + tui.Key("2") + "  GDPR  — EU / UK")
+	fmt.Println("  " + tui.Key("1") + "  CCPA  - California (default)")
+	fmt.Println("  " + tui.Key("2") + "  GDPR  - EU / UK")
 	fmt.Println("  " + tui.Key("3") + "  US state privacy statutes")
 	fmt.Print("  " + tui.Prompt() + " ")
 	cfg := s.cfg()

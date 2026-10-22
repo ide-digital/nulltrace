@@ -4,15 +4,17 @@ import (
 	"net/url"
 	"regexp"
 	"strings"
+
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
 )
 
 var (
 	hrefRe  = regexp.MustCompile(`(?i)href=["'](https?://[^"']+)["']`)
 	plainRe = regexp.MustCompile(`https?://[^\s<>"']+`)
+	uuidRe  = regexp.MustCompile(`^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`)
 )
 
-// ExtractURLs returns http(s) URLs from a MIME text or HTML body.
-func ExtractURLs(body string) []string {
+func extractURLs(body string) []string {
 	seen := map[string]struct{}{}
 	var out []string
 	add := func(raw string) {
@@ -36,6 +38,36 @@ func ExtractURLs(body string) []string {
 		add(m)
 	}
 	return out
+}
+
+func urlHost(raw string) string {
+	u, err := url.Parse(raw)
+	if err != nil {
+		return ""
+	}
+	return u.Hostname()
+}
+
+func addrHost(addr string) string {
+	if i := strings.LastIndexByte(addr, '@'); i >= 0 {
+		return addr[i+1:]
+	}
+	return ""
+}
+
+// trackingFromReply pulls our token back out of an In-Reply-To like
+// <nulltrace.UUID@example.com>. Anything else is ignored.
+func trackingFromReply(h string) string {
+	h = strings.Trim(strings.TrimSpace(h), "<>")
+	rest, ok := strings.CutPrefix(h, mailer.MessageIDPrefix)
+	if !ok {
+		return ""
+	}
+	tok, _, _ := strings.Cut(rest, "@")
+	if !uuidRe.MatchString(tok) {
+		return ""
+	}
+	return tok
 }
 
 func LooksLikeConfirmation(u string) bool {

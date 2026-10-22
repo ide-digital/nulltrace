@@ -17,7 +17,6 @@ type Dirs struct {
 	DaemonLog  string
 	ConfigFile string
 	TokenFile  string
-	Socket     string
 }
 
 func Resolve() (Dirs, error) {
@@ -58,7 +57,6 @@ func Resolve() (Dirs, error) {
 		DaemonLog:  filepath.Join(data, "daemon.log"),
 		ConfigFile: filepath.Join(cfg, "config.yaml"),
 		TokenFile:  filepath.Join(cfg, "daemon.token"),
-		Socket:     filepath.Join(data, "nulltraced.sock"),
 	}
 	return d, nil
 }

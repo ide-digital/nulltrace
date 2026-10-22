@@ -6,18 +6,15 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/engine/recon"
+	"github.com/ide-digital/nulltrace/internal/engine/recon"
 )
 
-// CheckPassword scores the password locally, then asks the public Pwned
-// Passwords range API whether that SHA-1 prefix appears in known dumps.
-// The full password never leaves the machine. No API key is used.
+// CheckPassword only sends the first 5 hex chars of SHA-1(pw) (k-anonymity).
 func CheckPassword(ctx context.Context, httpc *http.Client, pw string, hints []string) PasswordReport {
 	r := Analyze(pw, hints)
 	count, err := recon.PwnedPasswordPrefix(ctx, httpc, []byte(pw))
 	if err != nil {
-		r.PwnedOK = false
-		r.Advice = append(r.Advice, "Could not reach the dump index: "+err.Error())
+		r.PwnedErr = err.Error()
 	} else {
 		r.PwnedOK = true
 		r.PwnedCount = count

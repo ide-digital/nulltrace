@@ -144,20 +144,16 @@ func (r *Registry) All() []Broker {
 	return r.all
 }
 
-func (r *Registry) ByMechanism(m Mechanism) []Broker {
-	var out []Broker
-	for _, b := range r.all {
-		if b.Mechanism == m || b.Mechanism == MechanismHybrid {
-			out = append(out, b)
-		}
+// MatchHost finds the broker that owns host: its domain or any subdomain of
+// it, so mail.spokeo.com is Spokeo but notspokeo.com is not.
+func (r *Registry) MatchHost(host string) (Broker, bool) {
+	host = strings.TrimSuffix(strings.ToLower(strings.TrimSpace(host)), ".")
+	if host == "" {
+		return Broker{}, false
 	}
-	return out
-}
-
-func (r *Registry) MatchURL(rawURL string) (Broker, bool) {
-	low := strings.ToLower(rawURL)
 	for _, b := range r.all {
-		if b.Domain != "" && strings.Contains(low, strings.ToLower(b.Domain)) {
+		d := strings.ToLower(b.Domain)
+		if d != "" && (host == d || strings.HasSuffix(host, "."+d)) {
 			return b, true
 		}
 	}

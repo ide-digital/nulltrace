@@ -67,7 +67,7 @@ func center(s string, width int) string {
 	if width <= 0 {
 		return s
 	}
-	// Never use Style.Width — it reflows newlines and shreds bordered boxes.
+	// Never use Style.Width - it reflows newlines and shreds bordered boxes.
 	var b strings.Builder
 	for i, line := range strings.Split(s, "\n") {
 		if i > 0 {

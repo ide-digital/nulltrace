@@ -2,11 +2,12 @@ package crypto
 
 import (
 	"crypto/rand"
+	"crypto/subtle"
 	"fmt"
 
 	"golang.org/x/crypto/chacha20poly1305"
 
-	"github.com/4x3/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/nterr"
 )
 
 const (
@@ -136,17 +137,17 @@ func OpenEnvelope(passphrase []byte, env *Envelope) ([]byte, error) {
 
 	dek, err := unwrapDEK(kek, env.WrappedDEK)
 	if err != nil {
-		return nil, fmt.Errorf("%w", nterr.ErrInvalidPassphrase)
+		return nil, nterr.ErrInvalidPassphrase
 	}
 	plain, err := Decrypt(dek, env.Verifier, []byte("nulltrace/verifier"))
 	if err != nil {
 		Zeroize(dek)
-		return nil, fmt.Errorf("%w", nterr.ErrInvalidPassphrase)
+		return nil, nterr.ErrInvalidPassphrase
 	}
 	defer Zeroize(plain)
-	if string(plain) != verifierPlaintext {
+	if subtle.ConstantTimeCompare(plain, []byte(verifierPlaintext)) != 1 {
 		Zeroize(dek)
-		return nil, fmt.Errorf("%w", nterr.ErrInvalidPassphrase)
+		return nil, nterr.ErrInvalidPassphrase
 	}
 	return dek, nil
 }

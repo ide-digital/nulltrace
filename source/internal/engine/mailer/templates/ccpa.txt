@@ -1,4 +1,4 @@
-Subject: Request to Delete Personal Information — California Consumer Privacy Act (Cal. Civ. Code § 1798.105)
+Subject: Request to Delete Personal Information - California Consumer Privacy Act (Cal. Civ. Code § 1798.105)
 
 To the Privacy Officer / Data Protection contact at {{.BrokerName}} ({{.BrokerDomain}}):
 

@@ -37,7 +37,6 @@ func (v IdentityView) PrimaryEmail() string {
 	return v.Emails[0]
 }
 
-// Fields is the template execution context.
 type Fields struct {
 	BrokerName   string
 	BrokerDomain string

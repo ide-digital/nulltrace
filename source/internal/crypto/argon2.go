@@ -43,7 +43,7 @@ func GenerateSalt() ([]byte, error) {
 }
 
 // DeriveKey returns a 32-byte KEK. Caller must Zeroize it. passphrase is []byte
-// on purpose — Go strings cannot be wiped.
+// on purpose - Go strings cannot be wiped.
 func DeriveKey(passphrase, salt []byte, params KDFParams) ([]byte, error) {
 	if len(passphrase) == 0 {
 		return nil, fmt.Errorf("derive key: empty passphrase")

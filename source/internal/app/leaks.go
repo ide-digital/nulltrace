@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/engine/exposure"
-	"github.com/4x3/nulltrace/internal/tui"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/engine/exposure"
+	"github.com/ide-digital/nulltrace/internal/tui"
 )
 
 func (s *session) doLeaks() {
@@ -23,7 +23,7 @@ func (s *session) doLeaks() {
 		clearScreen()
 		printHead("Leaks", "Password strength and public dump hits. No account, no API key.")
 		fmt.Println("  " + tui.Muted("The password is never stored or sent in full. Only a 5-character"))
-		fmt.Println("  " + tui.Muted("SHA-1 prefix is checked against Have I Been Pwned’s dump index."))
+		fmt.Println("  " + tui.Muted("SHA-1 prefix is checked against Have I Been Pwned's dump index."))
 		fmt.Println()
 		fmt.Println("  " + tui.Key("1") + "  Check a password     strength, common-list, dump hits, replacements")
 		fmt.Println("  " + tui.Key("2") + "  Generate a password  passphrase + random")
@@ -73,7 +73,7 @@ func (s *session) checkPassword() {
 		ncrypto.Zeroize(pw)
 		return
 	}
-	fmt.Println("  " + tui.Muted("checking strength and dump index…"))
+	fmt.Println("  " + tui.Muted("checking strength and dump index..."))
 	ctx, cancel := context.WithTimeout(s.ctx, 25*time.Second)
 	rep := exposure.CheckPassword(ctx, s.rt.HTTP, string(pw), s.identityHints())
 	cancel()
@@ -99,7 +99,7 @@ func (s *session) showPasswordReport(rep exposure.PasswordReport) {
 	kv("risk", risk)
 	kv("strength", tui.Item(rep.Strength))
 	kv("length", fmt.Sprintf("%d characters", rep.Length))
-	kv("entropy", fmt.Sprintf("~%d bits  (%s)", rep.EntropyBits, nz(rep.Charset, "—")))
+	kv("entropy", fmt.Sprintf("~%d bits  (%s)", rep.EntropyBits, nz(rep.Charset, "-")))
 	if rep.PwnedOK {
 		if rep.PwnedCount == 0 {
 			kv("dump index", tui.OK("not found in public dumps"))
@@ -135,7 +135,7 @@ func (s *session) showPasswordReport(rep exposure.PasswordReport) {
 	}
 	fmt.Println()
 	fmt.Println("  " + tui.Muted("The dump index counts how often this password appeared in stolen"))
-	fmt.Println("  " + tui.Muted("compilations. It does not name each database — that kind of email"))
+	fmt.Println("  " + tui.Muted("compilations. It does not name each database - that kind of email"))
 	fmt.Println("  " + tui.Muted("lookup needs a paid/registered API, so NullTrace does not offer it."))
 	fmt.Println()
 	printNav()
@@ -147,7 +147,7 @@ func (s *session) showPasswordReport(rep exposure.PasswordReport) {
 	case choice == "1", choice == "2", choice == "3":
 		idx, _ := strconv.Atoi(choice)
 		if idx >= 1 && idx <= len(rep.Suggestions) {
-			fmt.Println("  " + tui.Muted("checking the suggestion (still never stored)…"))
+			fmt.Println("  " + tui.Muted("checking the suggestion (still never stored)..."))
 			ctx, cancel := context.WithTimeout(s.ctx, 25*time.Second)
 			next := exposure.CheckPassword(ctx, s.rt.HTTP, rep.Suggestions[idx-1], nil)
 			cancel()
@@ -164,7 +164,7 @@ func (s *session) showGeneratedPasswords() {
 	fmt.Println("  " + tui.Key("2") + "  20-char        " + tui.Name(sugs[1]))
 	fmt.Println("  " + tui.Key("3") + "  16-char+sym    " + tui.Name(sugs[2]))
 	fmt.Println()
-	fmt.Println("  " + tui.Muted("Type 1–3 to run a leak check on that suggestion.  r  new set."))
+	fmt.Println("  " + tui.Muted("Type 1-3 to run a leak check on that suggestion.  r  new set."))
 	fmt.Println()
 	printNav()
 	fmt.Print("\n  " + tui.Prompt() + " ")
@@ -176,7 +176,7 @@ func (s *session) showGeneratedPasswords() {
 		s.showGeneratedPasswords()
 	case choice == "1", choice == "2", choice == "3":
 		idx, _ := strconv.Atoi(choice)
-		fmt.Println("  " + tui.Muted("checking…"))
+		fmt.Println("  " + tui.Muted("checking..."))
 		ctx, cancel := context.WithTimeout(s.ctx, 25*time.Second)
 		rep := exposure.CheckPassword(ctx, s.rt.HTTP, sugs[idx-1], nil)
 		cancel()

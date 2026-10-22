@@ -11,11 +11,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/4x3/nulltrace/internal/app"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/daemon"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/app"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/daemon"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func main() {

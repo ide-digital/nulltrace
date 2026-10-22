@@ -11,15 +11,25 @@ import (
 	"github.com/wneessen/go-mail"
 	"golang.org/x/time/rate"
 
-	"github.com/4x3/nulltrace/internal/config"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/config"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/nterr"
 )
 
 //go:embed templates/*.txt
 var templateFS embed.FS
 
-const trackingHeader = "X-NullTrace-Tracking-ID"
+const (
+	trackingHeader  = "X-NullTrace-Tracking-ID"
+	MessageIDPrefix = "nulltrace."
+)
+
+func domainOf(addr string) string {
+	if i := strings.LastIndexByte(addr, '@'); i >= 0 && i < len(addr)-1 {
+		return strings.Trim(addr[i+1:], "> ")
+	}
+	return "localhost"
+}
 
 type Demand struct {
 	BrokerName   string
@@ -124,9 +134,12 @@ func (d *Dispatcher) Send(ctx context.Context, demand Demand) (Result, error) {
 	msg.Subject(subject)
 	msg.SetBodyString(mail.TypeTextPlain, body)
 	msg.SetGenHeader(mail.Header(trackingHeader), demand.TrackingID)
-	msg.SetMessageID()
+	// Replies quote this in In-Reply-To, which is how the IMAP side finds
+	// the action again when a broker strips our custom header.
+	msg.SetMessageIDWithValue(MessageIDPrefix + demand.TrackingID + "@" + domainOf(d.from))
 
 	opts := []mail.Option{
+		mail.WithTimeout(30 * time.Second),
 		mail.WithPort(d.cfg.Port),
 		mail.WithSMTPAuth(mail.SMTPAuthAutoDiscover),
 		mail.WithUsername(d.cfg.Username),
@@ -142,7 +155,7 @@ func (d *Dispatcher) Send(ctx context.Context, demand Demand) (Result, error) {
 	defer func() { _ = client.Close() }()
 
 	if err := client.DialAndSendWithContext(ctx, msg); err != nil {
-		return Result{}, fmt.Errorf("failed to dispatch legal demand to %s: %w", demand.To, err)
+		return Result{}, fmt.Errorf("smtp send to %s: %w", demand.To, err)
 	}
 	d.log.Info("smtp demand sent",
 		"broker", demand.BrokerName,

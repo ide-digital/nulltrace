@@ -12,15 +12,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/config"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/engine/mailer"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/internal/paths"
-	"github.com/4x3/nulltrace/internal/storage"
-	"github.com/4x3/nulltrace/pkg/ipc"
-	"github.com/4x3/nulltrace/pkg/opsec"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/config"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/paths"
+	"github.com/ide-digital/nulltrace/internal/storage"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/opsec"
 )
 
 const (
@@ -243,20 +243,24 @@ func (rt *Runtime) AddIdentity(ctx context.Context, req ipc.IdentityAddRequest) 
 	if err != nil {
 		return ipc.IdentityAddResult{}, err
 	}
-	for i, e := range req.Emails {
-		if _, err := rt.Store.AddAttribute(ctx, id, string(broker.AttrEmail), []byte(e), i == 0); err != nil {
-			return ipc.IdentityAddResult{}, err
+	add := func(kind broker.AttributeType, vals []string, firstPrimary bool) error {
+		for i, v := range vals {
+			if _, err := rt.Store.AddAttribute(ctx, id, string(kind), []byte(v), firstPrimary && i == 0); err != nil {
+				return err
+			}
 		}
+		return nil
 	}
-	for _, p := range req.Phones {
-		if _, err := rt.Store.AddAttribute(ctx, id, string(broker.AttrPhone), []byte(p), false); err != nil {
-			return ipc.IdentityAddResult{}, err
-		}
+	err = add(broker.AttrEmail, req.Emails, true)
+	if err == nil {
+		err = add(broker.AttrPhone, req.Phones, false)
 	}
-	for _, c := range req.Cities {
-		if _, err := rt.Store.AddAttribute(ctx, id, string(broker.AttrCity), []byte(c), false); err != nil {
-			return ipc.IdentityAddResult{}, err
-		}
+	if err == nil {
+		err = add(broker.AttrCity, req.Cities, false)
+	}
+	if err != nil {
+		_ = rt.Store.DeleteIdentity(ctx, id)
+		return ipc.IdentityAddResult{}, err
 	}
 	rt.Audit(ctx, "identity.created", "", map[string]any{"id": id})
 	return ipc.IdentityAddResult{ID: id}, nil

@@ -1,6 +1,9 @@
 package broker
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestLoadEmbeddedRegistry(t *testing.T) {
 	reg, err := Load()
@@ -37,5 +40,23 @@ func TestLoadEmbeddedRegistry(t *testing.T) {
 			t.Fatalf("duplicate domain %s (%s)", b.Domain, b.ID)
 		}
 		domains[b.Domain] = struct{}{}
+	}
+}
+
+func TestMatchHost(t *testing.T) {
+	reg, err := Load()
+	if err != nil {
+		t.Fatal(err)
+	}
+	spokeo, _ := reg.Get("spokeo")
+	for _, host := range []string{spokeo.Domain, "mail." + spokeo.Domain, strings.ToUpper(spokeo.Domain) + "."} {
+		if b, ok := reg.MatchHost(host); !ok || b.ID != "spokeo" {
+			t.Fatalf("%s should be spokeo, got %q", host, b.ID)
+		}
+	}
+	for _, host := range []string{"not" + spokeo.Domain, spokeo.Domain + ".evil.test", ""} {
+		if b, ok := reg.MatchHost(host); ok {
+			t.Fatalf("%q should not match, got %s", host, b.ID)
+		}
 	}
 }

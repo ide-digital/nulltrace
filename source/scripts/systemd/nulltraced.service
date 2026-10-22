@@ -1,12 +1,9 @@
 [Unit]
 Description=NullTrace local privacy daemon
-After=network-online.target
-Wants=network-online.target
 
 [Service]
 Type=simple
-Environment=CGO_ENABLED=0
-# Passphrase is read from a 0600 file; never put it on the ExecStart line.
+# keep the passphrase in a 0600 file, not on the command line
 Environment=NULLTRACE_PASSPHRASE_FILE=%h/.config/nulltrace/passphrase
 ExecStart=/usr/local/bin/nulltraced
 WorkingDirectory=%h

@@ -15,18 +15,6 @@ import (
 	"github.com/google/uuid"
 )
 
-func Encode(w io.Writer, v any) error {
-	enc := json.NewEncoder(w)
-	return enc.Encode(v)
-}
-
-func Decode[T any](r io.Reader) (T, error) {
-	var v T
-	dec := json.NewDecoder(r)
-	err := dec.Decode(&v)
-	return v, err
-}
-
 type Client struct {
 	addr  string
 	token string
@@ -90,7 +78,7 @@ func (c *Client) Call(ctx context.Context, cmd string, payload any) (Reply, erro
 	} else {
 		_ = conn.SetDeadline(time.Now().Add(2 * time.Minute))
 	}
-	if err := Encode(conn, env); err != nil {
+	if err := json.NewEncoder(conn).Encode(env); err != nil {
 		return Reply{}, err
 	}
 	br := bufio.NewReader(conn)

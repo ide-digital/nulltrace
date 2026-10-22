@@ -7,8 +7,8 @@ import (
 
 	"github.com/wneessen/go-mail"
 
-	"github.com/4x3/nulltrace/internal/config"
-	"github.com/4x3/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/config"
+	"github.com/ide-digital/nulltrace/internal/nterr"
 )
 
 // Probe dials the SMTP server and authenticates. It does not send mail.

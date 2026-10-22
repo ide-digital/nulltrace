@@ -9,7 +9,7 @@ func init() {
 }
 
 // Frequent passwords from public "most used" rankings. Used only for a
-// local check — the value is never sent to the network from this list.
+// local check - the value is never sent to the network from this list.
 const commonPasswordBlob = `
 password 123456 123456789 12345678 qwerty abc123 111111 1234567 monkey
 password1 123123 000000 iloveyou 1234 1q2w3e4r qwertyuiop 123 qwerty123

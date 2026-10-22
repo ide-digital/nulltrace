@@ -50,6 +50,7 @@ type StatusPayload struct {
 	ManualPending   int    `json:"manual_pending"`
 	Overdue         int    `json:"overdue"`
 	IdentityName    string `json:"identity_name,omitempty"`
+	MailLinked      bool   `json:"mail_linked"`
 }
 
 type ScanRequest struct {

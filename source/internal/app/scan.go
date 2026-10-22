@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/engine/recon"
-	"github.com/4x3/nulltrace/internal/storage"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/engine/recon"
+	"github.com/ide-digital/nulltrace/internal/storage"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func (rt *Runtime) Scan(ctx context.Context, enableHIBP bool) (recon.Report, ipc.ScanResult, error) {
@@ -26,8 +27,10 @@ func (rt *Runtime) Scan(ctx context.Context, enableHIBP bool) (recon.Report, ipc
 		if err != nil {
 			return recon.Report{}, ipc.ScanResult{}, err
 		}
+		defer ncrypto.Zeroize(hibpKey)
 	}
-	coord := recon.New(rt.Reg, rt.Cfg.HIBP.APIBase, hibpKey, enableHIBP && len(hibpKey) > 0)
+	usedHIBP := enableHIBP && len(hibpKey) > 0
+	coord := recon.New(rt.Reg, rt.Cfg.HIBP.APIBase, hibpKey, usedHIBP)
 	if rt.HTTP != nil {
 		coord.HTTP = rt.HTTP
 	}
@@ -88,7 +91,7 @@ func (rt *Runtime) Scan(ctx context.Context, enableHIBP bool) (recon.Report, ipc
 		"findings":  len(rep.Findings),
 		"breaches":  len(rep.Breaches),
 		"persisted": persisted,
-		"hibp":      enableHIBP && len(hibpKey) > 0,
+		"hibp":      usedHIBP,
 		"identity":  identID,
 	})
 	return rep, ipc.ScanResult{

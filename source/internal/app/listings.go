@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/paths"
-	"github.com/4x3/nulltrace/internal/tui"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/paths"
+	"github.com/ide-digital/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 const listingsPage = 12
@@ -84,7 +84,7 @@ func (s *session) doListings() {
 			fmt.Println()
 		}
 		fmt.Println("  " + tui.Spread([]string{
-			tui.Muted("showing") + "  " + tui.Item(fmt.Sprintf("%d–%d of %d", start+1, end, len(rows))),
+			tui.Muted("showing") + "  " + tui.Item(fmt.Sprintf("%d-%d of %d", start+1, end, len(rows))),
 			tui.Muted("page") + "  " + tui.Item(fmt.Sprintf("%d/%d", page+1, pages)),
 		}, 100))
 		fmt.Println()
@@ -171,7 +171,7 @@ func (s *session) showListing(r ipc.ExposedView) {
 	printHead(nz(r.BrokerName, r.BrokerID), r.Domain)
 	kv := func(k, v string) {
 		if strings.TrimSpace(v) == "" {
-			v = "—"
+			v = "-"
 		}
 		fmt.Printf("  %s  %s\n", tui.Label(fmt.Sprintf("%-12s", k)), v)
 	}
@@ -479,7 +479,7 @@ func renderListingsTable(chunk []ipc.ExposedView) string {
 func humanRisk(s string) string {
 	s = strings.ToLower(strings.TrimSpace(s))
 	if s == "" {
-		return "—"
+		return "-"
 	}
 	return s
 }
@@ -529,18 +529,18 @@ func prettyTime(s string) string {
 	return s
 }
 
-func clip(s string, n int) string {
-	s = strings.TrimSpace(s)
-	if n <= 1 || len(s) <= n {
+// cut trims s to n runes, ending in "..." when it had to drop anything.
+func cut(s string, n int) string {
+	r := []rune(s)
+	if len(r) <= n {
 		return s
 	}
-	return s[:n-1] + "..."
+	if n <= 3 {
+		return string(r[:n])
+	}
+	return string(r[:n-3]) + "..."
 }
 
 func wrapNotes(s string, width int) string {
-	s = strings.Join(strings.Fields(s), " ")
-	if len(s) <= width {
-		return s
-	}
-	return s[:width-1] + "..."
+	return cut(strings.Join(strings.Fields(s), " "), width)
 }

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/broker"
 )
 
 type Entry struct {

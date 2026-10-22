@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/engine/browser"
-	"github.com/4x3/nulltrace/internal/engine/captcha"
-	"github.com/4x3/nulltrace/internal/engine/mailer"
+	"github.com/ide-digital/nulltrace/internal/engine/browser"
+	"github.com/ide-digital/nulltrace/internal/engine/captcha"
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
 )
 
 type Result struct {

@@ -1,23 +1,37 @@
 #!/usr/bin/env sh
-# Install nulltrace / nulltraced into PREFIX (default /usr/local).
+# Builds nulltrace + nulltraced and copies them into $PREFIX/bin (default /usr/local).
+# Run it as yourself; it only asks for sudo if $PREFIX/bin isn't writable.
 set -eu
 PREFIX="${PREFIX:-/usr/local}"
 ROOT="$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)"
 export CGO_ENABLED=0
 
-echo "building with CGO_ENABLED=0"
-go build -C "$ROOT" -o "$ROOT/bin/nulltrace" ./cmd/nulltrace
-go build -C "$ROOT" -o "$ROOT/bin/nulltraced" ./cmd/nulltraced
+command -v go >/dev/null 2>&1 || { echo "go is not installed (need 1.23+)"; exit 1; }
 
-install -d "$PREFIX/bin"
-install -m 0755 "$ROOT/bin/nulltrace" "$PREFIX/bin/nulltrace"
-install -m 0755 "$ROOT/bin/nulltraced" "$PREFIX/bin/nulltraced"
+go build -C "$ROOT" -trimpath -ldflags="-s -w" -o "$ROOT/bin/nulltrace" ./cmd/nulltrace
+go build -C "$ROOT" -trimpath -ldflags="-s -w" -o "$ROOT/bin/nulltraced" ./cmd/nulltraced
 
-if [ -d /etc/systemd/system ]; then
-  install -d /etc/systemd/system
-  install -m 0644 "$ROOT/scripts/systemd/nulltraced.service" /etc/systemd/system/nulltraced.service
-  echo "systemd unit installed; run: systemctl daemon-reload && systemctl enable --now nulltraced"
+SUDO=""
+target="$PREFIX/bin"
+[ -d "$target" ] || target="$PREFIX"
+if [ ! -w "$target" ] && [ "$(id -u)" -ne 0 ]; then
+  echo "$PREFIX/bin needs root, using sudo"
+  SUDO="sudo"
+fi
+$SUDO install -d "$PREFIX/bin"
+$SUDO install -m 0755 "$ROOT/bin/nulltrace" "$PREFIX/bin/nulltrace"
+$SUDO install -m 0755 "$ROOT/bin/nulltraced" "$PREFIX/bin/nulltraced"
+echo "installed to $PREFIX/bin"
+
+# The daemon is optional. It runs as your user, never as root.
+if command -v systemctl >/dev/null 2>&1 && [ "$(id -u)" -ne 0 ]; then
+  UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+  mkdir -p "$UNIT_DIR"
+  sed "s#/usr/local/bin#$PREFIX/bin#" "$ROOT/scripts/systemd/nulltraced.service" > "$UNIT_DIR/nulltraced.service"
+  echo "user unit written to $UNIT_DIR (optional)"
+  echo "  to use it: put your vault password in ~/.config/nulltrace/passphrase (chmod 600)"
+  echo "  then:      systemctl --user daemon-reload && systemctl --user enable --now nulltraced"
 fi
 
-echo "installed to $PREFIX/bin"
-echo "initialize with: nulltrace vault init"
+echo
+echo "run: nulltrace"

@@ -66,7 +66,7 @@ func stripJPEG(data []byte) ([]byte, error) {
 			out.Write([]byte{0xff, marker})
 			break
 		}
-		if marker == 0xda { // SOS — remainder is entropy-coded
+		if marker == 0xda { // SOS - remainder is entropy-coded
 			out.Write([]byte{0xff, marker})
 			out.Write(data[i:])
 			break

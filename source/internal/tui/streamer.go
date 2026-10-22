@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func renderStreamer(s ipc.Snapshot, cursor, height int) string {

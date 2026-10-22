@@ -1,15 +1,14 @@
 package app
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
 	"golang.org/x/term"
 )
 
-// ReadPassphrase never logs the value.
-//
 // Order: --passphrase-file, NULLTRACE_PASSPHRASE, then a prompt (or one stdin
 // line if stdin isn't a TTY).
 func ReadPassphrase(fileFlag string, confirm bool) ([]byte, error) {
@@ -48,7 +47,7 @@ func ReadPassphrase(fileFlag string, confirm bool) ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		if string(pw) != string(pw2) {
+		if !bytes.Equal(pw, pw2) {
 			ncrypto.Zeroize(pw)
 			ncrypto.Zeroize(pw2)
 			return nil, fmt.Errorf("passphrases did not match")

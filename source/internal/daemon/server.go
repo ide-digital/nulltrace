@@ -3,30 +3,31 @@ package daemon
 import (
 	"bufio"
 	"context"
+	"crypto/subtle"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net"
-	"os"
-	"strings"
 	"sync"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/app"
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/engine/playbook"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/internal/app"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/engine/playbook"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 type Server struct {
 	rt    *app.Runtime
 	token string
+	stop  context.CancelFunc
 	ln    net.Listener
 	mu    sync.Mutex
 }
 
-func NewServer(rt *app.Runtime, token string) *Server {
-	return &Server{rt: rt, token: token}
+func NewServer(rt *app.Runtime, token string, stop context.CancelFunc) *Server {
+	return &Server{rt: rt, token: token, stop: stop}
 }
 
 func (s *Server) Listen() error {
@@ -41,6 +42,9 @@ func (s *Server) Listen() error {
 	s.mu.Lock()
 	s.ln = ln
 	s.mu.Unlock()
+	if tcp, ok := ln.Addr().(*net.TCPAddr); ok && !tcp.IP.IsLoopback() {
+		s.rt.Log.Warn("ipc is listening beyond localhost; only the token protects it", "addr", tcp.String())
+	}
 	s.rt.Log.Info("ipc listening", "addr", ln.Addr().String())
 	return nil
 }
@@ -68,15 +72,12 @@ func (s *Server) Serve(ctx context.Context) error {
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			if ctx.Err() != nil {
+			if ctx.Err() != nil || errors.Is(err, net.ErrClosed) {
 				return nil
 			}
 			if ne, ok := err.(net.Error); ok && ne.Timeout() {
 				time.Sleep(50 * time.Millisecond)
 				continue
-			}
-			if strings.Contains(err.Error(), "closed") {
-				return nil
 			}
 			return err
 		}
@@ -108,9 +109,20 @@ func writeReply(conn net.Conn, rep ipc.Reply) {
 	_ = json.NewEncoder(conn).Encode(rep)
 }
 
+// bind is json.Unmarshal that lets a command come with no payload at all.
+func bind(raw json.RawMessage, v any) error {
+	if len(raw) == 0 {
+		return nil
+	}
+	if err := json.Unmarshal(raw, v); err != nil {
+		return fmt.Errorf("bad payload: %w", err)
+	}
+	return nil
+}
+
 func (s *Server) dispatch(ctx context.Context, env ipc.Envelope) ipc.Reply {
 	rep := ipc.Reply{V: ipc.ProtocolVersion, ID: env.ID}
-	if env.Token != s.token {
+	if subtle.ConstantTimeCompare([]byte(env.Token), []byte(s.token)) != 1 {
 		rep.Error = nterr.ErrUnauthorized.Error()
 		return rep
 	}
@@ -127,41 +139,54 @@ func (s *Server) dispatch(ctx context.Context, env ipc.Envelope) ipc.Reply {
 		payload, err = s.rt.Snapshot(ctx)
 	case ipc.CmdScan:
 		var req ipc.ScanRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		_, payload, err = s.rt.Scan(ctx, req.EnableHIBP)
+		if err = bind(env.Payload, &req); err == nil {
+			_, payload, err = s.rt.Scan(ctx, req.EnableHIBP)
+		}
 	case ipc.CmdScrub:
 		payload, err = s.rt.Scrub(ctx)
 	case ipc.CmdExport:
 		var req ipc.ExportRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		payload, err = s.rt.Export(ctx, req.Format)
+		if err = bind(env.Payload, &req); err == nil {
+			payload, err = s.rt.Export(ctx, req.Format)
+		}
 	case ipc.CmdActionComplete:
 		var req ipc.ActionIDRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		err = s.rt.CompleteAction(ctx, req.ActionID)
-		payload = map[string]string{"action_id": req.ActionID}
+		if err = bind(env.Payload, &req); err == nil {
+			err = s.rt.CompleteAction(ctx, req.ActionID)
+			payload = map[string]string{"action_id": req.ActionID}
+		}
 	case ipc.CmdActionVerify:
 		var req ipc.ActionIDRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		err = s.rt.VerifyRemoved(ctx, req.RecordID)
-		payload = map[string]string{"record_id": req.RecordID}
+		if err = bind(env.Payload, &req); err == nil {
+			err = s.rt.VerifyRemoved(ctx, req.RecordID)
+			payload = map[string]string{"record_id": req.RecordID}
+		}
 	case ipc.CmdIdentityAdd:
 		var req ipc.IdentityAddRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		payload, err = s.rt.AddIdentity(ctx, req)
+		if err = bind(env.Payload, &req); err == nil {
+			payload, err = s.rt.AddIdentity(ctx, req)
+		}
 	case ipc.CmdAttrAdd:
 		var req ipc.AttrAddRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		err = s.rt.AddAttribute(ctx, req)
-		payload = map[string]string{"ok": "1"}
+		if err = bind(env.Payload, &req); err == nil {
+			err = s.rt.AddAttribute(ctx, req)
+			payload = map[string]string{"ok": "1"}
+		}
 	case ipc.CmdSecretSet:
 		var req ipc.SecretSetRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		err = s.rt.Store.PutSecret(ctx, req.Key, []byte(req.Value))
-		payload = map[string]string{"key": req.Key}
+		if err = bind(env.Payload, &req); err == nil {
+			if req.Key == "" || req.Value == "" {
+				err = fmt.Errorf("secret key and value are required")
+				break
+			}
+			err = s.rt.Store.PutSecret(ctx, req.Key, []byte(req.Value))
+			payload = map[string]string{"key": req.Key}
+		}
 	case ipc.CmdPlaybook:
 		var req ipc.PlaybookRequest
-		_ = json.Unmarshal(env.Payload, &req)
+		if err = bind(env.Payload, &req); err != nil {
+			break
+		}
 		b, ok := s.rt.Reg.Get(req.BrokerID)
 		if !ok {
 			row, e := s.rt.Store.GetBroker(ctx, req.BrokerID)
@@ -179,18 +204,20 @@ func (s *Server) dispatch(ctx context.Context, env ipc.Envelope) ipc.Reply {
 		payload = ipc.PlaybookResult{Text: playbook.Render(playbook.For(b))}
 	case ipc.CmdFootprint:
 		var req ipc.FootprintRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		payload, err = s.rt.Footprint(ctx, req.Username, req.Persist)
+		if err = bind(env.Payload, &req); err == nil {
+			payload, err = s.rt.Footprint(ctx, req.Username, req.Persist)
+		}
 	case ipc.CmdAutomate:
 		var req ipc.AutomateRequest
-		_ = json.Unmarshal(env.Payload, &req)
-		payload, err = s.rt.Automate(ctx, req.BrokerID, req.Headful)
+		if err = bind(env.Payload, &req); err == nil {
+			payload, err = s.rt.Automate(ctx, req.BrokerID, req.Headful)
+		}
 	case ipc.CmdShutdown:
 		payload = map[string]string{"bye": "1"}
+		// Give the reply a moment to go out before the listener closes.
 		go func() {
 			time.Sleep(50 * time.Millisecond)
-			p, _ := os.FindProcess(os.Getpid())
-			_ = p.Signal(os.Interrupt)
+			s.stop()
 		}()
 	default:
 		err = fmt.Errorf("unknown command %q", env.Cmd)

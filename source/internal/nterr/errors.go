@@ -7,6 +7,7 @@ var (
 	ErrIdentityNotFound     = errors.New("identity not found")
 	ErrRecordNotFound       = errors.New("exposed record not found")
 	ErrActionNotFound       = errors.New("erasure action not found")
+	ErrAlreadyClaimed       = errors.New("action is no longer queued")
 	ErrRateLimited          = errors.New("rate limited")
 	ErrStateDrift           = errors.New("listing reappeared after verified removal")
 	ErrVaultLocked          = errors.New("vault is locked")

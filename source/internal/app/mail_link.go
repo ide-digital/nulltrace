@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/config"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/engine/mailer"
-	"github.com/4x3/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/internal/config"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/engine/mailer"
+	"github.com/ide-digital/nulltrace/internal/tui"
 )
 
 type mailBrand struct {
@@ -113,9 +113,9 @@ func (s *session) linkedMail() (brand, addr string, ok bool) {
 func (s *session) linkMail(b mailBrand) {
 	clearScreen()
 	printHead("Link "+b.Label, b.Hint)
-	fmt.Println("  Opening " + b.Label + " in your browser…")
+	fmt.Println("  Opening " + b.Label + " in your browser...")
 	if err := openURL(b.HelpURL); err != nil {
-		fmt.Println("  " + tui.Warn("could not open a browser — visit this page:"))
+		fmt.Println("  " + tui.Warn("could not open a browser - visit this page:"))
 		fmt.Println("  " + tui.Muted(b.HelpURL))
 	} else {
 		fmt.Println("  " + tui.Muted(b.HelpURL))
@@ -185,6 +185,11 @@ func (s *session) linkCustomMail() {
 		return
 	}
 	pw = scrubAppPass(pw)
+	if len(pw) == 0 {
+		fmt.Println("  " + tui.Bad("password cannot be empty"))
+		s.pause()
+		return
+	}
 	cfg.SMTP = config.SMTPConfig{
 		Host:     host,
 		Port:     port,
@@ -222,7 +227,7 @@ func (s *session) saveMail(cfg config.File, pw []byte, b mailBrand, offerIMAP bo
 		}
 	}
 	fmt.Println()
-	fmt.Println("  " + tui.Muted("checking sign-in…"))
+	fmt.Println("  " + tui.Muted("checking sign-in..."))
 	ctx, cancel := context.WithTimeout(s.ctx, 20*time.Second)
 	err := mailer.Probe(ctx, cfg.SMTP, pw)
 	cancel()
@@ -297,7 +302,7 @@ func (s *session) enableInboxFromLinked() {
 		return
 	}
 	if !s.hasMailPassword() {
-		fmt.Println("  " + tui.Bad("link email first — the same app password is reused for the inbox."))
+		fmt.Println("  " + tui.Bad("link email first - the same app password is reused for the inbox."))
 		s.pause()
 		return
 	}

@@ -13,18 +13,17 @@ import (
 	"github.com/charmbracelet/huh"
 	"github.com/spf13/cobra"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/config"
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/engine/playbook"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/internal/paths"
-	"github.com/4x3/nulltrace/internal/tui"
-	"github.com/4x3/nulltrace/pkg/ipc"
-	"github.com/4x3/nulltrace/pkg/opsec"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/config"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/engine/playbook"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/paths"
+	"github.com/ide-digital/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/opsec"
 )
 
-// PassphraseFile is --passphrase-file. Do not log it.
 var PassphraseFile string
 
 func NewRoot() *cobra.Command {
@@ -71,7 +70,7 @@ func cmdAudit() *cobra.Command {
 }
 
 func runMenu(ctx context.Context, passFile string) error {
-	if cl, err := tryClient(); err == nil {
+	if cl, err := TryClient(); err == nil {
 		return runInteractive(ctx, nil, cl)
 	}
 	if passFile != "" {
@@ -123,7 +122,7 @@ func runMenu(ctx context.Context, passFile string) error {
 }
 
 func runAudit(ctx context.Context, passFile string) error {
-	if c, err := tryClient(); err == nil {
+	if c, err := TryClient(); err == nil {
 		return tui.Run(ctx, func(ctx context.Context) (ipc.Snapshot, error) {
 			rep, err := c.Call(ctx, ipc.CmdSnapshot, nil)
 			if err != nil {
@@ -286,13 +285,13 @@ func cmdIdentity() *cobra.Command {
 			return nil
 		},
 	}
-	add.Flags().StringVar(&first, "first", "", "")
-	add.Flags().StringVar(&last, "last", "", "")
-	add.Flags().StringVar(&middle, "middle", "", "")
-	add.Flags().StringVar(&dob, "dob", "", "")
-	add.Flags().StringVar(&email, "email", "", "")
-	add.Flags().StringVar(&phone, "phone", "", "")
-	add.Flags().StringVar(&city, "city", "", "")
+	add.Flags().StringVar(&first, "first", "", "first name (required)")
+	add.Flags().StringVar(&last, "last", "", "last name (required)")
+	add.Flags().StringVar(&middle, "middle", "", "middle name or initial")
+	add.Flags().StringVar(&dob, "dob", "", "date of birth, e.g. 1990-04-23")
+	add.Flags().StringVar(&email, "email", "", "main email address")
+	add.Flags().StringVar(&phone, "phone", "", "main phone number")
+	add.Flags().StringVar(&city, "city", "", "city you live in")
 	c.AddCommand(add)
 
 	var ident, typ, value string
@@ -314,10 +313,10 @@ func cmdIdentity() *cobra.Command {
 			})
 		},
 	}
-	attrAdd.Flags().StringVar(&ident, "identity", "", "")
+	attrAdd.Flags().StringVar(&ident, "identity", "", "identity id from `identity list` (default: the first one)")
 	attrAdd.Flags().StringVar(&typ, "type", "", "EMAIL|PHONE|ADDRESS|CITY|USERNAME|ALIAS|RELATIVE")
-	attrAdd.Flags().StringVar(&value, "value", "", "")
-	attrAdd.Flags().BoolVar(&primary, "primary", false, "")
+	attrAdd.Flags().StringVar(&value, "value", "", "the value to store")
+	attrAdd.Flags().BoolVar(&primary, "primary", false, "use this as the main value for its type")
 	attr.AddCommand(attrAdd)
 	c.AddCommand(attr)
 
@@ -351,8 +350,8 @@ func cmdSecret() *cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			key := args[0]
-			val := os.Getenv("NULLTRACE_SECRET")
-			if val == "" {
+			val := []byte(os.Getenv("NULLTRACE_SECRET"))
+			if len(val) == 0 {
 				if st, _ := os.Stdin.Stat(); st != nil && st.Mode()&os.ModeCharDevice != 0 {
 					fmt.Fprint(os.Stderr, "Secret: ")
 				}
@@ -360,12 +359,12 @@ func cmdSecret() *cobra.Command {
 				if err != nil {
 					return err
 				}
-				val = string(pw)
-				ncrypto.Zeroize(pw)
+				val = pw
 			}
-			req := ipc.SecretSetRequest{Key: key, Value: val}
+			defer ncrypto.Zeroize(val)
+			req := ipc.SecretSetRequest{Key: key, Value: string(val)}
 			if err := doOrLocal(cmd.Context(), ipc.CmdSecretSet, req, func(rt *Runtime) error {
-				return rt.Store.PutSecret(cmd.Context(), key, []byte(val))
+				return rt.Store.PutSecret(cmd.Context(), key, val)
 			}); err != nil {
 				return err
 			}
@@ -468,19 +467,6 @@ func cmdPlaybook() *cobra.Command {
 		Short: "Print web-form steps",
 		Args:  cobra.MaximumNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if len(args) == 1 {
-				res, err := callOrLocal(cmd.Context(), ipc.CmdPlaybook, ipc.PlaybookRequest{BrokerID: args[0]}, func(rt *Runtime) (ipc.PlaybookResult, error) {
-					b, ok := rt.Reg.Get(args[0])
-					if !ok {
-						return ipc.PlaybookResult{}, nterr.ErrBrokerNotFound
-					}
-					return ipc.PlaybookResult{Text: playbook.Render(playbook.For(b))}, nil
-				})
-				if err == nil {
-					fmt.Fprintln(cmd.OutOrStdout(), res.Text)
-					return nil
-				}
-			}
 			reg, err := broker.Default()
 			if err != nil {
 				return err
@@ -618,7 +604,7 @@ func withRT(ctx context.Context, passFile string, fn func(*Runtime) error) error
 	for {
 		pw, err := ReadPassphrase(passFile, false)
 		if err != nil {
-			if passFile == "" && os.Getenv("NULLTRACE_APP") == "1" && os.Getenv("NULLTRACE_PASSPHRASE") == "" {
+			if passFile == "" && !errors.Is(err, io.EOF) && os.Getenv("NULLTRACE_APP") == "1" && os.Getenv("NULLTRACE_PASSPHRASE") == "" {
 				fmt.Fprintln(os.Stderr, err)
 				continue
 			}
@@ -628,7 +614,7 @@ func withRT(ctx context.Context, passFile string, fn func(*Runtime) error) error
 		ncrypto.Zeroize(pw)
 		if err != nil {
 			if passFile == "" && (errors.Is(err, nterr.ErrInvalidPassphrase) || errors.Is(err, nterr.ErrEmptyPassphrase)) {
-				fmt.Fprintln(os.Stderr, "wrong password — try again")
+				fmt.Fprintln(os.Stderr, "wrong password - try again")
 				continue
 			}
 			return err
@@ -640,7 +626,7 @@ func withRT(ctx context.Context, passFile string, fn func(*Runtime) error) error
 
 func callOrLocal[T any](ctx context.Context, cmd string, req any, local func(*Runtime) (T, error)) (T, error) {
 	var zero T
-	if cl, err := tryClient(); err == nil {
+	if cl, err := TryClient(); err == nil {
 		rep, err := cl.Call(ctx, cmd, req)
 		if err != nil {
 			return zero, err
@@ -657,7 +643,7 @@ func callOrLocal[T any](ctx context.Context, cmd string, req any, local func(*Ru
 }
 
 func doOrLocal(ctx context.Context, cmd string, req any, local func(*Runtime) error) error {
-	if cl, err := tryClient(); err == nil {
+	if cl, err := TryClient(); err == nil {
 		_, err := cl.Call(ctx, cmd, req)
 		return err
 	}
@@ -671,10 +657,6 @@ func writeJSON(w io.Writer, v any) error {
 }
 
 func TryClient() (*ipc.Client, error) {
-	return tryClient()
-}
-
-func tryClient() (*ipc.Client, error) {
 	dirs, err := paths.Resolve()
 	if err != nil {
 		return nil, err

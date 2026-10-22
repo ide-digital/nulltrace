@@ -7,8 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/config"
-	"github.com/4x3/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/internal/config"
+	"github.com/ide-digital/nulltrace/internal/tui"
 )
 
 func vaultInitialized(ctx context.Context) (bool, error) {
@@ -20,7 +20,8 @@ func vaultInitialized(ctx context.Context) (bool, error) {
 	return rt.Store.Initialized(ctx)
 }
 
-func runSetupThenMenu(ctx context.Context, pw []byte) error {
+func runSetupThenMenu(ctx context.Context, pw []byte) (err error) {
+	defer quitOnEOF(&err)
 	if len(strings.TrimSpace(string(pw))) == 0 {
 		return fmt.Errorf("password cannot be empty")
 	}
@@ -78,6 +79,6 @@ func runSetupThenMenu(ctx context.Context, pw []byte) error {
 	fmt.Println("  " + tui.OK("Setup complete."))
 	fmt.Println("  Next: [1] Scan, then [4] Listings, then [2] Scrub.")
 	waitEnter(in)
-	s.hint = "Setup complete. [1] Scan  →  [4] Listings  →  [2] Scrub"
-	return runInteractive(ctx, rt, nil)
+	s.hint = "Setup complete. [1] Scan  >  [4] Listings  >  [2] Scrub"
+	return s.run()
 }

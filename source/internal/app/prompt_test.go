@@ -1,6 +1,34 @@
 package app
 
-import "testing"
+import (
+	"bufio"
+	"errors"
+	"strings"
+	"testing"
+)
+
+func TestClosedStdinDoesNotConfirm(t *testing.T) {
+	confirmed := false
+	run := func() (err error) {
+		defer quitOnEOF(&err)
+		in := bufio.NewReader(strings.NewReader(""))
+		confirmed = promptYes(in, "send", true)
+		return errors.New("prompt returned")
+	}
+	if err := run(); err != nil {
+		t.Fatalf("expected a clean exit, got %v", err)
+	}
+	if confirmed {
+		t.Fatal("EOF counted as yes")
+	}
+}
+
+func TestLastLineWithoutNewline(t *testing.T) {
+	in := bufio.NewReader(strings.NewReader("y"))
+	if !promptYes(in, "send", false) {
+		t.Fatal("y without a trailing newline should still count")
+	}
+}
 
 func TestNavChoices(t *testing.T) {
 	if !isHomeChoice("m") || !isHomeChoice("HOME") || !isHomeChoice(" menu ") {

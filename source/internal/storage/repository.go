@@ -11,8 +11,8 @@ import (
 
 	"github.com/google/uuid"
 
-	ncrypto "github.com/4x3/nulltrace/internal/crypto"
-	"github.com/4x3/nulltrace/internal/nterr"
+	ncrypto "github.com/ide-digital/nulltrace/internal/crypto"
+	"github.com/ide-digital/nulltrace/internal/nterr"
 )
 
 const (
@@ -25,8 +25,7 @@ const (
 	metaKeyLen     = "kdf.key_len"
 )
 
-// Store is the persistence façade. The DEK is held in memory only while the
-// vault is unlocked. Lock wipes it.
+// dek is only set while the vault is unlocked. Lock wipes it.
 type Store struct {
 	db  *sql.DB
 	dek []byte
@@ -52,8 +51,6 @@ func (s *Store) Lock() {
 	ncrypto.Zeroize(s.dek)
 	s.dek = nil
 }
-
-func (s *Store) DEK() []byte { return s.dek }
 
 func (s *Store) Initialized(ctx context.Context) (bool, error) {
 	var n int
@@ -467,6 +464,11 @@ func (s *Store) DecryptIdentity(row IdentityRow) (first, last, middle, dob []byt
 	return
 }
 
+func (s *Store) DeleteIdentity(ctx context.Context, id string) error {
+	_, err := s.db.ExecContext(ctx, `DELETE FROM identities WHERE id = ?`, id)
+	return err
+}
+
 func (s *Store) AddAttribute(ctx context.Context, identityID, attrType string, value []byte, primary bool) (string, error) {
 	if err := s.requireDEK(); err != nil {
 		return "", err
@@ -523,9 +525,8 @@ func (s *Store) LookupExposedID(ctx context.Context, identityID, brokerID string
 	return id, err
 }
 
-// UpsertExposed inserts or updates an exposure row. The ciphertext AAD is bound
-// to rec.ID, so this method reuses the existing primary key when the
-// (identity_id, broker_id) pair already exists.
+// The ciphertext AAD includes rec.ID, so an existing (identity, broker) row
+// has to keep its id or its blob stops decrypting.
 func (s *Store) UpsertExposed(ctx context.Context, rec ExposedRecordRow) (string, error) {
 	existing, err := s.LookupExposedID(ctx, rec.IdentityID, rec.BrokerID)
 	if err != nil {
@@ -570,7 +571,6 @@ func (s *Store) UpsertExposed(ctx context.Context, rec ExposedRecordRow) (string
 	return rec.ID, nil
 }
 
-// SaveFinding encrypts details under the stable exposed-record id, then upserts.
 func (s *Store) SaveFinding(ctx context.Context, rec ExposedRecordRow, detailsJSON []byte) (string, error) {
 	existing, err := s.LookupExposedID(ctx, rec.IdentityID, rec.BrokerID)
 	if err != nil {
@@ -705,6 +705,19 @@ func (s *Store) UpdateActionState(ctx context.Context, id, state string, attempt
 		return nterr.ErrActionNotFound
 	}
 	return nil
+}
+
+// ClaimAction moves an action from one state to another only if it is still
+// in the first one. The daemon's workers and the Send menu race on QUEUED rows.
+func (s *Store) ClaimAction(ctx context.Context, id, from, to string) (bool, error) {
+	res, err := s.db.ExecContext(ctx, `
+		UPDATE erasure_actions SET current_state = ?, updated_at = ?
+		WHERE id = ? AND current_state = ?`, to, nowRFC3339(), id, from)
+	if err != nil {
+		return false, err
+	}
+	n, err := res.RowsAffected()
+	return n == 1, err
 }
 
 func (s *Store) ListActions(ctx context.Context) ([]ActionRow, error) {
@@ -868,13 +881,13 @@ func (s *Store) Stats(ctx context.Context) (DashboardStats, error) {
 		q   string
 	}{
 		{&st.BrokerCount, `SELECT COUNT(*) FROM brokers`},
-		{&st.ActiveRemovals, `SELECT COUNT(*) FROM erasure_actions WHERE current_state IN ('QUEUED','SUBMITTED','AWAITING_CONFIRMATION','AWAITING_MANUAL')`},
+		{&st.ActiveRemovals, `SELECT COUNT(*) FROM erasure_actions WHERE current_state IN ('QUEUED','SENDING','SUBMITTED','AWAITING_CONFIRMATION','AWAITING_MANUAL')`},
 		{&st.VerifiedRemoved, `SELECT COUNT(*) FROM exposed_records WHERE status = 'VERIFIED_REMOVED'`},
 		{&st.ExposedRecords, `SELECT COUNT(*) FROM exposed_records`},
 		{&st.FailedActions, `SELECT COUNT(*) FROM erasure_actions WHERE current_state = 'FAILED'`},
 		{&st.AwaitingConfirm, `SELECT COUNT(*) FROM erasure_actions WHERE current_state = 'AWAITING_CONFIRMATION'`},
 		{&st.ManualPending, `SELECT COUNT(*) FROM erasure_actions WHERE current_state = 'AWAITING_MANUAL'`},
-		{&st.Overdue, `SELECT COUNT(*) FROM erasure_actions WHERE statutory_deadline IS NOT NULL AND statutory_deadline < ? AND current_state NOT IN ('COMPLETED','REJECTED')`},
+		{&st.Overdue, `SELECT COUNT(*) FROM erasure_actions WHERE statutory_deadline IS NOT NULL AND julianday(statutory_deadline) < julianday(?) AND current_state NOT IN ('COMPLETED','REJECTED')`},
 	}
 	now := nowRFC3339()
 	for _, q := range queries {
@@ -889,14 +902,6 @@ func (s *Store) Stats(ctx context.Context) (DashboardStats, error) {
 		}
 	}
 	return st, nil
-}
-
-func (s *Store) EncryptActionPayload(actionID string, payload []byte) ([]byte, error) {
-	return s.encrypt("erasure_actions", "request_payload_enc", actionID, payload)
-}
-
-func (s *Store) DecryptActionPayload(a ActionRow) ([]byte, error) {
-	return s.decrypt("erasure_actions", "request_payload_enc", a.ID, a.RequestPayloadEnc)
 }
 
 func (s *Store) GetIdentity(ctx context.Context, id string) (IdentityRow, error) {
@@ -931,12 +936,6 @@ func (s *Store) PrimaryIdentity(ctx context.Context) (IdentityRow, error) {
 	return rows[0], nil
 }
 
-func (s *Store) CountIdentities(ctx context.Context) (int, error) {
-	var n int
-	err := s.db.QueryRowContext(ctx, `SELECT COUNT(*) FROM identities`).Scan(&n)
-	return n, err
-}
-
 func (s *Store) GetAction(ctx context.Context, id string) (ActionRow, error) {
 	row := s.db.QueryRowContext(ctx, `
 		SELECT id, exposed_record_id, broker_id, strategy, current_state, attempts,
@@ -948,6 +947,22 @@ func (s *Store) GetAction(ctx context.Context, id string) (ActionRow, error) {
 		return ActionRow{}, nterr.ErrActionNotFound
 	}
 	return a, err
+}
+
+// RequeueFailed puts a failed action for this record back in the queue.
+// FAILED still counts as open in HasOpenAction, so without this a send
+// that failed once (bad password, wifi drop) would never be retried.
+func (s *Store) RequeueFailed(ctx context.Context, exposedID, strategy string) (bool, error) {
+	res, err := s.db.ExecContext(ctx, `
+		UPDATE erasure_actions
+		SET current_state = 'QUEUED', last_error = NULL, updated_at = ?
+		WHERE exposed_record_id = ? AND strategy = ? AND current_state = 'FAILED'`,
+		nowRFC3339(), exposedID, strategy)
+	if err != nil {
+		return false, err
+	}
+	n, _ := res.RowsAffected()
+	return n > 0, nil
 }
 
 func (s *Store) HasOpenAction(ctx context.Context, exposedID, strategy string) (bool, error) {
@@ -986,16 +1001,15 @@ func (s *Store) DecryptActionResponse(a ActionRow) ([]byte, error) {
 	return s.decrypt("erasure_actions", "response_log_enc", a.ID, a.ResponseLogEnc)
 }
 
-// StaleVerified returns VERIFIED_REMOVED records whose last_verified_at is
-// older than cutoff. The scheduler marks these PENDING_REVIEW; it does not
-// scrape third-party sites.
+// Timestamps are RFC3339Nano text, which drops trailing zeros, so compare
+// them with julianday() rather than as strings.
 func (s *Store) StaleVerified(ctx context.Context, cutoff time.Time) ([]ExposedRecordRow, error) {
 	rows, err := s.db.QueryContext(ctx, `
 		SELECT id, identity_id, broker_id, COALESCE(profile_url, ''), extracted_data_json_enc,
 			confidence_score, status, risk_tier, first_detected_at, last_verified_at
 		FROM exposed_records
 		WHERE status = 'VERIFIED_REMOVED'
-		  AND last_verified_at < ?
+		  AND julianday(last_verified_at) < julianday(?)
 		ORDER BY last_verified_at`, cutoff.UTC().Format(time.RFC3339Nano))
 	if err != nil {
 		return nil, err

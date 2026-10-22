@@ -6,7 +6,7 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 
-	"github.com/4x3/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
 )
 
 func renderMatrix(s ipc.Snapshot, cursor, height int) string {
@@ -16,7 +16,7 @@ func renderMatrix(s ipc.Snapshot, cursor, height int) string {
 	b.WriteString(styleMuted.Render("  broker                        risk     conf   status"))
 	b.WriteString("\n")
 	if len(s.Exposed) == 0 {
-		b.WriteString(styleMuted.Render("  no findings yet — run nulltrace scan"))
+		b.WriteString(styleMuted.Render("  no findings yet - run nulltrace scan"))
 		b.WriteString("\n")
 		return b.String()
 	}

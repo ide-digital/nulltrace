@@ -1,4 +1,4 @@
-Subject: Consumer Request to Delete Personal Data — {{.StatuteName}}
+Subject: Consumer Request to Delete Personal Data - {{.StatuteName}}
 
 To the Privacy Officer at {{.BrokerName}} ({{.BrokerDomain}}):
 

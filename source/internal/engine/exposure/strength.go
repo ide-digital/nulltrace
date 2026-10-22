@@ -15,6 +15,7 @@ type PasswordReport struct {
 	Risk        string
 	PwnedCount  int
 	PwnedOK     bool
+	PwnedErr    string
 	Common      bool
 	Issues      []string
 	Advice      []string
@@ -30,7 +31,6 @@ var (
 	yearRe    = regexp.MustCompile(`(?:19|20)\d{2}`)
 )
 
-// Analyze inspects a password locally. It never sends the value.
 func Analyze(pw string, identityHints []string) PasswordReport {
 	r := PasswordReport{Length: utf8.RuneCountInString(pw)}
 	if r.Length == 0 {
@@ -115,7 +115,7 @@ func Analyze(pw string, identityHints []string) PasswordReport {
 	if r.Length < 8 {
 		r.Issues = append(r.Issues, "shorter than 8 characters")
 	} else if r.Length < 12 {
-		r.Issues = append(r.Issues, "under 12 characters — short for 2026")
+		r.Issues = append(r.Issues, "under 12 characters - short for 2026")
 	}
 	if classes < 2 {
 		r.Issues = append(r.Issues, "only one character type")
@@ -174,13 +174,23 @@ func FinishRisk(r PasswordReport) PasswordReport {
 	if r.PwnedOK && r.PwnedCount > 0 {
 		r.Advice = append(r.Advice,
 			"Stop using this password on every account that still has it.",
-			"The dump index does not name each stolen database — treat it as public.",
+			"The dump index does not name each stolen database - treat it as public.",
 			"Turn on 2-step verification wherever this password was reused.",
 		)
 		r.Summary = "This password appears in public breach compilations. Attackers try it first."
 	} else if r.Common {
-		r.Advice = append(r.Advice, "Pick something that is not on any “top passwords” list.")
+		r.Advice = append(r.Advice, "Pick something that is not on any \"top passwords\" list.")
 		r.Summary = "Too common. Cracking tools try this immediately."
+	} else if !r.PwnedOK {
+		why := r.PwnedErr
+		if why == "" {
+			why = "no response"
+		}
+		r.Advice = append(r.Advice,
+			"Could not reach the dump index: "+why,
+			"Run it again once you're online before trusting this.",
+		)
+		r.Summary = "Only the shape of the password was checked. The dump lookup failed."
 	} else if r.Risk == "ok" {
 		r.Advice = append(r.Advice,
 			"Still use a unique password per site (a password manager helps).",

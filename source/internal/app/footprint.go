@@ -7,12 +7,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/engine/footprint"
-	"github.com/4x3/nulltrace/internal/nterr"
-	"github.com/4x3/nulltrace/internal/storage"
-	"github.com/4x3/nulltrace/pkg/ipc"
-	"github.com/4x3/nulltrace/pkg/opsec"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/engine/footprint"
+	"github.com/ide-digital/nulltrace/internal/nterr"
+	"github.com/ide-digital/nulltrace/internal/storage"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/opsec"
 )
 
 func (rt *Runtime) Footprint(ctx context.Context, username string, persist bool) (ipc.FootprintResult, error) {

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -41,14 +42,24 @@ var challengePhrases = []string{
 	"just a moment",
 }
 
-func FetchConfirmation(ctx context.Context, client *http.Client, rawURL string) (FetchResult, error) {
-	if client == nil {
-		client = &http.Client{Timeout: 20 * time.Second, CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			if len(via) >= 8 {
-				return fmt.Errorf("too many redirects")
-			}
-			return nil
-		}}
+// FetchConfirmation GETs a link out of a broker's mail. allow is checked on
+// the link and on every redirect, since anyone can send mail to the inbox.
+func FetchConfirmation(ctx context.Context, client *http.Client, rawURL string, allow func(host string) bool) (FetchResult, error) {
+	if !allowedURL(rawURL, allow) {
+		return FetchResult{}, fmt.Errorf("confirmation link is not on a known broker domain")
+	}
+	c := http.Client{Timeout: 20 * time.Second}
+	if client != nil {
+		c = *client
+	}
+	c.CheckRedirect = func(req *http.Request, via []*http.Request) error {
+		if len(via) >= 8 {
+			return fmt.Errorf("too many redirects")
+		}
+		if !allowedURL(req.URL.String(), allow) {
+			return fmt.Errorf("redirect left the broker's domain")
+		}
+		return nil
 	}
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, rawURL, nil)
 	if err != nil {
@@ -57,7 +68,7 @@ func FetchConfirmation(ctx context.Context, client *http.Client, rawURL string) 
 	req.Header.Set("User-Agent", "NullTrace/1.0")
 	req.Header.Set("Accept", "text/html, text/plain;q=0.9, */*;q=0.8")
 
-	resp, err := client.Do(req)
+	resp, err := c.Do(req)
 	if err != nil {
 		return FetchResult{}, fmt.Errorf("confirmation fetch: %w", err)
 	}
@@ -87,10 +98,18 @@ func FetchConfirmation(ctx context.Context, client *http.Client, rawURL string) 
 	return res, nil
 }
 
+func allowedURL(raw string, allow func(string) bool) bool {
+	u, err := url.Parse(raw)
+	if err != nil || (u.Scheme != "https" && u.Scheme != "http") || u.Hostname() == "" {
+		return false
+	}
+	return allow != nil && allow(u.Hostname())
+}
+
 func clip(s string, n int) string {
 	s = strings.Join(strings.Fields(s), " ")
 	if len(s) <= n {
 		return s
 	}
-	return s[:n] + "..."
+	return strings.ToValidUTF8(s[:n], "") + "..."
 }

@@ -10,13 +10,13 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/4x3/nulltrace/internal/broker"
-	"github.com/4x3/nulltrace/internal/config"
-	"github.com/4x3/nulltrace/internal/engine/playbook"
-	"github.com/4x3/nulltrace/internal/paths"
-	"github.com/4x3/nulltrace/internal/tui"
-	"github.com/4x3/nulltrace/pkg/ipc"
-	"github.com/4x3/nulltrace/pkg/opsec"
+	"github.com/ide-digital/nulltrace/internal/broker"
+	"github.com/ide-digital/nulltrace/internal/config"
+	"github.com/ide-digital/nulltrace/internal/engine/playbook"
+	"github.com/ide-digital/nulltrace/internal/paths"
+	"github.com/ide-digital/nulltrace/internal/tui"
+	"github.com/ide-digital/nulltrace/pkg/ipc"
+	"github.com/ide-digital/nulltrace/pkg/opsec"
 )
 
 type session struct {
@@ -29,19 +29,24 @@ type session struct {
 }
 
 func runInteractive(ctx context.Context, rt *Runtime, cl *ipc.Client) error {
-	tui.RestoreCookedConsole()
-	s := &session{ctx: ctx, rt: rt, cl: cl, in: bufio.NewReader(os.Stdin)}
 	if rt == nil && cl == nil {
 		return fmt.Errorf("vault is not available")
 	}
-	s.hint = "First time?  [5] Identity  →  [1] Scan  →  [14] Leaks  →  [4] Listings"
+	s := &session{ctx: ctx, rt: rt, cl: cl, in: bufio.NewReader(os.Stdin)}
+	s.hint = "First time?  [5] Identity  >  [1] Scan  >  [14] Leaks  >  [4] Listings"
+	return s.run()
+}
+
+func (s *session) run() (err error) {
+	defer quitOnEOF(&err)
+	tui.RestoreCookedConsole()
 	for {
 		if err := s.ctx.Err(); err != nil {
 			return err
 		}
 		s.goHome = false
 		s.drawHome()
-		choice := strings.TrimSpace(s.readChoice())
+		choice := readLine(s.in)
 		if choice == "" {
 			continue
 		}
@@ -77,14 +82,9 @@ func runInteractive(ctx context.Context, rt *Runtime, cl *ipc.Client) error {
 		case "14":
 			s.doLeaks()
 		default:
-			s.hint = "Unknown option " + choice + " — type a number from the menu"
+			s.hint = "Unknown option " + choice + " - type a number from the menu"
 		}
 	}
-}
-
-func (s *session) readChoice() string {
-	line, _ := s.in.ReadString('\n')
-	return strings.TrimSpace(line)
 }
 
 func (s *session) drawHome() {
@@ -168,7 +168,8 @@ func (s *session) hasMailPassword() bool {
 	if s.rt != nil {
 		return s.rt.hasSecret(s.ctx, SecretSMTPPassword)
 	}
-	return false
+	snap, err := s.snapshot()
+	return err == nil && snap.Status.MailLinked
 }
 
 func (s *session) needLocal(what string) bool {
@@ -193,7 +194,7 @@ func (s *session) doScan() {
 	}
 	hibp := false
 	fmt.Println()
-	fmt.Println("  " + tui.Muted("scanning…"))
+	fmt.Println("  " + tui.Muted("scanning..."))
 	var res ipc.ScanResult
 	if s.cl != nil {
 		rep, e := s.cl.Call(s.ctx, ipc.CmdScan, ipc.ScanRequest{EnableHIBP: hibp})
@@ -249,7 +250,7 @@ func (s *session) doScrub() {
 		tui.OK("queued"), res.QueuedSMTP, res.QueuedManual, res.Skipped)
 	cfg := s.cfg()
 	if cfg.SMTP.Host == "" || !s.hasMailPassword() {
-		fmt.Println("  " + tui.Warn("Email is not set up yet — [7] Email, then [3] Send."))
+		fmt.Println("  " + tui.Warn("Email is not set up yet - [7] Email, then [3] Send."))
 	} else {
 		fmt.Println("  Next: [3] Send to deliver the queued mail.")
 	}
@@ -312,7 +313,7 @@ func (s *session) doProgress() {
 			start = n - 18
 		}
 		if n == 0 {
-			fmt.Println("  " + tui.Muted("(none yet — Scan then Scrub)"))
+			fmt.Println("  " + tui.Muted("(none yet - Scan then Scrub)"))
 		}
 		for _, a := range snap.Actions[start:] {
 			short := a.ID
@@ -380,7 +381,7 @@ func (s *session) resolveAction(snap ipc.Snapshot, prefix string) (string, error
 	if len(hits) == 0 {
 		return "", fmt.Errorf("no action starts with %q", prefix)
 	}
-	return "", fmt.Errorf("ambiguous — type more of the id")
+	return "", fmt.Errorf("ambiguous - type more of the id")
 }
 
 func (s *session) completeAction(id string) error {
@@ -420,11 +421,11 @@ func (s *session) doIdentity() {
 			if id.DOB != "" {
 				fmt.Println("  dob     " + id.DOB)
 			}
-			fmt.Println("  email   " + nz(strings.Join(id.Emails, ", "), "—"))
-			fmt.Println("  phone   " + nz(strings.Join(id.Phones, ", "), "—"))
-			fmt.Println("  city    " + nz(strings.Join(id.Cities, ", "), "—"))
-			fmt.Println("  address " + nz(strings.Join(id.Addresses, ", "), "—"))
-			fmt.Println("  user    " + nz(strings.Join(id.Usernames, ", "), "—"))
+			fmt.Println("  email   " + nz(strings.Join(id.Emails, ", "), "-"))
+			fmt.Println("  phone   " + nz(strings.Join(id.Phones, ", "), "-"))
+			fmt.Println("  city    " + nz(strings.Join(id.Cities, ", "), "-"))
+			fmt.Println("  address " + nz(strings.Join(id.Addresses, ", "), "-"))
+			fmt.Println("  user    " + nz(strings.Join(id.Usernames, ", "), "-"))
 		}
 		fmt.Println()
 		fmt.Println("  " + tui.Key("1") + "  Set / replace name")
@@ -532,7 +533,7 @@ func (s *session) doFootprint() {
 		return
 	}
 	persist := promptYes(s.in, "  Save hits as listings in the vault", false)
-	fmt.Println("  " + tui.Warn("checking…"))
+	fmt.Println("  " + tui.Warn("checking..."))
 	var res ipc.FootprintResult
 	var err error
 	if s.cl != nil {
@@ -723,22 +724,22 @@ func (s *session) doPlaybooks() {
 func (s *session) doGuide() {
 	clearScreen()
 	printHead("How to clear your listings", "")
-	fmt.Println("  1.  " + tui.Item("Identity") + "  — who the brokers listed (name, email, phone, city).")
-	fmt.Println("  2.  " + tui.Item("Scan") + "      — match that person to ~400 people-search / broker sites.")
-	fmt.Println("  3.  " + tui.Item("Listings") + "  — scroll every site, then export a .txt or .md report.")
+	fmt.Println("  1.  " + tui.Item("Identity") + "  - who the brokers listed (name, email, phone, city).")
+	fmt.Println("  2.  " + tui.Item("Scan") + "      - match that person to ~400 people-search / broker sites.")
+	fmt.Println("  3.  " + tui.Item("Listings") + "  - scroll every site, then export a .txt or .md report.")
 	fmt.Println("      " + tui.Muted("m jumps to the main menu from any nested screen."))
-	fmt.Println("  4.  " + tui.Item("Scrub") + "     — queue a deletion demand for each one.")
-	fmt.Println("  5.  " + tui.Item("Email") + "     — pick Gmail / Outlook / Yahoo; a browser opens so you")
+	fmt.Println("  4.  " + tui.Item("Scrub") + "     - queue a deletion demand for each one.")
+	fmt.Println("  5.  " + tui.Item("Email") + "     - pick Gmail / Outlook / Yahoo; a browser opens so you")
 	fmt.Println("      can create an App Password. Paste it back here. Your normal")
 	fmt.Println("      mailbox password will not work.")
-	fmt.Println("  6.  " + tui.Item("Send") + "      — deliver the queue. Keep this window open.")
-	fmt.Println("  7.  " + tui.Item("Playbooks") + " — the leftover sites that only have a web form.")
-	fmt.Println("  8.  " + tui.Item("Leaks") + "     — check a password for strength and dump hits.")
+	fmt.Println("  6.  " + tui.Item("Send") + "      - deliver the queue. Keep this window open.")
+	fmt.Println("  7.  " + tui.Item("Playbooks") + " - the leftover sites that only have a web form.")
+	fmt.Println("  8.  " + tui.Item("Leaks") + "     - check a password for strength and dump hits.")
 	fmt.Println("      Nothing is stored. No API key.")
 	fmt.Println()
 	fmt.Println("  Optional")
 	fmt.Println("  •  Proxy in Settings if you want traffic through a local or HTTP proxy.")
-	fmt.Println("  •  Inbox (IMAP) to catch “click to confirm” emails.")
+	fmt.Println("  •  Inbox (IMAP) to catch 'click to confirm' emails.")
 	fmt.Println()
 	fmt.Println("  Your vault stays on this PC:")
 	if dirs, err := paths.Resolve(); err == nil {
@@ -759,11 +760,7 @@ func nz(s, fallback string) string {
 }
 
 func trimErr(s string) string {
-	s = strings.TrimSpace(s)
-	if len(s) > 60 {
-		return s[:57] + "..."
-	}
-	return s
+	return cut(strings.TrimSpace(s), 60)
 }
 
 func openURL(raw string) error {
