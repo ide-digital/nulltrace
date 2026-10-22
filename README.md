@@ -1,8 +1,8 @@
 <div align="center">
 
-# NullTrace
+<img src="docs/media/banner.png" alt="NullTrace: opt out of 400+ data brokers" width="900">
 
-**Opt out of 400+ data brokers from one app that never leaves your machine.**
+# NullTrace
 
 NullTrace matches the name, email and phone you give it against a catalog of people-search and marketing brokers, queues CCPA / GDPR deletion requests, sends them from a mailbox you already own, and checks your passwords against public breach dumps. Everything is stored in an encrypted vault on your computer. There is no NullTrace account and no NullTrace server.
 
@@ -12,8 +12,6 @@ NullTrace matches the name, email and phone you give it against a catalog of peo
 [![License](https://img.shields.io/github/license/ide-digital/nulltrace)](LICENSE)
 
 [Download](https://github.com/ide-digital/nulltrace/releases) · [Quick start](#quick-start) · [What leaves your machine](#what-leaves-your-machine) · [Contributing](#contributing)
-
-<img src="docs/media/home.png" alt="NullTrace home screen with Scan, Scrub, Send, Listings and Leaks" width="900">
 
 </div>
 
@@ -32,6 +30,10 @@ Your address, phone number and relatives are probably listed on dozens of people
 | **Leaks** | Scores password strength locally, checks a common-password list, and looks up breach dumps without sending the password. |
 | **Footprint** | Looks up where a username is registered. |
 | **Vault** | Mailbox passwords and API keys live in an encrypted local file (Argon2id + XChaCha20-Poly1305), never in plain config. |
+
+<div align="center">
+<img src="docs/media/home.png" alt="NullTrace home screen with Scan, Scrub, Send, Listings and Leaks" width="820">
+</div>
 
 ## What leaves your machine
 
