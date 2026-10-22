@@ -5,7 +5,8 @@
 NullTrace keeps the vault on the machine that runs it:
 
 - Windows: `%LocalAppData%\nulltrace` (vault), `%AppData%\nulltrace` (config)
-- Linux / macOS: `$HOME/.local/share/nulltrace` (vault), `$HOME/.config/nulltrace` (config)
+- Linux / macOS: `~/.local/share/nulltrace` (vault), `~/.config/nulltrace` (config),
+  or under `$XDG_DATA_HOME` / `$XDG_CONFIG_HOME` if you set them
 
 The vault is encrypted. Do not attach `vault.db`, `config.yaml`, `daemon.token`,
 or a passphrase file to an issue or a pull request.
@@ -26,6 +27,6 @@ Browser automation and CapSolver are off until you enable them.
 ## Reporting a vulnerability
 
 Please use GitHub's private vulnerability reporting on this repository
-(Security tab → Report a vulnerability). Include the version (`v0.3.1`
+(Security tab, then "Report a vulnerability"). Include the version (`nulltrace --version`
 or `git rev-parse --short HEAD`) and enough to reproduce. Do not open a
 public issue for a vault-bypass or crypto bug.

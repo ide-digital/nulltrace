@@ -27,7 +27,7 @@ Your address, phone number and relatives are probably listed on dozens of people
 |---|---|
 | **Scan** | Scores your identity against a maintained catalog of 400+ people-search sites, data brokers and ad-tech aggregators, and shows which ones are worth a request. |
 | **Scrub & Send** | Builds CCPA / CPRA, GDPR and state-law deletion emails from local templates and sends them through your own Gmail, Outlook or Yahoo account. |
-| **Inbox** | Optionally watches the same mailbox over IMAP for broker confirmations, so you can see who actually removed you. |
+| **Inbox** | Optionally watches the same mailbox over IMAP for broker confirmations, so you can see who actually removed you. It only follows confirmation links that stay on that broker's own domain. |
 | **Playbooks** | Step-by-step guides for brokers that only accept a web form. |
 | **Leaks** | Scores password strength locally, checks a common-password list, and looks up breach dumps without sending the password. |
 | **Footprint** | Looks up where a username is registered. |
@@ -40,15 +40,33 @@ By default, almost nothing.
 - **Scan is not a live crawl.** It matches against the broker catalog bundled in this repo. It does not search the web for you.
 - **Password checks use k-anonymity.** Only the first five hex characters of `SHA-1(password)` are sent to the public Pwned Passwords range API. The full password and full hash stay local. NullTrace does not ask Have I Been Pwned which *accounts* were breached; that API needs a key.
 - **Mail goes through your own mailbox.** You paste in an App Password; SMTP is tested before it is saved. There is no OAuth app and no NullTrace inbox.
-- **Browser automation and CAPTCHA helpers ship disabled.** The default path is catalog match → templated email → sent from your account.
+- **Browser automation and CAPTCHA helpers ship disabled.** By default it's just a catalog match and a templated email sent from your account.
 
 Details and the threat model are in [SECURITY.md](SECURITY.md).
 
 ## Quick start
 
-### Windows
+### Download
 
-Download the latest zip from [Releases](https://github.com/ide-digital/nulltrace/releases), unzip it, keep `NullTrace.exe` next to the `app` folder, and double-click.
+Grab the build for your OS from the [latest release](https://github.com/ide-digital/nulltrace/releases/latest).
+
+**Windows:** unzip `NullTrace-windows-amd64.zip`, keep `NullTrace.exe` next to the `app` folder, and double-click. The exe isn't code-signed yet, so SmartScreen may ask first ("More info", then "Run anyway").
+
+**Linux:**
+
+```sh
+tar -xzf nulltrace-linux-amd64.tar.gz    # or linux-arm64
+./nulltrace-linux-amd64/nulltrace
+```
+
+**macOS:**
+
+```sh
+tar -xzf nulltrace-darwin-arm64.tar.gz   # darwin-amd64 on Intel Macs
+cd nulltrace-darwin-arm64
+xattr -d com.apple.quarantine nulltrace nulltraced   # not notarized yet
+./nulltrace
+```
 
 ### Build from source (Linux, macOS, Windows)
 
@@ -92,7 +110,7 @@ Nested screens use `[0] back` and `[m] main menu`. The identity form validates n
 
 ### Running it as a service
 
-`nulltraced` keeps the vault unlocked on a box while the CLI talks to it on `127.0.0.1:7738`. See `source/docker-compose.yml` and `source/scripts/systemd/nulltraced.service`. `source/scripts/install.sh` installs `nulltrace` and `nulltraced` into `/usr/local/bin`.
+`nulltraced` keeps the vault unlocked on a box while the CLI talks to it on `127.0.0.1:7738`. See `source/docker-compose.yml` and `source/scripts/systemd/nulltraced.service`. `source/scripts/install.sh` (or `make install`) builds `nulltrace` and `nulltraced` into `/usr/local/bin`, using sudo only if it has to, and sets the daemon up as a systemd *user* service so it never runs as root. The daemon leaves queued mail alone until a mailbox is linked.
 
 ## Where files live
 

@@ -17,20 +17,20 @@ body:
     id: os
     attributes:
       label: OS
-      placeholder: Windows 11, or Linux distro
+      placeholder: Windows 11, Ubuntu 24.04, macOS 15...
     validations:
       required: true
   - type: input
     id: version
     attributes:
       label: Version
-      placeholder: 0.3.1, or a commit SHA
+      placeholder: nulltrace --version, or a commit SHA
     validations:
       required: true
   - type: textarea
     id: repro
     attributes:
       label: Steps
-      placeholder: 1. Open NullTrace.exe …
+      placeholder: 1. Open NullTrace, go to [1] Scan...
     validations:
       required: true

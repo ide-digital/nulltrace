@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.4.0
+
+Moved to [ide-digital/nulltrace](https://github.com/ide-digital/nulltrace). The old URL redirects. If you build from source, the module path is now `github.com/ide-digital/nulltrace`.
+
+- Downloads for Linux and macOS (amd64 + arm64) on every release, next to the Windows zip
+- A queued email is claimed before it's sent, so the daemon and the CLI can't both mail the same broker
+- Starting the daemon before linking a mailbox no longer marks the whole queue as failed
+- Scrub retries emails that failed to send (wrong password, dropped connection) instead of skipping them forever
+- IMAP only follows confirmation links on the broker's own domain, redirects included
+- Broker replies are matched back to the request they answer
+- A failed Pwned Passwords lookup is reported as failed instead of "not found"
+- Closing the terminal (or piping in nothing) no longer counts as "yes" at the Send/Scrub prompts
+- The daemon shuts down properly on Windows and cleans up if it can't bind
+- Timeouts on SMTP, IMAP, the dump lookup, and CapSolver so nothing hangs forever
+- Overdue and re-check dates compare as times, not strings
+- In daemon mode the Email screen shows whether mail is linked
+- Custom SMTP refuses an empty password
+- A failed identity save no longer leaves half a record behind
+- `install.sh` installs the systemd unit per user and only uses sudo for `/usr/local/bin`
+- Docker image listens on the container interface so `-p 127.0.0.1:7738:7738` works
+
 ## 0.3.1
 
 - Setup and Identity prompts check names, email, phone, date of birth, and city before saving. Blank still skips optional fields.
@@ -16,5 +37,5 @@ First public cut.
 - Broker catalog of 400+ people-search and marketing aggregators
 - CCPA / CPRA / GDPR / state deletion mail from local templates
 - Password strength plus Pwned Passwords k-anonymity (5-character SHA-1 prefix)
-- Gmail / Outlook / Yahoo linking via App Passwords — no OAuth
+- Gmail / Outlook / Yahoo linking via App Passwords, no OAuth
 - Browser automation and CapSolver stay off until you turn them on

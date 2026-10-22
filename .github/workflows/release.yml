@@ -1,0 +1,64 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+          cache-dependency-path: source/go.sum
+
+      - name: build
+        working-directory: source
+        env:
+          CGO_ENABLED: "0"
+        run: |
+          set -eu
+          out="$GITHUB_WORKSPACE/dist"
+          mkdir -p "$out"
+          flags="-s -w"
+
+          # Windows keeps the double-click launcher next to an app/ folder.
+          w="$out/NullTrace-windows-amd64"
+          mkdir -p "$w/app"
+          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "-H windowsgui $flags" -o "$w/NullTrace.exe" ./cmd/launch
+          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$flags" -o "$w/app/nulltrace.exe" ./cmd/nulltrace
+          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags "$flags" -o "$w/app/nulltraced.exe" ./cmd/nulltraced
+          (cd "$out" && zip -qr NullTrace-windows-amd64.zip NullTrace-windows-amd64)
+
+          for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64; do
+            os=${target%/*}; arch=${target#*/}
+            d="$out/nulltrace-$os-$arch"
+            mkdir -p "$d"
+            GOOS=$os GOARCH=$arch go build -trimpath -ldflags "$flags" -o "$d/nulltrace" ./cmd/nulltrace
+            GOOS=$os GOARCH=$arch go build -trimpath -ldflags "$flags" -o "$d/nulltraced" ./cmd/nulltraced
+            cp ../LICENSE "$d/"
+            tar -C "$out" -czf "$out/nulltrace-$os-$arch.tar.gz" "nulltrace-$os-$arch"
+          done
+
+          cd "$out" && sha256sum *.zip *.tar.gz > checksums.txt
+
+      - name: notes
+        run: |
+          # The section of CHANGELOG.md for this tag, without its heading.
+          v="${GITHUB_REF_NAME#v}"
+          awk -v v="$v" '$0 == "## " v {on=1; next} /^## / {on=0} on' CHANGELOG.md > notes.md
+          [ -s notes.md ] || echo "See CHANGELOG.md." > notes.md
+
+      - name: publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "NullTrace ${GITHUB_REF_NAME#v}" \
+            --notes-file notes.md \
+            dist/*.zip dist/*.tar.gz dist/checksums.txt

@@ -23,7 +23,7 @@ coverage.*
 .DS_Store
 Thumbs.db
 
-# Local vaults, tokens, env — never commit
+# Local vaults, tokens, env, never commit
 *.db
 *.db-wal
 *.db-shm
