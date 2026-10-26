@@ -70,25 +70,51 @@ xattr -d com.apple.quarantine nulltrace nulltraced   # not notarized yet
 ./nulltrace
 ```
 
+### Verify your download
+
+Builds aren't signed with a paid certificate. This is how you confirm a download came from the public source.
+
+Every file on the release page has a build attestation from GitHub Actions. With the [GitHub CLI](https://cli.github.com/):
+
+```sh
+gh attestation verify nulltrace-linux-amd64.tar.gz --repo ide-digital/nulltrace
+```
+
+You can also check the SHA-256 against `checksums.txt` from the same release. The file lists every download, so pick out the line for yours.
+
+Linux:
+
+```sh
+grep nulltrace-linux-amd64.tar.gz checksums.txt | sha256sum -c
+```
+
+macOS:
+
+```sh
+grep nulltrace-darwin-arm64.tar.gz checksums.txt | shasum -a 256 -c
+```
+
+Windows PowerShell:
+
+```powershell
+(Get-FileHash .\NullTrace-windows-amd64.zip -Algorithm SHA256).Hash.ToLower()
+Select-String NullTrace-windows-amd64.zip checksums.txt
+```
+
+The two hashes should match.
+
 ### Build from source (Linux, macOS, Windows)
 
-Go 1.23+ with CGO off. Same binary on every platform:
+You need Go 1.23+ and `make`. On Windows, run it from Git Bash.
 
 ```sh
 git clone https://github.com/ide-digital/nulltrace.git
-cd nulltrace/source
-go build -trimpath -ldflags="-s -w" -o nulltrace ./cmd/nulltrace
-./nulltrace
-```
-
-Windows launcher from source:
-
-```powershell
-git clone https://github.com/ide-digital/nulltrace.git
 cd nulltrace
-powershell -File source\build.ps1
-.\NullTrace.exe
+make build
+./bin/nulltrace
 ```
+
+That builds `bin/nulltrace` and `bin/nulltraced`. On Windows it builds `bin/NullTrace.exe` and `bin/app/` instead, the same layout as the zip. No C toolchain is needed.
 
 ### First run
 
@@ -114,6 +140,23 @@ Nested screens use `[0] back` and `[m] main menu`. The identity form validates n
 
 `nulltraced` keeps the vault unlocked on a box while the CLI talks to it on `127.0.0.1:7738`. See `source/docker-compose.yml` and `source/scripts/systemd/nulltraced.service`. `source/scripts/install.sh` (or `make install`) builds `nulltrace` and `nulltraced` into `/usr/local/bin`, using sudo only if it has to, and sets the daemon up as a systemd *user* service so it never runs as root. The daemon leaves queued mail alone until a mailbox is linked.
 
+## How the catalog stays current
+
+Opt-out pages move and privacy addresses go dead. A GitHub Action checks every opt-out page and privacy address in the catalog once a week. Broken entries open an issue, and that same issue is updated each week until things are fixed.
+
+A release only ships when the check passes. Entries we know are broken sit in [`known_issues.yaml`](source/internal/broker/data/known_issues.yaml) for at most 60 days, so the list can't grow quietly.
+
+If you fix an entry, send a pull request and include a source for the new URL or address. [CONTRIBUTING.md](CONTRIBUTING.md) shows how to run the check yourself.
+
+## Re-listing
+
+Brokers sometimes add you back. While `nulltraced` is running, a watchdog checks once an hour:
+
+- A removal you confirmed more than `scheduler.repopulation_days` ago (45 by default) goes back to "re-check".
+- Each broker has a `repopulation_period_days` (60 by default). Once that many days have passed since a completed request, the record is flagged again.
+
+Nothing is re-sent automatically. Run Scrub again and it queues new requests for anything marked "re-check".
+
 ## Where files live
 
 | | Windows | Linux / macOS |
@@ -128,8 +171,7 @@ Config is YAML (`source/config.example.yaml` shows the default shape). Mailbox p
 The broker catalog is YAML in [`source/internal/broker/data/`](source/internal/broker/data). Opt-out pages change constantly, so **a pull request that adds a broker or fixes a stale opt-out URL is the most useful contribution there is.** Include a source for the URL or privacy address.
 
 ```sh
-cd source
-go test ./...
+make test
 ```
 
 On Windows the console is pinned to the window size rather than the 3000-row scrollback buffer, which used to smear the login field. If you touch `source/internal/tui/login.go` or `source/cmd/nulltrace/console_windows.go`, keep the login tests green.

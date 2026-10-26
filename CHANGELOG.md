@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+- Weekly catalog check: every opt-out page and privacy address is probed, and broken ones open a single tracking issue
+- Releases only ship when the catalog check passes
+- Build provenance attestations for every download, plus `checksums.txt`, so you can verify a build without a paid signing certificate
+- `make build` builds everything from source, including the Windows launcher and `app/` folder when `GOOS=windows`
+- README: how to verify a download, how the catalog stays current, and how re-listing is handled
+
 ## 0.4.0
 
 Moved to [ide-digital/nulltrace](https://github.com/ide-digital/nulltrace). The old URL redirects. If you build from source, the module path is now `github.com/ide-digital/nulltrace`.

@@ -23,3 +23,13 @@ jobs:
           cache-dependency-path: source/go.sum
       - run: go vet ./...
       - run: go test ./...
+      - name: make build
+        if: runner.os != 'Windows'
+        working-directory: .
+        run: make build
+      - name: make build, windows layout
+        if: runner.os == 'Linux'
+        working-directory: .
+        run: |
+          make build GOOS=windows
+          test -f bin/NullTrace.exe && test -f bin/app/nulltrace.exe && test -f bin/app/nulltraced.exe

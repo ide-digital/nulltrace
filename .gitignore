@@ -44,3 +44,4 @@ docs/media/*.ttf
 
 # Local toolchain
 .tooling/
+catalog-report/
