@@ -18,7 +18,6 @@ coverage.*
 # Workspace / IDE
 .idea/
 .vscode/
-.cursor/
 *.swp
 .DS_Store
 Thumbs.db
