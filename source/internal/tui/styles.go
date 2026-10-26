@@ -2,7 +2,7 @@ package tui
 
 import "github.com/charmbracelet/lipgloss"
 
-const Version = "0.4.0"
+const Version = "0.5.0"
 
 func Key(k string) string   { return styleNum.Render("[" + k + "]") }
 func Item(s string) string  { return styleItem.Render(s) }

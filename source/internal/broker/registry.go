@@ -39,6 +39,10 @@ func Load() (*Registry, error) {
 		if d.IsDir() || !strings.HasSuffix(path, ".yaml") {
 			return nil
 		}
+		// maintainer notes for cmd/catalogcheck, not brokers
+		if d.Name() == "known_issues.yaml" {
+			return nil
+		}
 		raw, err := fs.ReadFile(dataFS, path)
 		if err != nil {
 			return fmt.Errorf("read %s: %w", path, err)

@@ -1,0 +1,76 @@
+name: catalog-check
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.x"
+          cache-dependency-path: source/go.sum
+
+      - name: run the checker
+        id: run
+        working-directory: source
+        run: |
+          code=0
+          go run ./cmd/catalogcheck -report-dir "$RUNNER_TEMP/catalog-report" || code=$?
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-report
+          path: ${{ runner.temp }}/catalog-report
+
+      # One open issue at a time. It gets edited while the catalog is broken
+      # and closed with a comment once it's clean again.
+      - name: update the tracking issue
+        if: steps.run.outputs.code != '2'
+        run: |
+          report="$RUNNER_TEMP/catalog-report"
+          fail=$(jq '.summary.fail + .summary.stale_known' "$report/catalog-report.json")
+          warn=$(jq '.summary.warn' "$report/catalog-report.json")
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+          existing=$(gh issue list --label catalog-check --state open --json number --jq '.[0].number // empty')
+
+          if [ "$fail" -eq 0 ] && [ "$warn" -eq 0 ]; then
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --body "All clear. Run: $run_url"
+              gh issue close "$existing"
+            fi
+            exit 0
+          fi
+
+          title="Catalog check: $fail broken, $warn to review"
+          {
+            head -c 60000 "$report/catalog-report.md"
+            echo
+            echo "Full report: $run_url"
+          } > "$RUNNER_TEMP/body.md"
+
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --title "$title" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh label create catalog-check --color 0e8a16 \
+              --description "Weekly catalog check" 2>/dev/null || true
+            gh issue create --title "$title" --label catalog-check --body-file "$RUNNER_TEMP/body.md"
+          fi
+
+      - name: fail the run if the catalog is broken
+        if: steps.run.outputs.code != '0'
+        run: exit 1

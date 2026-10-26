@@ -1,0 +1,188 @@
+# Catalog entries that fail cmd/catalogcheck and that we are leaving for now.
+# Format, one item per entry:
+#
+#   - id: spokeo            # broker id
+#     field: opt_out_url    # opt_out_url or contact_email
+#     reason: site is down, waiting on their status page
+#     added: 2026-10-26     # entries older than 60 days fail the check
+#
+- id: 4eyesai
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: acxiom
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: addresses
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: adsquare-gmbh
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: advancedbackgroundchecks
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: advisortarget
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: altair-data-resources
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: american-spirit-data-solutions
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: beenverified-ownerly
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: bliss-point-media
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: cardlytics
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: catalyze-ai
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: civis-analytics
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: clustrmaps
+  field: opt_out_url
+  reason: "connection refused, site may be down or blocking us"
+  added: 2026-10-26
+- id: corelogic
+  field: opt_out_url
+  reason: "page returns 404; the site now redirects to cotality.com, whose /privacy also returns 404"
+  added: 2026-10-26
+- id: date-detective
+  field: opt_out_url
+  reason: "certificate does not match the hostname, site needs a working URL"
+  added: 2026-10-26
+- id: datonics
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: dun-bradstreet
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: epsilon
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: equifax
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: erepublic
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: experian
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: idtrue
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: innovis
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: intellicorp-records
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: key-marketing-advantage
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: labels-lists
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: limeleads
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: liveramp
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: minerva-bi
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: neighborwho
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: nexxen
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: nfocus-consulting
+  field: opt_out_url
+  reason: "connection refused, site may be down or blocking us"
+  added: 2026-10-26
+- id: nuwber
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: people-data-labs
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: peoplefindersdaas
+  field: opt_out_url
+  reason: "certificate does not match the hostname, site needs a working URL"
+  added: 2026-10-26
+- id: prospector-database
+  field: contact_email
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: prospector-database
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: recsolu
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: salutary-data
+  field: opt_out_url
+  reason: "domain does not resolve (confirmed with curl), may be defunct"
+  added: 2026-10-26
+- id: truedata-solutions
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: tymax-media
+  field: opt_out_url
+  reason: "certificate does not match the hostname, site needs a working URL"
+  added: 2026-10-26
+- id: unearth-campaigns
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: veraset
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
+- id: zoominfo
+  field: opt_out_url
+  reason: "page returns 404 (confirmed with curl), replacement page not found yet"
+  added: 2026-10-26
