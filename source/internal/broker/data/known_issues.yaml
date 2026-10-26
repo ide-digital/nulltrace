@@ -186,3 +186,7 @@
   field: opt_out_url
   reason: "page returns 404 (confirmed with curl), replacement page not found yet"
   added: 2026-10-26
+- id: 4c-insights
+  field: opt_out_url
+  reason: "server sends no intermediate certificate, strict TLS clients reject it (openssl confirms), loads in browsers that fetch it"
+  added: 2026-10-26
