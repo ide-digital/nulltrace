@@ -154,7 +154,7 @@ brokers:
     domain: spyfly.com
     category: BACKGROUND
     mechanism: WEB_FORM
-    opt_out_url: https://www.spyfly.com/opt-out
+    opt_out_url: https://www.spyfly.com/help-center/privacy-requests
     jurisdiction_coverage: ALL
 
   - id: socialcatfish
